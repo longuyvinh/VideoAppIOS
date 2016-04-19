@@ -9,8 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var labelTitle: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +23,14 @@ class ViewController: UIViewController {
                 print("== \(names)")
             }
         }*/
-        
+        /*
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         
         print("width: \(screenWidth) - hight: \(screenHeight) ")
-        
+        */
     }
 
     override func didReceiveMemoryWarning() {
