@@ -8,12 +8,25 @@
 
 import UIKit
 
-class vcWachedList: UIViewController {
+class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var listWached = [videoObject]()
+    
+    var imageCache = [String:UIImage]()
 
+    @IBOutlet weak var tableWached: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_SX300.jpg", tIn:"Inside Out", yIn:"2015", dIn:"Pete Docter", aIn:"Amy Poehler, Phyllis Smith, Richard Kind"))
+        self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BODUwMDc5Mzc5M15BMl5BanBnXkFtZTcwNDgzOTY0MQ@@._V1_SX300.jpg", tIn:"Spider-Man 3", yIn:"2007", dIn:"Sam Raimi", aIn:"Tobey Maguire, Kirsten Dunst, James Franco"))
+        self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTYxMjA5NDMzNV5BMl5BanBnXkFtZTcwOTk2Mjk3NA@@._V1_SX300.jpg", tIn:"Thor", yIn:"2011", dIn:"Kenneth Branagh", aIn:"Chris Hemsworth, Natalie Portman, Tom Hiddleston"))
+        self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTYzOTc2NzU3N15BMl5BanBnXkFtZTcwNjY3MDE3NQ@@._V1_SX300.jpg", tIn:"Captain America: The First Avenger", yIn:"2011", dIn:"Joe Johnston", aIn:"Chris Evans, Hayley Atwell, Sebastian Stan"))
+        self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMjEyNzI1ODA0MF5BMl5BanBnXkFtZTYwODIxODY3._V1_SX300.jpg", tIn:"Ice Age", yIn:"2002", dIn:"Chris Wedge, Carlos Saldanha", aIn:"Ray Romano, John Leguizamo, Denis Leary"))
+        
+        self.tableWached.separatorStyle = UITableViewCellSeparatorStyle.None
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,9 +34,51 @@ class vcWachedList: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listWached.count
+    }
 
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cellWached", forIndexPath: indexPath) as! customCell
+        let item = listWached[indexPath.row]
+        
+        cell.lblTitle.text = item.title
+        cell.lblYear.text = item.year
+        cell.lblActors.text = item.actors
+        cell.lblDirector.text = item.director
+        
+        //let imgUrl = NSURL(fileURLWithPath: item.poster!)
+        requestImage( item.poster! ) { (image) -> Void in
+            cell.poster.image = image
+        }
+
+        return cell
+    }
+    
+    
     @IBAction func actionBack(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    func requestImage(url: String, success: (UIImage?) -> Void) {
+        requestURL(url, success: { (data) -> Void in
+            if let d = data {
+                success(UIImage(data: d))
+            }
+        })
+    }
+    
+    func requestURL(url: String, success: (NSData?) -> Void, error: ((NSError) -> Void)? = nil) {
+        NSURLConnection.sendAsynchronousRequest(
+            NSURLRequest(URL: NSURL (string: url)!),
+            queue: NSOperationQueue.mainQueue(),
+            completionHandler: { response, data, err in
+                if let e = err {
+                    error?(e)
+                } else {
+                    success(data)
+                }
+        })
     }
     /*
     // MARK: - Navigation
