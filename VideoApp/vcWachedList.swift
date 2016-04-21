@@ -80,6 +80,59 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
         })
     }
+    
+    @IBAction func termClick(sender: AnyObject) {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let subviewWidth = 300
+        let subviewHeight = 250
+        
+        let subviewX:Int = Int( (Int(screenWidth) - Int(subviewWidth))/2 )
+        let subviewY:Int = Int( (Int(screenHeight) - Int(subviewHeight))/2 )
+        
+        let mySubView:customView = customView(frame: CGRect(x:subviewX, y: subviewY, width: subviewWidth, height: subviewHeight))
+        self.view.addSubview(mySubView)
+        
+        
+        mySubView.tag = 100
+        
+        mySubView.layer.cornerRadius = 12
+        mySubView.layer.borderColor = UIColor.blackColor().CGColor
+        mySubView.layer.borderWidth = 1
+        mySubView.layer.shadowRadius = 2
+        mySubView.layer.cornerRadius = 12
+        
+        mySubView.closePopup.addTarget(self, action: "removeSubview:", forControlEvents: UIControlEvents.TouchUpInside)
+        mySubView.buttonTerm.addTarget(self, action: "openTermview:", forControlEvents: UIControlEvents.TouchUpInside)
+        mySubView.buttonDisclaimer.addTarget(self, action: "openDisclaimerview:", forControlEvents: UIControlEvents.TouchUpInside)
+        mySubView.buttonContact.addTarget(self, action: "openContactview:", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func openTermview(sender:UIButton) {
+        let termViewController = self.storyboard?.instantiateViewControllerWithIdentifier("termView") as! TermViewController
+        self.navigationController?.pushViewController(termViewController, animated: true)
+    }
+    
+    func openDisclaimerview(sender:UIButton) {
+        let disclaimerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("disclaimerView") as! DisclaimerViewController
+        self.navigationController?.pushViewController(disclaimerViewController, animated: true)
+    }
+    
+    func openContactview(sender:UIButton) {
+        let contactViewController = self.storyboard?.instantiateViewControllerWithIdentifier("contactView") as! ContactViewController
+        self.navigationController?.pushViewController(contactViewController, animated: true)
+    }
+    
+    func removeSubview(sender:UIButton) {
+        for v in view.subviews{
+            if (v.tag == 100) {
+                v.removeFromSuperview()
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

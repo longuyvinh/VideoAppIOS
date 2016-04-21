@@ -14,9 +14,79 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
 
     @IBOutlet weak var tableWachLater: UITableView!
     
+    @IBAction func popup(sender: AnyObject) {
+        //self.ViewFunc()
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let subviewWidth = 300
+        let subviewHeight = 250
+        
+        let subviewX:Int = Int( (Int(screenWidth) - Int(subviewWidth))/2 )
+        let subviewY:Int = Int( (Int(screenHeight) - Int(subviewHeight))/2 )
+        
+        let mySubView:customView = customView(frame: CGRect(x:subviewX, y: subviewY, width: subviewWidth, height: subviewHeight))
+        self.view.addSubview(mySubView)
+
+        
+        mySubView.tag = 100
+
+        mySubView.layer.cornerRadius = 12
+        mySubView.layer.borderColor = UIColor.blackColor().CGColor
+        mySubView.layer.borderWidth = 1
+        mySubView.layer.shadowRadius = 2
+        mySubView.layer.cornerRadius = 12
+        
+        mySubView.closePopup.addTarget(self, action: "removeSubview:", forControlEvents: UIControlEvents.TouchUpInside)
+        mySubView.buttonTerm.addTarget(self, action: "openTermview:", forControlEvents: UIControlEvents.TouchUpInside)
+        mySubView.buttonDisclaimer.addTarget(self, action: "openDisclaimerview:", forControlEvents: UIControlEvents.TouchUpInside)
+        mySubView.buttonContact.addTarget(self, action: "openContactview:", forControlEvents: UIControlEvents.TouchUpInside)
+        /*
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.view.backgroundColor = UIColor.clearColor()
+            
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.view.bounds
+            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            
+            self.view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+        } 
+        else {
+            self.view.backgroundColor = UIColor.blackColor()
+        }
+        */
+    }
+    func openTermview(sender:UIButton) {
+        let termViewController = self.storyboard?.instantiateViewControllerWithIdentifier("termView") as! TermViewController
+        self.navigationController?.pushViewController(termViewController, animated: true)
+    }
+    
+    func openDisclaimerview(sender:UIButton) {
+        let disclaimerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("disclaimerView") as! DisclaimerViewController
+        self.navigationController?.pushViewController(disclaimerViewController, animated: true)
+    }
+    
+    func openContactview(sender:UIButton) {
+        let contactViewController = self.storyboard?.instantiateViewControllerWithIdentifier("contactView") as! ContactViewController
+        self.navigationController?.pushViewController(contactViewController, animated: true)
+    }
+    
+    func removeSubview(sender:UIButton) {
+        for v in view.subviews{
+            if (v.tag == 100) {
+                v.removeFromSuperview()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_SX300.jpg", tIn:"Batman v Superman: Dawn of Justice", yIn:"2016", dIn:"Zack Snyder", aIn:"Ben Affleck, Henry Cavill, Amy Adams"))
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTY0MDY0NjExN15BMl5BanBnXkFtZTgwOTU3OTYyODE@._V1_SX300.jpg", tIn:"X-Men: Apocalypse", yIn:"2016", dIn:"Bryan Singer", aIn:"Sophie Turner, Jennifer Lawrence, Olivia Munn"))
@@ -25,6 +95,8 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTUyMjA5OTgyOV5BMl5BanBnXkFtZTgwOTkyMjQ5NTE@._V1_SX300.jpg", tIn:"Terminus", yIn:"2015", dIn:"Marc Furmie", aIn:"Jai Koutrae, Kendra Appleton, Todd Lasance"))
         
         self.tableWachLater.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
