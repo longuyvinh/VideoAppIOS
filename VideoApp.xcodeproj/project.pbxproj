@@ -14,6 +14,7 @@
 		FA02C5CF1CC8AEB300C79B40 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C5CE1CC8AEB300C79B40 /* TermViewController.swift */; };
 		FA02C5D11CC8B8FA00C79B40 /* DisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C5D01CC8B8FA00C79B40 /* DisclaimerViewController.swift */; };
 		FA02C5D31CC8B90B00C79B40 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */; };
+		FA02C6131CC8F2BD00C79B40 /* vcCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */; };
 		FA031E6D1CC0C5BC00275D30 /* line_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = FA031E6C1CC0C5BC00275D30 /* line_vertical.png */; };
 		FA031E711CC0C93E00275D30 /* film_black.png in Resources */ = {isa = PBXBuildFile; fileRef = FA031E701CC0C93E00275D30 /* film_black.png */; };
 		FA031E731CC0E4B300275D30 /* insideout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA031E721CC0E4B300275D30 /* insideout.jpg */; };
@@ -56,6 +57,7 @@
 		FA02C5CE1CC8AEB300C79B40 /* TermViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermViewController.swift; sourceTree = "<group>"; };
 		FA02C5D01CC8B8FA00C79B40 /* DisclaimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclaimerViewController.swift; sourceTree = "<group>"; };
 		FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcCategory.swift; sourceTree = "<group>"; };
 		FA031E6C1CC0C5BC00275D30 /* line_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_vertical.png; sourceTree = "<group>"; };
 		FA031E701CC0C93E00275D30 /* film_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = film_black.png; sourceTree = "<group>"; };
 		FA031E721CC0E4B300275D30 /* insideout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = insideout.jpg; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				FA02C5CE1CC8AEB300C79B40 /* TermViewController.swift */,
 				FA02C5D01CC8B8FA00C79B40 /* DisclaimerViewController.swift */,
 				FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */,
+				FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */,
 			);
 			path = VideoApp;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				FA02C5CF1CC8AEB300C79B40 /* TermViewController.swift in Sources */,
 				FA02C5D31CC8B90B00C79B40 /* ContactViewController.swift in Sources */,
 				FAFFE49D1CC6324F004C8FE6 /* vcStart.swift in Sources */,
+				FA02C6131CC8F2BD00C79B40 /* vcCategory.swift in Sources */,
 				FA02C5C31CC72B4800C79B40 /* videoObject.swift in Sources */,
 				FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */,
 				FA02C5D11CC8B8FA00C79B40 /* DisclaimerViewController.swift in Sources */,

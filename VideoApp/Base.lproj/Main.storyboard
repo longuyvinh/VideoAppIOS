@@ -51,12 +51,8 @@
             <string>Amatic-Bold</string>
             <string>Amatic-Bold</string>
             <string>Amatic-Bold</string>
-            <string>Amatic-Bold</string>
         </mutableArray>
         <mutableArray key="AmaticSC-Regular.ttf">
-            <string>AmaticSC-Regular</string>
-            <string>AmaticSC-Regular</string>
-            <string>AmaticSC-Regular</string>
             <string>AmaticSC-Regular</string>
             <string>AmaticSC-Regular</string>
             <string>AmaticSC-Regular</string>
@@ -309,10 +305,10 @@
             </objects>
             <point key="canvasLocation" x="1884" y="484"/>
         </scene>
-        <!--View Controller-->
+        <!--Vc Category-->
         <scene sceneID="j9b-gD-vha">
             <objects>
-                <viewController id="hq0-hE-hue" sceneMemberID="viewController">
+                <viewController id="hq0-hE-hue" customClass="vcCategory" customModule="VideoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="25p-CD-hso"/>
                         <viewControllerLayoutGuide type="bottom" id="KDY-aA-txf"/>
@@ -346,58 +342,36 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0et-Pf-Hhv">
                                 <rect key="frame" x="0.0" y="120" width="600" height="90"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpJ-pI-3aT">
-                                        <rect key="frame" x="123" y="8" width="166" height="74"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gB-5T-7ff">
-                                                <rect key="frame" x="62" y="26" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7p6-zc-7mG">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2x6-UE-zRO">
-                                        <rect key="frame" x="-51" y="8" width="166" height="74"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TRAILER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmJ-cL-k4H">
-                                                <rect key="frame" x="62" y="26" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.38823529411764707" green="0.96470588235294119" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="moo-Fw-T5Q">
-                                        <rect key="frame" x="471" y="8" width="166" height="74"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CARTOON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhe-YZ-OQr">
-                                                <rect key="frame" x="58" y="26" width="50" height="21"/>
-                                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zaV-x5-gRs">
-                                        <rect key="frame" x="297" y="8" width="166" height="74"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COMEDY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-PU-eyf">
-                                                <rect key="frame" x="62" y="26" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="aLW-cc-Gcu"/>
+                                            <constraint firstAttribute="height" constant="90" id="wk8-Rt-gPl"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" id="A42-79-WHv">
+                                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A42-79-WHv" id="GYs-hw-a8Y">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="hq0-hE-hue" id="N3R-HB-Rrh"/>
+                                            <outlet property="delegate" destination="hq0-hE-hue" id="A7q-nP-A1E"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="leading" secondItem="0et-Pf-Hhv" secondAttribute="leading" id="1aV-Ip-Gha"/>
                                     <constraint firstAttribute="height" constant="90" id="5r9-oQ-u0w"/>
+                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="top" secondItem="0et-Pf-Hhv" secondAttribute="top" id="Aon-Kb-0hP"/>
+                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="centerY" secondItem="0et-Pf-Hhv" secondAttribute="centerY" id="JWG-MF-ORb"/>
+                                    <constraint firstAttribute="bottom" secondItem="7p6-zc-7mG" secondAttribute="bottom" id="zqf-lX-Xzf"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="film_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="xIO-Zb-sEu">
@@ -489,6 +463,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="H97-Tt-GYR"/>
+                    <connections>
+                        <outlet property="myTableView" destination="7p6-zc-7mG" id="lbd-76-9ul"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aU2-m9-qw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1947,9 +1924,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fva-w1-2wB"/>
-        <segue reference="7hM-AN-yIa"/>
-        <segue reference="1fT-bq-onR"/>
-        <segue reference="o8I-oN-CmP"/>
+        <segue reference="dnA-Al-jVk"/>
+        <segue reference="a4X-E0-2Zb"/>
+        <segue reference="kh1-X9-q0m"/>
+        <segue reference="olX-c2-hIn"/>
     </inferredMetricsTieBreakers>
 </document>
