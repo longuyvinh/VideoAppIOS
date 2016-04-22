@@ -342,13 +342,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0et-Pf-Hhv">
                                 <rect key="frame" x="0.0" y="120" width="600" height="90"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7p6-zc-7mG">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7p6-zc-7mG">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="aLW-cc-Gcu"/>
-                                            <constraint firstAttribute="height" constant="90" id="wk8-Rt-gPl"/>
-                                        </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" id="A42-79-WHv">
                                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
@@ -367,12 +363,31 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="leading" secondItem="0et-Pf-Hhv" secondAttribute="leading" id="1aV-Ip-Gha"/>
                                     <constraint firstAttribute="height" constant="90" id="5r9-oQ-u0w"/>
-                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="top" secondItem="0et-Pf-Hhv" secondAttribute="top" id="Aon-Kb-0hP"/>
-                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="centerY" secondItem="0et-Pf-Hhv" secondAttribute="centerY" id="JWG-MF-ORb"/>
-                                    <constraint firstAttribute="bottom" secondItem="7p6-zc-7mG" secondAttribute="bottom" id="zqf-lX-Xzf"/>
+                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="leading" secondItem="0et-Pf-Hhv" secondAttribute="leading" id="Igu-9f-IeA"/>
+                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="centerY" secondItem="0et-Pf-Hhv" secondAttribute="centerY" id="TVz-FO-N9C"/>
+                                    <constraint firstItem="7p6-zc-7mG" firstAttribute="top" secondItem="0et-Pf-Hhv" secondAttribute="top" id="ZnN-q7-5iG"/>
+                                    <constraint firstAttribute="bottom" secondItem="7p6-zc-7mG" secondAttribute="bottom" id="g5b-Cz-xq4"/>
+                                    <constraint firstAttribute="trailing" secondItem="7p6-zc-7mG" secondAttribute="trailing" id="hdV-wl-xHa"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Igu-9f-IeA"/>
+                                        <exclude reference="TVz-FO-N9C"/>
+                                        <exclude reference="ZnN-q7-5iG"/>
+                                        <exclude reference="g5b-Cz-xq4"/>
+                                        <exclude reference="hdV-wl-xHa"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="Igu-9f-IeA"/>
+                                        <include reference="TVz-FO-N9C"/>
+                                        <include reference="ZnN-q7-5iG"/>
+                                        <include reference="g5b-Cz-xq4"/>
+                                        <include reference="hdV-wl-xHa"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="film_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="xIO-Zb-sEu">
                                 <rect key="frame" x="0.0" y="209" width="600" height="13"/>
@@ -469,7 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aU2-m9-qw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2563" y="484"/>
+            <point key="canvasLocation" x="2562" y="483"/>
         </scene>
         <!--Vc Wached List-->
         <scene sceneID="WWv-Ib-YIB">
@@ -714,6 +729,9 @@
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
+                                        <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="638"/>
+                                        </variation>
                                         <connections>
                                             <outlet property="dataSource" destination="TTf-hy-Npu" id="oLV-ia-Zxd"/>
                                             <outlet property="delegate" destination="TTf-hy-Npu" id="kGK-nk-Egt"/>
@@ -723,6 +741,9 @@
                                 <constraints>
                                     <constraint firstItem="CS2-Yb-Te3" firstAttribute="width" secondItem="Ezh-ZR-A0a" secondAttribute="width" id="WaN-Kh-fKn"/>
                                 </constraints>
+                                <variation key="heightClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="102" width="600" height="638"/>
+                                </variation>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_conner.png" translatesAutoresizingMaskIntoConstraints="NO" id="uYE-f2-XLd">
                                 <rect key="frame" x="-10" y="-10" width="60" height="60"/>
@@ -796,7 +817,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5h-uX-Ewp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2563" y="1267"/>
+            <point key="canvasLocation" x="2563" y="1266.75"/>
         </scene>
         <!--Vc Watch Later List-->
         <scene sceneID="cTt-hB-ocs">
@@ -1816,6 +1837,9 @@
                                                     <constraint firstItem="NY8-CM-Pd4" firstAttribute="top" secondItem="abq-yL-ikb" secondAttribute="top" constant="8" id="Mow-Xi-jm2"/>
                                                     <constraint firstItem="NY8-CM-Pd4" firstAttribute="centerX" secondItem="abq-yL-ikb" secondAttribute="centerX" id="mAL-Se-MWi"/>
                                                 </constraints>
+                                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                                    <rect key="frame" x="8" y="500" width="784" height="164"/>
+                                                </variation>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1924,9 +1948,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dnA-Al-jVk"/>
-        <segue reference="a4X-E0-2Zb"/>
+        <segue reference="3CL-Fp-xta"/>
         <segue reference="kh1-X9-q0m"/>
+        <segue reference="dnA-Al-jVk"/>
         <segue reference="olX-c2-hIn"/>
     </inferredMetricsTieBreakers>
 </document>

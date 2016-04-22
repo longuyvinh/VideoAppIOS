@@ -34,6 +34,14 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         cell.textLabel!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
         cell.textLabel?.textAlignment = .Center
+        
+        cell.layer.borderWidth = 3.0
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+        
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 0, green: 0.9922, blue: 0.7843, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        cell.textLabel!.font = UIFont(name:"Amatic", size:30)
         return cell
     }
     
@@ -42,8 +50,10 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        /*
         let cell  = tableView.cellForRowAtIndexPath(indexPath)
         cell!.contentView.backgroundColor = .redColor()
+         */
     }
     
     func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
