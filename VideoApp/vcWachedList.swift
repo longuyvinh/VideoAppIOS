@@ -45,6 +45,10 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.lblTitle.text = item.title
         cell.lblYear.text = item.year
         cell.lblActors.text = item.actors
+        cell.lblActors.numberOfLines = 0
+        cell.lblActors.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        
+        
         cell.lblDirector.text = item.director
         
         //let imgUrl = NSURL(fileURLWithPath: item.poster!)

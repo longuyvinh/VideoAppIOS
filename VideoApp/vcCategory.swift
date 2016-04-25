@@ -10,7 +10,8 @@ import UIKit
 
 class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let listGenre = ["Action", "Adventure", "Fantasy", "Animation", "Comedy"]
+    @IBOutlet weak var viewFrameTable: UIView!
+    let listGenre = ["Action", "Adventure", "Fantasy", "Animation", "Comedy" , "Comedy11"]
     
     @IBOutlet weak var myTableView: UITableView!
     
@@ -18,10 +19,16 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let oldCenter:CGPoint = myTableView.center;
-        myTableView.frame=CGRectMake(0.0, 0.0, myTableView.bounds.size.height, myTableView.bounds.size.width)
         myTableView.transform=CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-        myTableView.center=oldCenter
+        myTableView.translatesAutoresizingMaskIntoConstraints = true;
+
+        var frame = myTableView.frame
+        frame.origin.y = 0
+        frame.origin.x = 0
+        frame.size.width  = self.view.frame.size.width
+        frame.size.height = viewFrameTable.frame.size.height
+        myTableView.frame = frame
+        myTableView.backgroundColor = UIColor.blackColor()
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,9 +49,14 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         bgColorView.backgroundColor = UIColor(red: 0, green: 0.9922, blue: 0.7843, alpha: 1.0)
         cell.selectedBackgroundView = bgColorView
         cell.textLabel!.font = UIFont(name:"Amatic", size:30)
+        //cell.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
         return cell
     }
-    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+
+    }
+  
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 150.00
     }
