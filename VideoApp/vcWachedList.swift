@@ -59,6 +59,11 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    @IBAction func imgBack(sender: AnyObject) {
+        self.navigationController!.popViewControllerAnimated(true)
+
+    }
+    
     
     @IBAction func actionBack(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)

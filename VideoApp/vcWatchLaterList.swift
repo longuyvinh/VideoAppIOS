@@ -127,6 +127,11 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         return cell
     }
     
+    
+    @IBAction func imgBack(sender: AnyObject) {
+        self.navigationController!.popViewControllerAnimated(true)
+    }
+    
     @IBAction func btnBack(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)
     }
