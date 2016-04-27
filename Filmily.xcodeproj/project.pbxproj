@@ -21,6 +21,7 @@
 		FA08425B1CB76DD1006C68FE /* film_light3.png in Resources */ = {isa = PBXBuildFile; fileRef = FA08425A1CB76DD1006C68FE /* film_light3.png */; };
 		FA08425D1CB7B3E8006C68FE /* bg_conner.png in Resources */ = {isa = PBXBuildFile; fileRef = FA08425C1CB7B3E8006C68FE /* bg_conner.png */; };
 		FA08425F1CB7BAB3006C68FE /* line1.png in Resources */ = {isa = PBXBuildFile; fileRef = FA08425E1CB7BAB3006C68FE /* line1.png */; };
+		FA19512B1CCF1FB6007D734E /* vcSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19512A1CCF1FB6007D734E /* vcSignup.swift */; };
 		FA19C2F61CB657B700DDB49B /* Amatic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2236EB1CB6527400737D60 /* Amatic-Bold.ttf */; };
 		FA19C2F71CB657B700DDB49B /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2236EC1CB6527A00737D60 /* AmaticSC-Regular.ttf */; };
 		FA19C2FA1CB65C4100DDB49B /* player_black.png in Resources */ = {isa = PBXBuildFile; fileRef = FA19C2F81CB65C4100DDB49B /* player_black.png */; };
@@ -64,6 +65,7 @@
 		FA08425A1CB76DD1006C68FE /* film_light3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = film_light3.png; sourceTree = "<group>"; };
 		FA08425C1CB7B3E8006C68FE /* bg_conner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_conner.png; sourceTree = "<group>"; };
 		FA08425E1CB7BAB3006C68FE /* line1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line1.png; sourceTree = "<group>"; };
+		FA19512A1CCF1FB6007D734E /* vcSignup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcSignup.swift; sourceTree = "<group>"; };
 		FA19C2F81CB65C4100DDB49B /* player_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_black.png; sourceTree = "<group>"; };
 		FA19C2F91CB65C4100DDB49B /* player_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_white.png; sourceTree = "<group>"; };
 		FA19C2FC1CB6618600DDB49B /* multimedia_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multimedia_line.png; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		FA19C3041CB6797500DDB49B /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		FA19C3081CB67A5900DDB49B /* facebook(big).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook(big).png"; sourceTree = "<group>"; };
 		FA19C30A1CB67AE400DDB49B /* mail(big).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail(big).png"; sourceTree = "<group>"; };
-		FA2236D31CB6510500737D60 /* VideoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA2236D31CB6510500737D60 /* Filmily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filmily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2236D61CB6510500737D60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA2236D81CB6510500737D60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA2236DB1CB6510500737D60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,6 +109,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA1951281CCF1EC6007D734E /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA19C2FC1CB6618600DDB49B /* multimedia_line.png */,
+				FA19C2F81CB65C4100DDB49B /* player_black.png */,
+				FA19C2F91CB65C4100DDB49B /* player_white.png */,
+				FA5F0D631CBE54D0007FE99F /* video.mp4 */,
+				FA031E6C1CC0C5BC00275D30 /* line_vertical.png */,
+				FA08425E1CB7BAB3006C68FE /* line1.png */,
+				FA19C30A1CB67AE400DDB49B /* mail(big).png */,
+				FA08425C1CB7B3E8006C68FE /* bg_conner.png */,
+				FA19C3041CB6797500DDB49B /* facebook.png */,
+				FA19C3081CB67A5900DDB49B /* facebook(big).png */,
+				FA031E701CC0C93E00275D30 /* film_black.png */,
+				FA19C3021CB6735200DDB49B /* film_light.png */,
+				FA08425A1CB76DD1006C68FE /* film_light3.png */,
+				FAFFE47A1CC61717004C8FE6 /* back.png */,
+				FAFFE4741CC60B48004C8FE6 /* social-media-2.png */,
+				FAFFE4751CC60B48004C8FE6 /* social-media-3.png */,
+				FAFFE4761CC60B48004C8FE6 /* social-media.png */,
+				FA031E721CC0E4B300275D30 /* insideout.jpg */,
+				FAFFE4701CC60820004C8FE6 /* watch_later.png */,
+				FAFFE4711CC60820004C8FE6 /* watched.png */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		FA1951291CCF1F00007D734E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = fonts;
+			sourceTree = "<group>";
+		};
 		FA2236CA1CB6510500737D60 = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +155,7 @@
 		FA2236D41CB6510500737D60 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA2236D31CB6510500737D60 /* VideoApp.app */,
+				FA2236D31CB6510500737D60 /* Filmily.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,33 +163,15 @@
 		FA2236D51CB6510500737D60 /* VideoApp */ = {
 			isa = PBXGroup;
 			children = (
-				FAFFE47A1CC61717004C8FE6 /* back.png */,
-				FAFFE4741CC60B48004C8FE6 /* social-media-2.png */,
-				FAFFE4751CC60B48004C8FE6 /* social-media-3.png */,
-				FAFFE4761CC60B48004C8FE6 /* social-media.png */,
-				FA031E721CC0E4B300275D30 /* insideout.jpg */,
-				FAFFE4701CC60820004C8FE6 /* watch_later.png */,
-				FAFFE4711CC60820004C8FE6 /* watched.png */,
+				FA1951291CCF1F00007D734E /* fonts */,
+				FA1951281CCF1EC6007D734E /* resources */,
+				FA2236D61CB6510500737D60 /* AppDelegate.swift */,
 				FA2236EB1CB6527400737D60 /* Amatic-Bold.ttf */,
 				FA2236EC1CB6527A00737D60 /* AmaticSC-Regular.ttf */,
-				FA2236D61CB6510500737D60 /* AppDelegate.swift */,
 				FA2236E01CB6510500737D60 /* Assets.xcassets */,
-				FA08425C1CB7B3E8006C68FE /* bg_conner.png */,
-				FA19C3041CB6797500DDB49B /* facebook.png */,
-				FA19C3081CB67A5900DDB49B /* facebook(big).png */,
-				FA031E701CC0C93E00275D30 /* film_black.png */,
-				FA19C3021CB6735200DDB49B /* film_light.png */,
-				FA08425A1CB76DD1006C68FE /* film_light3.png */,
 				FA2236E51CB6510500737D60 /* Info.plist */,
 				FA2236E21CB6510500737D60 /* LaunchScreen.storyboard */,
-				FA031E6C1CC0C5BC00275D30 /* line_vertical.png */,
-				FA08425E1CB7BAB3006C68FE /* line1.png */,
-				FA19C30A1CB67AE400DDB49B /* mail(big).png */,
 				FA2236DA1CB6510500737D60 /* Main.storyboard */,
-				FA19C2FC1CB6618600DDB49B /* multimedia_line.png */,
-				FA19C2F81CB65C4100DDB49B /* player_black.png */,
-				FA19C2F91CB65C4100DDB49B /* player_white.png */,
-				FA5F0D631CBE54D0007FE99F /* video.mp4 */,
 				FA2236DD1CB6510500737D60 /* VideoApp.xcdatamodeld */,
 				FA2236D81CB6510500737D60 /* ViewController.swift */,
 				FA4738B41CC4C318009E2FB0 /* vcResult.swift */,
@@ -168,6 +186,7 @@
 				FA02C5D01CC8B8FA00C79B40 /* DisclaimerViewController.swift */,
 				FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */,
 				FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */,
+				FA19512A1CCF1FB6007D734E /* vcSignup.swift */,
 			);
 			path = VideoApp;
 			sourceTree = "<group>";
@@ -175,9 +194,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA2236D21CB6510500737D60 /* VideoApp */ = {
+		FA2236D21CB6510500737D60 /* Filmily */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA2236E81CB6510500737D60 /* Build configuration list for PBXNativeTarget "VideoApp" */;
+			buildConfigurationList = FA2236E81CB6510500737D60 /* Build configuration list for PBXNativeTarget "Filmily" */;
 			buildPhases = (
 				FA2236CF1CB6510500737D60 /* Sources */,
 				FA2236D01CB6510500737D60 /* Frameworks */,
@@ -187,9 +206,9 @@
 			);
 			dependencies = (
 			);
-			name = VideoApp;
+			name = Filmily;
 			productName = VideoApp;
-			productReference = FA2236D31CB6510500737D60 /* VideoApp.app */;
+			productReference = FA2236D31CB6510500737D60 /* Filmily.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -208,7 +227,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FA2236CE1CB6510500737D60 /* Build configuration list for PBXProject "VideoApp" */;
+			buildConfigurationList = FA2236CE1CB6510500737D60 /* Build configuration list for PBXProject "Filmily" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -221,7 +240,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA2236D21CB6510500737D60 /* VideoApp */,
+				FA2236D21CB6510500737D60 /* Filmily */,
 			);
 		};
 /* End PBXProject section */
@@ -275,6 +294,7 @@
 				FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */,
 				FA02C5D11CC8B8FA00C79B40 /* DisclaimerViewController.swift in Sources */,
 				FAFFE49B1CC624F7004C8FE6 /* vcWachedList.swift in Sources */,
+				FA19512B1CCF1FB6007D734E /* vcSignup.swift in Sources */,
 				FA02C5CD1CC7946400C79B40 /* customView.swift in Sources */,
 				FA2236DF1CB6510500737D60 /* VideoApp.xcdatamodeld in Sources */,
 				FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */,
@@ -323,8 +343,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: longuyvinh@magiclabs.vn (77E6G8F5W8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: longuyvinh@magiclabs.vn (77E6G8F5W8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohsen Rastizadeh (2B55EM2DGD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohsen Rastizadeh (2B55EM2DGD)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -346,6 +366,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "aa248a7d-6e35-4c25-a9d6-bf8d6d8361a8";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -369,8 +390,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: longuyvinh@magiclabs.vn (77E6G8F5W8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: longuyvinh@magiclabs.vn (77E6G8F5W8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohsen Rastizadeh (2B55EM2DGD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohsen Rastizadeh (2B55EM2DGD)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -385,6 +406,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "aa248a7d-6e35-4c25-a9d6-bf8d6d8361a8";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -396,13 +418,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: vinh nguyen (4M6KAXWH59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: vinh nguyen (4M6KAXWH59)";
 				INFOPLIST_FILE = VideoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.moe.filmify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "aa248a7d-6e35-4c25-a9d6-bf8d6d8361a8";
 			};
 			name = Debug;
 		};
@@ -412,20 +434,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: vinh nguyen (4M6KAXWH59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: vinh nguyen (4M6KAXWH59)";
 				INFOPLIST_FILE = VideoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.moe.filmify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "aa248a7d-6e35-4c25-a9d6-bf8d6d8361a8";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FA2236CE1CB6510500737D60 /* Build configuration list for PBXProject "VideoApp" */ = {
+		FA2236CE1CB6510500737D60 /* Build configuration list for PBXProject "Filmily" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA2236E61CB6510500737D60 /* Debug */,
@@ -434,7 +456,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA2236E81CB6510500737D60 /* Build configuration list for PBXNativeTarget "VideoApp" */ = {
+		FA2236E81CB6510500737D60 /* Build configuration list for PBXNativeTarget "Filmily" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA2236E91CB6510500737D60 /* Debug */,

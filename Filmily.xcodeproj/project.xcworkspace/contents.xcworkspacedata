@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:VideoApp.xcodeproj">
+      location = "self:/xcode_source/VideoApp/ios-app/Filmily.xcodeproj">
    </FileRef>
 </Workspace>
