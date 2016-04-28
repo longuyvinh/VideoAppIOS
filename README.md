@@ -1,6 +1,5 @@
 # README #
-Step 01: set up pod
- - 
+Step 01: set up cocoapod
 ```
 #!cmd
 
