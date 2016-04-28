@@ -125,17 +125,24 @@
                                             <segue destination="jNl-ZD-DBC" kind="push" id="UwN-xh-XuJ"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2pR-ER-3tg">
-                                        <rect key="frame" x="170" y="21" width="260" height="38"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pR-ER-3tg" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="170" y="25" width="260" height="38"/>
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="260" id="4DA-f8-7k5"/>
+                                            <constraint firstAttribute="height" constant="38" id="IlD-T9-RmG"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Yez-3Z-nie" secondAttribute="trailing" id="21P-JD-DSr"/>
+                                    <constraint firstItem="2pR-ER-3tg" firstAttribute="top" secondItem="gMv-Ix-BOH" secondAttribute="bottom" constant="12" id="679-qZ-LAR"/>
                                     <constraint firstItem="Yez-3Z-nie" firstAttribute="leading" secondItem="X2j-lq-bPB" secondAttribute="leading" id="J5i-mz-ivg"/>
                                     <constraint firstItem="gMv-Ix-BOH" firstAttribute="top" secondItem="X2j-lq-bPB" secondAttribute="top" id="OlU-z9-BUW"/>
                                     <constraint firstAttribute="bottom" secondItem="Yez-3Z-nie" secondAttribute="bottom" id="grS-Ue-l53"/>
+                                    <constraint firstItem="2pR-ER-3tg" firstAttribute="centerX" secondItem="X2j-lq-bPB" secondAttribute="centerX" id="j4H-0a-SDp"/>
+                                    <constraint firstItem="2pR-ER-3tg" firstAttribute="top" secondItem="X2j-lq-bPB" secondAttribute="top" constant="25" id="mrs-gn-Hnm"/>
                                     <constraint firstItem="3iU-oi-Lic" firstAttribute="centerX" secondItem="X2j-lq-bPB" secondAttribute="centerX" id="nrQ-HA-fD4"/>
                                     <constraint firstAttribute="trailing" secondItem="gMv-Ix-BOH" secondAttribute="trailing" id="pGN-tZ-IrP"/>
                                     <constraint firstItem="gMv-Ix-BOH" firstAttribute="leading" secondItem="X2j-lq-bPB" secondAttribute="leading" id="qnD-ee-T5v"/>
@@ -163,6 +170,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JRE-bh-ERB"/>
+                    <connections>
+                        <outlet property="loginFacebook" destination="2pR-ER-3tg" id="QWH-TX-6dg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPR-HC-51c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -421,7 +431,7 @@
         <!--Vc Category-->
         <scene sceneID="j9b-gD-vha">
             <objects>
-                <viewController id="hq0-hE-hue" customClass="vcCategory" customModule="Filmily" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeCategory" id="hq0-hE-hue" customClass="vcCategory" customModule="Filmily" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="25p-CD-hso"/>
                         <viewControllerLayoutGuide type="bottom" id="KDY-aA-txf"/>
@@ -2268,9 +2278,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="olX-c2-hIn"/>
         <segue reference="o8I-oN-CmP"/>
-        <segue reference="7hM-AN-yIa"/>
-        <segue reference="fva-w1-2wB"/>
-        <segue reference="BAz-O3-BNm"/>
+        <segue reference="dnA-Al-jVk"/>
+        <segue reference="kh1-X9-q0m"/>
     </inferredMetricsTieBreakers>
 </document>

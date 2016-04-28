@@ -29,6 +29,12 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         frame.size.height = viewFrameTable.frame.size.height
         myTableView.frame = frame
         myTableView.backgroundColor = UIColor.blackColor()
+        
+        self.navigationController?.navigationBarHidden = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
