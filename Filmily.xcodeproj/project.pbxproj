@@ -37,7 +37,6 @@
 		FA2236DF1CB6510500737D60 /* VideoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA2236DD1CB6510500737D60 /* VideoApp.xcdatamodeld */; };
 		FA2236E11CB6510500737D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2236E01CB6510500737D60 /* Assets.xcassets */; };
 		FA2236E41CB6510500737D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2236E21CB6510500737D60 /* LaunchScreen.storyboard */; };
-		FA4738B31CC4C2D9009E2FB0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4738B21CC4C2D9009E2FB0 /* MediaPlayer.framework */; };
 		FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4738B41CC4C318009E2FB0 /* vcResult.swift */; };
 		FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */; };
 		FAFFE4721CC60820004C8FE6 /* watch_later.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFFE4701CC60820004C8FE6 /* watch_later.png */; };
@@ -102,7 +101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA4738B31CC4C2D9009E2FB0 /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

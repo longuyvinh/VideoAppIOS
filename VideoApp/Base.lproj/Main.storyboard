@@ -1880,8 +1880,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-vh-djx">
                                 <rect key="frame" x="0.0" y="110" width="600" height="430"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAJ-sD-wKx" userLabel="View Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="640"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAJ-sD-wKx" userLabel="View Container">
+                                        <rect key="frame" x="-8" y="-118" width="600" height="640"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BW1-TQ-4cI" userLabel="View Section 03">
                                                 <rect key="frame" x="8" y="285" width="584" height="196"/>
@@ -1899,30 +1899,34 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-N8-1y0">
-                                                        <rect key="frame" x="42" y="46" width="500" height="150"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvP-7f-9I7">
+                                                        <rect key="frame" x="20" y="46" width="544" height="150"/>
+                                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="150" id="gYP-jL-Hhz"/>
+                                                            <constraint firstAttribute="height" constant="150" id="zAN-0f-lwd"/>
                                                         </constraints>
-                                                    </view>
+                                                    </webView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="Sjb-N8-1y0" firstAttribute="centerX" secondItem="BW1-TQ-4cI" secondAttribute="centerX" id="01W-l2-Qfw"/>
                                                     <constraint firstItem="lvT-Uc-Qde" firstAttribute="top" secondItem="BW1-TQ-4cI" secondAttribute="top" constant="20" id="3Ht-wo-X16"/>
-                                                    <constraint firstItem="Sjb-N8-1y0" firstAttribute="top" secondItem="HX3-9P-Odm" secondAttribute="bottom" constant="8" id="9H5-6X-LPi"/>
-                                                    <constraint firstItem="Sjb-N8-1y0" firstAttribute="leading" secondItem="BW1-TQ-4cI" secondAttribute="leading" constant="42" id="9fZ-ZB-CDF"/>
+                                                    <constraint firstItem="pvP-7f-9I7" firstAttribute="top" secondItem="HX3-9P-Odm" secondAttribute="bottom" constant="8" id="9AE-56-7Vo"/>
                                                     <constraint firstItem="lvT-Uc-Qde" firstAttribute="centerX" secondItem="BW1-TQ-4cI" secondAttribute="centerX" id="COA-iN-asU"/>
                                                     <constraint firstItem="lvT-Uc-Qde" firstAttribute="centerX" secondItem="BW1-TQ-4cI" secondAttribute="centerX" id="I2a-Bs-q3S"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pvP-7f-9I7" secondAttribute="bottom" id="T32-SS-A6W"/>
                                                     <constraint firstAttribute="trailing" secondItem="lvT-Uc-Qde" secondAttribute="trailing" constant="42" id="V2c-oJ-UP9"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Sjb-N8-1y0" secondAttribute="trailing" constant="42" id="YHo-j2-m94"/>
-                                                    <constraint firstItem="Sjb-N8-1y0" firstAttribute="top" secondItem="HX3-9P-Odm" secondAttribute="bottom" constant="8" id="aQm-TK-Jdi"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Sjb-N8-1y0" secondAttribute="bottom" id="dMV-Ba-4uq"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pvP-7f-9I7" secondAttribute="trailing" constant="20" id="VL7-bf-Q90"/>
+                                                    <constraint firstItem="pvP-7f-9I7" firstAttribute="leading" secondItem="BW1-TQ-4cI" secondAttribute="leading" constant="20" id="ZRE-qB-oYD"/>
                                                     <constraint firstItem="lvT-Uc-Qde" firstAttribute="leading" secondItem="BW1-TQ-4cI" secondAttribute="leading" constant="42" id="kbz-W0-jH0"/>
                                                     <constraint firstItem="HX3-9P-Odm" firstAttribute="centerX" secondItem="BW1-TQ-4cI" secondAttribute="centerX" id="rPj-up-NX8"/>
                                                     <constraint firstItem="HX3-9P-Odm" firstAttribute="centerY" secondItem="lvT-Uc-Qde" secondAttribute="centerY" id="rTH-of-MnY"/>
+                                                    <constraint firstItem="pvP-7f-9I7" firstAttribute="top" secondItem="HX3-9P-Odm" secondAttribute="bottom" constant="8" id="vSN-Oi-0NW"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="vSN-Oi-0NW"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8d-nM-Fb8" userLabel="View Section 02">
                                                 <rect key="frame" x="8" y="148" width="584" height="129"/>
@@ -2226,6 +2230,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Rth-XD-bHQ"/>
+                    <connections>
+                        <outlet property="webView" destination="pvP-7f-9I7" id="b9F-MK-1nn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TtX-Vm-xfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2269,9 +2276,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vDc-qc-wto"/>
-        <segue reference="NM3-yX-Gqf"/>
-        <segue reference="KGG-c7-eCa"/>
+        <segue reference="o8I-oN-CmP"/>
         <segue reference="7hM-AN-yIa"/>
+        <segue reference="fva-w1-2wB"/>
+        <segue reference="BAz-O3-BNm"/>
     </inferredMetricsTieBreakers>
 </document>

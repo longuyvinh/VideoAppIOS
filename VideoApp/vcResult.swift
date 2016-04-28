@@ -13,34 +13,31 @@ class vcResult: UIViewController {
 
     var moviePlayer : MPMoviePlayerController?
     
-    @IBOutlet weak var videoPlayer: UIView!
+    @IBOutlet weak var webView: UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //playVideo()
-        // Do any additional setup after loading the view.
+        
+        let youtubeLink:String = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
+        
+        let width = self.webView.frame.width
+        let height = self.webView.frame.height - 5
+
+        self.webView.allowsInlineMediaPlayback = true
+        
+        let code:NSString = "<iframe width=\(width) height=\(height) src=\(youtubeLink) frameborder=\"0\" allowfullscreen></iframe>"
+        
+        self.webView.loadHTMLString(code as String, baseURL: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
-
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     func playVideo() {
-        /*
-        let path = NSBundle.mainBundle().pathForResource("video", ofType:"mp4")
-        */
         let url = NSURL.fileURLWithPath("http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4")
         moviePlayer = MPMoviePlayerController(contentURL: url)
         if let player = moviePlayer {
@@ -51,6 +48,7 @@ class vcResult: UIViewController {
             self.videoPlayer.addSubview(player.view)
         }
     }
+    */
     
     @IBAction func termClick(sender: AnyObject) {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
