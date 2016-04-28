@@ -1,11 +1,14 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 # Uncomment this line if you're using Swift
-# use_frameworks!
+use_frameworks!
 
-pod 'PTEHorizontalTableView'
+pod 'Bolts'
+pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
+pod 'FBSDKLoginKit'
 
-target 'VideoApp' do
+target 'Filmily' do
 
 end
 

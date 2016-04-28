@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>video.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>FA04DADB1CD1E3EC002C23BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>FA2236D21CB6510500737D60</key>
 		<dict>
 			<key>primary</key>
