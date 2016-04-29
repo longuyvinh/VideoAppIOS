@@ -8,6 +8,8 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 
+pod 'CWStackController', '0.0.3'
+
 target 'Filmily' do
 
 end

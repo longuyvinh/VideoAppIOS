@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C99BF4F4B689CAC8E1C3E10F'
-               BlueprintName = 'FBSDKLoginKit'
+               BlueprintIdentifier = 'F6DFCBB0CA0DCA2FCAF7794D'
+               BlueprintName = 'CWStackController'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FBSDKLoginKit.framework'>
+               BuildableName = 'CWStackController.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

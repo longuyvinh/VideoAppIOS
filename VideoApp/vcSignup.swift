@@ -63,6 +63,40 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             [self.view layoutIfNeeded]
         }
     }*/
+    
+    @IBAction func buttonSignup(sender: AnyObject) {
+        let fname:String = txtFirstname.text!
+        let lname:String = txtLastname.text!
+        let email:String = txtEmail.text!
+        let password:String = txtPassword.text!
+        let username:String = txtUsername.text!
+        
+        var errorFlah:Int = 0
+        
+        if fname.isEmpty{
+            self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if lname.isEmpty{
+            self.createAlertView("Error", message: "Last name can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if username.isEmpty{
+            self.createAlertView("Error", message: "Username can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if email.isEmpty{
+            self.createAlertView("Error", message: "Email can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if !isValidEmail(email){
+            self.createAlertView("Error", message: "This is not an email", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if password.isEmpty{
+            self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }
+        
+        if(errorFlah != 1){
+            self.performSegueWithIdentifier("segueIdentifier", sender: self)
+        }
+    }
 
     @IBAction func signup(sender: AnyObject) {
         

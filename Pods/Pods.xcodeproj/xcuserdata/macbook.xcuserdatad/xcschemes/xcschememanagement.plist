@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CWStackController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,12 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7FDC23E973CC8CEE46E2B1A952F13793</key>
+		<key>72854AAD479F291023401E534DAF6DA5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7B60D9238B7EBF70587FDA96DAF4C93</key>
+		<key>7D248D24FDF39BC4B992C9CF6899549F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>857E2518917EF8D1AEBC705CC08D4A44</key>
 		<dict>
 			<key>primary</key>
 			<true/>
