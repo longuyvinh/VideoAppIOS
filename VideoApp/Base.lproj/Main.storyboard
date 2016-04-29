@@ -538,7 +538,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="player_white.png"/>
                                 <connections>
-                                    <segue destination="0An-d2-kRp" kind="push" id="dnA-Al-jVk"/>
+                                    <action selector="actionPlay:" destination="hq0-hE-hue" eventType="touchUpInside" id="5wv-bv-sqh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIF-SR-rks">
@@ -597,6 +597,7 @@
                     <connections>
                         <outlet property="myTableView" destination="7p6-zc-7mG" id="lbd-76-9ul"/>
                         <outlet property="viewFrameTable" destination="0et-Pf-Hhv" id="G49-dv-lYr"/>
+                        <segue destination="0An-d2-kRp" kind="push" identifier="seguePlayDetail" id="XcC-8b-ayC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aU2-m9-qw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2239,7 +2240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TtX-Vm-xfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3357" y="483"/>
+            <point key="canvasLocation" x="3284" y="484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6mc-bz-fEe">
@@ -2278,9 +2279,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="LPm-uE-D0V"/>
+        <segue reference="XcC-8b-ayC"/>
         <segue reference="olX-c2-hIn"/>
-        <segue reference="o8I-oN-CmP"/>
-        <segue reference="dnA-Al-jVk"/>
         <segue reference="kh1-X9-q0m"/>
     </inferredMetricsTieBreakers>
 </document>

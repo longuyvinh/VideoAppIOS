@@ -15,6 +15,8 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var myTableView: UITableView!
     
+    var currentCategory:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,6 +69,15 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return 150.00
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+        
+        currentCategory = String(currentCell.textLabel!.text)
+    }
+    
     func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
         /*
         let cell  = tableView.cellForRowAtIndexPath(indexPath)
@@ -84,6 +95,25 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func actionPlay(sender: AnyObject) {
+        if(currentCategory == ""){
+            self.createAlertView("Warning", message: "Please choose one category", buttonTitle: "Ok")
+        }else{
+            self.performSegueWithIdentifier("seguePlayDetail", sender: self)
+        }
+    }
+    
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let createAccountErrorAlert: UIAlertView = UIAlertView()
+        
+        createAccountErrorAlert.delegate = self
+        
+        createAccountErrorAlert.title = title
+        createAccountErrorAlert.message = message
+        createAccountErrorAlert.addButtonWithTitle(buttonTitle)
+        
+        createAccountErrorAlert.show()
+    }
 
     /*
     // MARK: - Navigation

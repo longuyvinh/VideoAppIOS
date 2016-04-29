@@ -96,7 +96,6 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         
         if(errorFlah != 1){
             self.performSegueWithIdentifier("segueIdentifier", sender: self)
-            print("passed")
         }
 
     }
@@ -138,35 +137,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
-    /*
-    func keyboardWillShow(notification: NSNotification) {
-        let info:NSDictionary = notification.userInfo!
-        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
-        
-        let keyboardHeight: CGFloat = keyboardSize.height
-        
-        let _: CGFloat = info[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber as CGFloat
-        
-        
-        UIView.animateWithDuration(0.25, delay: 0.25, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            self.frameView.frame = CGRectMake(0, (self.frameView.frame.origin.y - keyboardHeight), self.view.bounds.width, self.view.bounds.height)
-            }, completion: nil)
-        
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        let info: NSDictionary = notification.userInfo!
-        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
-        
-        let keyboardHeight: CGFloat = keyboardSize.height
-        
-        let _: CGFloat = info[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber as CGFloat
-        
-        UIView.animateWithDuration(0.25, delay: 0.25, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            self.frameView.frame = CGRectMake(0, (self.frameView.frame.origin.y + keyboardHeight), self.view.bounds.width, self.view.bounds.height)
-            }, completion: nil)
-        
-    }*/
+
     
     func DismissKeyboard(){
         self.view.endEditing(true)
