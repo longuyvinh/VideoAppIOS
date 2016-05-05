@@ -58,28 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoApp/vcSignup.swift"
-            timestampString = "483597485.452622"
+            timestampString = "484115034.124323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "signup(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoApp/vcSignup.swift"
-            timestampString = "483597485.452622"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "textFieldShouldReturn(_:)"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "createAlertView(_:message:buttonTitle:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

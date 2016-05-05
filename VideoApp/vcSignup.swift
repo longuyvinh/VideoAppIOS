@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Alamofire
 
 class vcSignup: UIViewController, UITextFieldDelegate {
+    
+    
     
     @IBOutlet weak var txtFirstname: UITextField!
     @IBOutlet weak var txtLastname: UITextField!
@@ -19,6 +22,8 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var constrainsHeightView: NSLayoutConstraint!
     
     @IBOutlet weak var frameView: UIView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +46,8 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         */
+        
+        
     }
     
     /*
@@ -65,13 +72,15 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     }*/
     
     @IBAction func buttonSignup(sender: AnyObject) {
+        var errorFlah:Int = 0
+        
+        
         let fname:String = txtFirstname.text!
         let lname:String = txtLastname.text!
         let email:String = txtEmail.text!
         let password:String = txtPassword.text!
         let username:String = txtUsername.text!
-        
-        var errorFlah:Int = 0
+      
         
         if fname.isEmpty{
             self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
@@ -94,12 +103,65 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         }
         
         if(errorFlah != 1){
-            self.performSegueWithIdentifier("segueIdentifier", sender: self)
+            let parameters = [
+                "first_name":   fname,
+                "last_name":    lname,
+                "username":     username,
+                "password":     password,
+                "email":        email
+            ]
+        
+            Alamofire.request(.POST, "http://filmify.yieldlevel.co/register/", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in switch response.result {
+                        case .Success(let JSON):
+                                print("success")
+                                var statusCode:Int
+                                statusCode = (response.response?.statusCode)!
+                                
+                                if(statusCode != 201){
+                                    print("auth error")
+                                    let response = JSON as! NSDictionary
+                                    //example if there is an id
+                                    if ( response.objectForKey("username") != nil ){
+                                        //let errUsername = (JSON.valueForKey("username") as? String)!
+                                        //var uuidString: String? = regionToMonitor["uuid"] as AnyObject? as? String
+                                        let errUsername:String? = JSON.valueForKey("username") as AnyObject? as? String
+                                        //print(errUsername)
+                                        self.createAlertView("Error", message: "\(errUsername)", buttonTitle: "Retry")
+                                    }
+                                    if(response.objectForKey("email") != nil){
+                                        //let errEmail = response.objectForKey("email")
+                                        let errEmail:String? = response.objectForKey("email") as AnyObject? as? String
+                                        //print(errEmail)
+                                        self.createAlertView("Error", message: errEmail!, buttonTitle: "Retry")
+                                    }
+                                    if(response.objectForKey("last_name") != nil){
+                                        let errLname = response.objectForKey("last_name")
+                                        //print(errLname)
+                                        self.createAlertView("Error", message: errLname as! String, buttonTitle: "Retry")
+                                    }
+                                    if(response.objectForKey("first_name") != nil){
+                                        let errFname = response.objectForKey("first_name")
+                                        //print(errFname)
+                                        self.createAlertView("Error", message: errFname as! String, buttonTitle: "Retry")
+                                    }
+                                }else{
+                                    //print("auth success")
+                                    self.createAlertView("Congratulation", message: "Sign up user successful", buttonTitle: "OK")
+                                    self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                                }
+                    
+                        case .Failure(let error):
+                                print("Request failed with error: \(error)")
+                    }
+        
+                
+            }
         }
     }
-
+    
     @IBAction func signup(sender: AnyObject) {
-        
+    
         let fname:String = txtFirstname.text!
         let lname:String = txtLastname.text!
         let email:String = txtEmail.text!
@@ -128,15 +190,19 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             errorFlah = 1
         }
         
+        
+        
         if(errorFlah != 1){
             self.performSegueWithIdentifier("segueIdentifier", sender: self)
         }
 
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     /*
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
@@ -176,14 +242,5 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     func DismissKeyboard(){
         self.view.endEditing(true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

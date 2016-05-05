@@ -84,16 +84,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-Filmily/Alamofire.framework"
   install_framework "Pods-Filmily/Bolts.framework"
   install_framework "Pods-Filmily/CWStackController.framework"
   install_framework "Pods-Filmily/FBSDKCoreKit.framework"
   install_framework "Pods-Filmily/FBSDKLoginKit.framework"
   install_framework "Pods-Filmily/FBSDKShareKit.framework"
+  install_framework "Pods-Filmily/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-Filmily/Alamofire.framework"
   install_framework "Pods-Filmily/Bolts.framework"
   install_framework "Pods-Filmily/CWStackController.framework"
   install_framework "Pods-Filmily/FBSDKCoreKit.framework"
   install_framework "Pods-Filmily/FBSDKLoginKit.framework"
   install_framework "Pods-Filmily/FBSDKShareKit.framework"
+  install_framework "Pods-Filmily/SwiftyJSON.framework"
 fi
