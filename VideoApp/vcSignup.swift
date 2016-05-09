@@ -69,7 +69,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     
     //"http://filmify.yieldlevel.co/api/register/"
     func requestServer(link: String, successBlock:(data:[NSObject : AnyObject] , stautusCode: Int)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
-        Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject], encoding: .JSON)
+        Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject])
             .responseJSON { response in switch response.result {
                 
             case .Success(let JSON):
@@ -87,35 +87,33 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func buttonSignup(sender: AnyObject) {
-        let errorFlah:Int = 0
+        var errorFlah:Int = 0
         
         let fname:String = txtFirstname.text!
         let lname:String = txtLastname.text!
         let email:String = txtEmail.text!
         let password:String = txtPassword.text!
         let username:String = txtUsername.text!
-      
-        // sao no ko vao ta
-        //alo
-//        if fname.isEmpty{
-//            self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
-//            errorFlah = 1
-//        }else if lname.isEmpty{
-//            self.createAlertView("Error", message: "Last name can not blank", buttonTitle: "Retry")
-//            errorFlah = 1
-//        }else if username.isEmpty{
-//            self.createAlertView("Error", message: "Username can not blank", buttonTitle: "Retry")
-//            errorFlah = 1
-//        }else if email.isEmpty{
-//            self.createAlertView("Error", message: "Email can not blank", buttonTitle: "Retry")
-//            errorFlah = 1
-//        }else if !isValidEmail(email){
-//            self.createAlertView("Error", message: "This is not an email", buttonTitle: "Retry")
-//            errorFlah = 1
-//        }else if password.isEmpty{
-//            self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
-//            errorFlah = 1
-//        }
+
+        if fname.isEmpty{
+            self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if lname.isEmpty{
+            self.createAlertView("Error", message: "Last name can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if username.isEmpty{
+            self.createAlertView("Error", message: "Username can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if email.isEmpty{
+            self.createAlertView("Error", message: "Email can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if !isValidEmail(email){
+            self.createAlertView("Error", message: "This is not an email", buttonTitle: "Retry")
+            errorFlah = 1
+        }else if password.isEmpty{
+            self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
+            errorFlah = 1
+        }
         
         if(errorFlah != 1){
             let paramSignup = [
@@ -135,17 +133,12 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                     //print("success")
                     //print(data)
                     //[id: 46, username: longuyvinh, first_name: vinh, email: longuyvinh.ny@gmail.com, last_name: Nguyen]
-                    
                     let usernameRS:String = (data["username"] as? String)!
                     let defaults = NSUserDefaults.standardUserDefaults()
-                    
-                    
-                    
                     
                     let date = NSDate()
                     let timestamp = Int(date.timeIntervalSince1970)
                     
-                    //self.performSegueWithIdentifier("segueIdentifier", sender: self)
                     let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
                     let clientSecret = "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E"
                     
@@ -153,25 +146,25 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                         "grant_type":       "password",
                         "client_id":        clientID,
                         "client_secret":    clientSecret,
-                        "username":         username,
+                        "username":         usernameRS,
                         "password":         password
                     ]
                     let url = "http://filmify.yieldlevel.co/auth/token"
-                    
-                    Alamofire.request(.POST, url, parameters: paramAuth).responseJSON { response in
-                            /*
-                            if let JSON = response.result.value {
-                                accesstoken = (JSON["access_token"] as? String)!
-                                refeshtoken = (JSON["refresh_token"] as? String)!
-                                expiretime = (JSON["expires_in"] as? Int)!
-                                let expireTime = timestamp + expiretime
-                                
-                                defaults.setObject(accesstoken, forKey: "accesstoken")
-                                defaults.setObject(refeshtoken, forKey: "refreshtoken")
-                                defaults.setInteger(expireTime, forKey: "expiretime")
-                                defaults.setObject(usernameRS, forKey: "username")
-                            }*/
-                    }
+                    self.requestServer(url, successBlock: { (data, stautusCode) in
+                            //print(data)
+                            let accesstoken = (data["access_token"] as? String)!
+                            let refeshtoken = (data["refresh_token"] as? String)!
+                            let expiretime = (data["expires_in"] as? Int)!
+                            let expireTime = timestamp + expiretime
+                        
+                            defaults.setObject(accesstoken, forKey: "accesstoken")
+                            defaults.setObject(refeshtoken, forKey: "refreshtoken")
+                            defaults.setInteger(expireTime, forKey: "expiretime")
+                            defaults.setObject(usernameRS, forKey: "username")
+                            self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                        }, error: { (error) in
+                            //error
+                        }, parameters: paramAuth)
                     
                 }
                 

@@ -29,6 +29,8 @@ class vcResult: UIViewController {
         let code:NSString = "<iframe width=\(width) height=\(height) src=\(youtubeLink) frameborder=\"0\" allowfullscreen></iframe>"
         
         self.webView.loadHTMLString(code as String, baseURL: nil)
+        
+        print("show id: \(self.genrePassed)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,19 +39,6 @@ class vcResult: UIViewController {
         
     }
     
-    /*
-    func playVideo() {
-        let url = NSURL.fileURLWithPath("http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4")
-        moviePlayer = MPMoviePlayerController(contentURL: url)
-        if let player = moviePlayer {
-            player.view.frame = self.view.bounds
-            player.prepareToPlay()
-            player.scalingMode = .AspectFill
-            //self.view.addSubview(player.view)
-            self.videoPlayer.addSubview(player.view)
-        }
-    }
-    */
     
     @IBAction func termClick(sender: AnyObject) {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
