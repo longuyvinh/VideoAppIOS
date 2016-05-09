@@ -8,11 +8,20 @@
 
 import UIKit
 import MediaPlayer
+import Alamofire
 
 class vcResult: UIViewController {
 
     var moviePlayer : MPMoviePlayerController?
     var genrePassed:Int = 0
+    
+    @IBOutlet weak var moviePoster: UIImageView!
+    
+    @IBOutlet weak var moviePilot: UILabel!
+    @IBOutlet weak var movieActors: UILabel!
+    @IBOutlet weak var movieDirector: UILabel!
+    @IBOutlet weak var movieYear: UILabel!
+    @IBOutlet weak var movieTitle: UILabel!
     
     @IBOutlet weak var webView: UIWebView!
     
@@ -31,12 +40,60 @@ class vcResult: UIViewController {
         self.webView.loadHTMLString(code as String, baseURL: nil)
         
         print("show id: \(self.genrePassed)")
+        //var accesstoken:String
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let accesstoken = defaults.objectForKey("accesstoken") as! String
+  
+        let parameters=[
+            "has_poster": "true",
+            "has_plot" : "true",
+            "page_size" : "1",
+            "genre_ids" : genrePassed,
+            "access_token" : accesstoken
+        ]
+        
+        let url = "http://filmify.yieldlevel.co/api/movies-by-genres"
+        self.getServer(url, successBlock: { data in
+                let json = data!["results"] as! [AnyObject]
+                let jsonData = json[0]
+                self.movieTitle.text = jsonData.valueForKey("title") as! String
+                self.movieYear.text = String(jsonData.valueForKey("year") as! Int)
+                self.moviePilot.text = jsonData.valueForKey("plot") as! String
+                self.movieActors.text = jsonData.valueForKey("main_cast") as! String
+                self.movieDirector.text = jsonData.valueForKey("director") as! String
+            
+                if let url = NSURL(string: jsonData.valueForKey("poster") as! String) {
+                    if let data = NSData(contentsOfURL: url) {
+                        self.moviePoster.image = UIImage(data: data)
+                    }
+                }
+                //print(title)
+                //print(json["title"])
+                //movieYear.text = json["year"]
+            }, error: { error in
+            }, parameters: parameters)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
+    }
+    
+    func getServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.GET, link , parameters: parameters as? [String : AnyObject])
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                let data: AnyObject? = JSON
+                successBlock(data: data)
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+                }
+                
+        }
     }
     
     

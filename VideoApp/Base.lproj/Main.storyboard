@@ -1986,8 +1986,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-vh-djx">
                                 <rect key="frame" x="0.0" y="110" width="600" height="430"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAJ-sD-wKx" userLabel="View Container">
-                                        <rect key="frame" x="-8" y="-118" width="600" height="640"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAJ-sD-wKx" userLabel="View Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="640"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BW1-TQ-4cI" userLabel="View Section 03">
                                                 <rect key="frame" x="8" y="285" width="584" height="196"/>
@@ -2081,7 +2081,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXj-fH-rHc" userLabel="View Section 01">
                                                 <rect key="frame" x="8" y="0.0" width="584" height="140"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="insideout.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zho-zr-oh3">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="insideout.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zho-zr-oh3">
                                                         <rect key="frame" x="20" y="0.0" width="110" height="140"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="140" id="RbB-lU-AOr"/>
@@ -2131,16 +2131,6 @@
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jii-I3-2fe">
-                                                                <rect key="frame" x="29" y="0.0" width="42" height="21"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="21" id="ZU0-P9-hEh"/>
-                                                                    <constraint firstAttribute="width" constant="42" id="pK7-4E-W42"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="20"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pete Docter, Ronnie Del Carmen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhW-sw-t3I">
                                                                 <rect key="frame" x="52" y="25" width="374" height="21"/>
                                                                 <constraints>
@@ -2152,6 +2142,16 @@
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amy Poehler, Phyllis Smith, Richard Kind, Bill Hader" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exK-RY-O0M">
                                                                 <rect key="frame" x="41" y="48" width="385" height="26"/>
+                                                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="20"/>
+                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jii-I3-2fe">
+                                                                <rect key="frame" x="29" y="0.0" width="42" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="ZU0-P9-hEh"/>
+                                                                    <constraint firstAttribute="width" constant="42" id="pK7-4E-W42"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="20"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2350,6 +2350,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Rth-XD-bHQ"/>
                     <connections>
+                        <outlet property="movieActors" destination="exK-RY-O0M" id="bEq-ft-Ryc"/>
+                        <outlet property="movieDirector" destination="DhW-sw-t3I" id="EzL-cV-3aV"/>
+                        <outlet property="moviePilot" destination="rdy-9P-UKR" id="Y9G-qV-0fU"/>
+                        <outlet property="moviePoster" destination="zho-zr-oh3" id="myg-3L-Wm4"/>
+                        <outlet property="movieTitle" destination="2wp-ft-uCs" id="d5U-Tg-5M7"/>
+                        <outlet property="movieYear" destination="Jii-I3-2fe" id="vHe-kO-Tby"/>
                         <outlet property="webView" destination="pvP-7f-9I7" id="b9F-MK-1nn"/>
                     </connections>
                 </viewController>
@@ -2394,9 +2400,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LPm-uE-D0V"/>
-        <segue reference="kh1-X9-q0m"/>
+        <segue reference="o8I-oN-CmP"/>
         <segue reference="XcC-8b-ayC"/>
-        <segue reference="olX-c2-hIn"/>
+        <segue reference="fva-w1-2wB"/>
+        <segue reference="BAz-O3-BNm"/>
     </inferredMetricsTieBreakers>
 </document>
