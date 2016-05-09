@@ -11,8 +11,6 @@ import Alamofire
 
 class vcSignup: UIViewController, UITextFieldDelegate {
     
-    
-    
     @IBOutlet weak var txtFirstname: UITextField!
     @IBOutlet weak var txtLastname: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -22,8 +20,6 @@ class vcSignup: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var constrainsHeightView: NSLayoutConstraint!
     
     @IBOutlet weak var frameView: UIView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +67,27 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         }
     }*/
     
+    //"http://filmify.yieldlevel.co/api/register/"
+    func requestServer(link: String, successBlock:(data:[NSObject : AnyObject] , stautusCode: Int)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject], encoding: .JSON)
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                var statusCode:Int
+                statusCode = (response.response?.statusCode)!
+                successBlock(data: JSON as! [NSObject : AnyObject] , stautusCode: statusCode)
+                                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+            }
+                
+        }
+    }
+    
+    
     @IBAction func buttonSignup(sender: AnyObject) {
-        var errorFlah:Int = 0
-        
+        let errorFlah:Int = 0
         
         let fname:String = txtFirstname.text!
         let lname:String = txtLastname.text!
@@ -81,82 +95,162 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         let password:String = txtPassword.text!
         let username:String = txtUsername.text!
       
-        
-        if fname.isEmpty{
-            self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
-            errorFlah = 1
-        }else if lname.isEmpty{
-            self.createAlertView("Error", message: "Last name can not blank", buttonTitle: "Retry")
-            errorFlah = 1
-        }else if username.isEmpty{
-            self.createAlertView("Error", message: "Username can not blank", buttonTitle: "Retry")
-            errorFlah = 1
-        }else if email.isEmpty{
-            self.createAlertView("Error", message: "Email can not blank", buttonTitle: "Retry")
-            errorFlah = 1
-        }else if !isValidEmail(email){
-            self.createAlertView("Error", message: "This is not an email", buttonTitle: "Retry")
-            errorFlah = 1
-        }else if password.isEmpty{
-            self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
-            errorFlah = 1
-        }
+        // sao no ko vao ta
+        //alo
+//        if fname.isEmpty{
+//            self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
+//            errorFlah = 1
+//        }else if lname.isEmpty{
+//            self.createAlertView("Error", message: "Last name can not blank", buttonTitle: "Retry")
+//            errorFlah = 1
+//        }else if username.isEmpty{
+//            self.createAlertView("Error", message: "Username can not blank", buttonTitle: "Retry")
+//            errorFlah = 1
+//        }else if email.isEmpty{
+//            self.createAlertView("Error", message: "Email can not blank", buttonTitle: "Retry")
+//            errorFlah = 1
+//        }else if !isValidEmail(email){
+//            self.createAlertView("Error", message: "This is not an email", buttonTitle: "Retry")
+//            errorFlah = 1
+//        }else if password.isEmpty{
+//            self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
+//            errorFlah = 1
+//        }
         
         if(errorFlah != 1){
-            let parameters = [
+            let paramSignup = [
                 "first_name":   fname,
                 "last_name":    lname,
                 "username":     username,
                 "password":     password,
                 "email":        email
             ]
-        
-            Alamofire.request(.POST, "http://filmify.yieldlevel.co/register/", parameters: parameters, encoding: .JSON)
-                .responseJSON { response in switch response.result {
-                        case .Success(let JSON):
-                                print("success")
-                                var statusCode:Int
-                                statusCode = (response.response?.statusCode)!
-                                
-                                if(statusCode != 201){
-                                    print("auth error")
-                                    let response = JSON as! NSDictionary
-                                    //example if there is an id
-                                    if ( response.objectForKey("username") != nil ){
-                                        //let errUsername = (JSON.valueForKey("username") as? String)!
-                                        //var uuidString: String? = regionToMonitor["uuid"] as AnyObject? as? String
-                                        let errUsername:String? = JSON.valueForKey("username") as AnyObject? as? String
-                                        //print(errUsername)
-                                        self.createAlertView("Error", message: "\(errUsername)", buttonTitle: "Retry")
-                                    }
-                                    if(response.objectForKey("email") != nil){
-                                        //let errEmail = response.objectForKey("email")
-                                        let errEmail:String? = response.objectForKey("email") as AnyObject? as? String
-                                        //print(errEmail)
-                                        self.createAlertView("Error", message: errEmail!, buttonTitle: "Retry")
-                                    }
-                                    if(response.objectForKey("last_name") != nil){
-                                        let errLname = response.objectForKey("last_name")
-                                        //print(errLname)
-                                        self.createAlertView("Error", message: errLname as! String, buttonTitle: "Retry")
-                                    }
-                                    if(response.objectForKey("first_name") != nil){
-                                        let errFname = response.objectForKey("first_name")
-                                        //print(errFname)
-                                        self.createAlertView("Error", message: errFname as! String, buttonTitle: "Retry")
-                                    }
-                                }else{
-                                    //print("auth success")
-                                    self.createAlertView("Congratulation", message: "Sign up user successful", buttonTitle: "OK")
-                                    self.performSegueWithIdentifier("segueIdentifier", sender: self)
-                                }
+            let url1:String = "http://filmify.yieldlevel.co/api/register/"
+            
+            self.requestServer(url1, successBlock: { (data, stautusCode) in
+                if stautusCode != 201 {
+                    print("error field")
+                    //print(data)
+                } else {
+                    //print("success")
+                    //print(data)
+                    //[id: 46, username: longuyvinh, first_name: vinh, email: longuyvinh.ny@gmail.com, last_name: Nguyen]
                     
-                        case .Failure(let error):
-                                print("Request failed with error: \(error)")
+                    let usernameRS:String = (data["username"] as? String)!
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    
+                    
+                    
+                    
+                    let date = NSDate()
+                    let timestamp = Int(date.timeIntervalSince1970)
+                    
+                    //self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                    let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
+                    let clientSecret = "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E"
+                    
+                    let paramAuth = [
+                        "grant_type":       "password",
+                        "client_id":        clientID,
+                        "client_secret":    clientSecret,
+                        "username":         username,
+                        "password":         password
+                    ]
+                    let url = "http://filmify.yieldlevel.co/auth/token"
+                    
+                    Alamofire.request(.POST, url, parameters: paramAuth).responseJSON { response in
+                            /*
+                            if let JSON = response.result.value {
+                                accesstoken = (JSON["access_token"] as? String)!
+                                refeshtoken = (JSON["refresh_token"] as? String)!
+                                expiretime = (JSON["expires_in"] as? Int)!
+                                let expireTime = timestamp + expiretime
+                                
+                                defaults.setObject(accesstoken, forKey: "accesstoken")
+                                defaults.setObject(refeshtoken, forKey: "refreshtoken")
+                                defaults.setInteger(expireTime, forKey: "expiretime")
+                                defaults.setObject(usernameRS, forKey: "username")
+                            }*/
                     }
-        
+                    
+                }
                 
-            }
+                }, error: { (error) in
+                    //error
+                }, parameters: paramSignup)
+
+            
+//            Alamofire.request(.POST, "http://filmify.yieldlevel.co/api/register/", parameters: parameters, encoding: .JSON)
+//                .responseJSON { response in switch response.result {
+//                        case .Success(let JSON):
+//                                print("success")
+//                                var statusCode:Int
+//                                statusCode = (response.response?.statusCode)!
+//
+//                                if(statusCode != 201){
+//                                    print("auth error")
+//                                    let response = JSON as! NSDictionary
+//                                    //example if there is an id
+//                                    if ( response.objectForKey("username") != nil ){
+//                                        //let errUsername = (JSON.valueForKey("username") as? String)!
+//                                        //var uuidString: String? = regionToMonitor["uuid"] as AnyObject? as? String
+//                                        let errUsername:String? = JSON.valueForKey("username") as AnyObject? as? String
+//                                        //print(errUsername)
+//                                        self.createAlertView("Error", message: "\(errUsername)", buttonTitle: "Retry")
+//                                    }
+//                                    if(response.objectForKey("email") != nil){
+//                                        //let errEmail = response.objectForKey("email")
+//                                        let errEmail:String? = response.objectForKey("email") as AnyObject? as? String
+//                                        //print(errEmail)
+//                                        self.createAlertView("Error", message: errEmail!, buttonTitle: "Retry")
+//                                    }
+//                                    if(response.objectForKey("last_name") != nil){
+//                                        let errLname = response.objectForKey("last_name")
+//                                        //print(errLname)
+//                                        self.createAlertView("Error", message: errLname as! String, buttonTitle: "Retry")
+//                                    }
+//                                    if(response.objectForKey("first_name") != nil){
+//                                        let errFname = response.objectForKey("first_name")
+//                                        //print(errFname)
+//                                        self.createAlertView("Error", message: errFname as! String, buttonTitle: "Retry")
+//                                    }
+//                                }else{
+//                                    //print("auth success")
+//                                    self.createAlertView("Congratulation", message: "Sign up user successful", buttonTitle: "OK")
+//                                    
+//                                    let parameAuth = [
+//                                        "grant_type":       "password",
+//                                        "client_id":        "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod",
+//                                        "client_secret":    "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E",
+//                                        "username":         username,
+//                                        "password":         password
+//                                    ]
+//                                    print(parameAuth)
+//                                    
+//                                    Alamofire.request(.POST, "http://filmify.yieldlevel.co/auth/token/", parameters: parameAuth, encoding: .JSON).responseJSON { response2 in switch response2.result {
+//                                        
+//                                                case .Success(let JSON2):
+//                                                    print(parameters)
+//                                                    print("authentication success")
+//                                                    print("Success with JSON: \(JSON2)")
+//                                                    print(response2.data)
+//                                                    print(response2.response)
+//                                                    //self.performSegueWithIdentifier("segueIdentifier", sender: self)
+//                                                case .Failure(let error2):
+//                                                    print("error \(error2)")
+//
+//                                            }
+//                                    }
+//                                    
+//                                    
+//                                }
+//                    
+//                        case .Failure(let error):
+//                                print("Request failed with error: \(error)")
+//                    }
+//        
+//                
+//            }
         }
     }
     

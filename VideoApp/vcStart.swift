@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
+import Alamofire
 
 class vcStart: UIViewController, FBSDKLoginButtonDelegate{
     
@@ -19,10 +20,81 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        /*
         if(FBSDKAccessToken.currentAccessToken() == nil){
             print("User is not logged in")
         }else{
             print("User is not logged")
+        }*/
+        
+        //get time now
+        let date = NSDate()
+        let timestamp = Int(date.timeIntervalSince1970)
+        var accesstoken:String
+        var refeshtoken:String
+        var expiretime:Int
+        let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
+        let clientSecret = "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E"
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if(defaults.objectForKey("accesstoken") != nil){
+             accesstoken = defaults.objectForKey("accesstoken") as! String
+        }else{
+            accesstoken = ""
+        }
+        
+        if(defaults.objectForKey("refreshtoken") != nil){
+            refeshtoken = defaults.objectForKey("refreshtoken") as! String
+        }else{
+            refeshtoken = ""
+        }
+        
+        if(defaults.objectForKey("expiretime") != nil){
+            expiretime = defaults.objectForKey("expiretime") as! Int
+        }else{
+            expiretime = 0
+        }
+        
+        if(accesstoken != "") && (expiretime >= timestamp){
+            //token still available and redirect to home category
+            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
+            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = protectedPageNav
+        }else if((expiretime < timestamp) && (accesstoken != "")){
+            //token expire timeout
+            print("expired timeout")
+            
+            let paramAuth = [
+                "grant_type":       "refresh_token",
+                "client_id":        clientID,
+                "client_secret":    clientSecret,
+                "refresh_token":    refeshtoken
+            ]
+            let url = "http://filmify.yieldlevel.co/auth/token"
+            
+            Alamofire.request(.POST, url, parameters: paramAuth)
+                .responseJSON { response in
+                    
+                    if let JSON = response.result.value {
+                        accesstoken = (JSON["access_token"] as? String)!
+                        refeshtoken = (JSON["refresh_token"] as? String)!
+                        expiretime = (JSON["expires_in"] as? Int)!
+                        
+                        let expireTime = timestamp + expiretime
+                        defaults.setObject(accesstoken, forKey: "accesstoken")
+                        defaults.setObject(refeshtoken, forKey: "refreshtoken")
+                        defaults.setInteger(expireTime, forKey: "expiretime")
+                        
+                        //redirect to view home category
+                        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
+                        let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = protectedPageNav
+                        //redirect to view home category EOF
+                    }
+                    
+            }
         }
         
         loginFacebook.delegate = self

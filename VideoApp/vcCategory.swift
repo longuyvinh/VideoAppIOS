@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import Alamofire
 
 class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var viewFrameTable: UIView!
-    let listGenre = ["Action", "Adventure", "Fantasy", "Animation", "Comedy" , "Comedy11"]
-    
+    //let listGenre = ["Action", "Adventure", "Fantasy", "Animation", "Comedy" , "Comedy11"]
+    var listGenre = [Genre]()
     @IBOutlet weak var myTableView: UITableView!
     
-    var currentCategory:String = ""
+    var currentCategory:Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,70 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         myTableView.backgroundColor = UIColor.blackColor()
         
         self.navigationController?.navigationBarHidden = true
+
+        var accesstoken:String
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if(defaults.objectForKey("accesstoken") != nil){
+            accesstoken = defaults.objectForKey("accesstoken") as! String
+        }else{
+            accesstoken = ""
+        }
+        print("access token: \(accesstoken)")
+        
+        let paramListGenres=[
+            "page": "1",
+            "page_size" : "1000",
+            "ordering" : "name",
+            "access_token" : accesstoken
+        ]
+        
+        let urlGenres = "http://filmify.yieldlevel.co/api/genres/"
+
+        self.requestServer(urlGenres,
+            successBlock:{(data) in
+                //print(data!["results"])
+                let jsonListing = data!["results"] as? NSArray
+                //print(jsonListing)
+                for item in jsonListing as! [AnyObject]{
+                    //let title:String = (item.valueForKey("description") as? String)!
+                    let genreId:Int = (item.valueForKey("id") as? Int)!
+                    let genreName:String = (item.valueForKey("description") as? String)!
+                    self.listGenre.append(Genre(idIn: genreId as Int, nameIn: genreName as String))
+                    
+                    //self.listGenre.append(title)
+                    //print(title)
+                }
+                //print(self.listGenre)
+                self.myTableView.reloadData()
+            },
+            error:{(error) in
+            
+            },
+            parameters: paramListGenres)
+   }
+
+    func requestServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.GET, link, parameters: parameters as? [String : AnyObject]).responseJSON{
+            response in
+            // nen dung swich case ngay day ...
+            if let JSON = response.result.value{
+                let data: AnyObject? = JSON
+                successBlock(data: data)
+            }
+        }
     }
+    
+    /*
+    //code demo
+    func makeTable(data: AnyObject?) -> () {
+        // make your table
+    }
+    
+    callSomeAPI() { data in
+    makeTable(data)
+    }*/
+    
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
@@ -45,7 +109,8 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        cell.textLabel!.text = listGenre[indexPath.row]
+        let item = listGenre[indexPath.row]
+        cell.textLabel!.text = item.name
         
         cell.textLabel!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
         cell.textLabel?.textAlignment = .Center
@@ -72,10 +137,13 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow
-        
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
-        
-        currentCategory = String(currentCell.textLabel!.text)
+        //print("row: \(indexPath!.row)")
+        let idkey:Int = indexPath!.row
+        //print("genre id: \(self.listGenre[idkey].id) - \(self.listGenre[idkey].name)")
+        //let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+        //print("current: \(currentCell)")
+        currentCategory = self.listGenre[idkey].id!
+        //print(currentCategory)
     }
     
     func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
@@ -96,10 +164,19 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func actionPlay(sender: AnyObject) {
-        if(currentCategory == ""){
+        if(currentCategory == -1){
             self.createAlertView("Warning", message: "Please choose one category", buttonTitle: "Ok")
         }else{
             self.performSegueWithIdentifier("seguePlayDetail", sender: self)
+        }
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "seguePlayDetail") {
+            var svc = segue.destinationViewController as! vcResult;
+            svc.dataPassed = currentCategory
+            svc.secondDataPassed = fieldB.text
         }
     }
     
@@ -114,7 +191,34 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         createAccountErrorAlert.show()
     }
-
+    
+    func getServer(link: String, successBlock:(data:[NSObject : AnyObject])-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.GET, link , parameters: parameters as? [String : AnyObject], encoding: .JSON)
+            .responseJSON { response in
+                
+                if let JSON = response.result.value {
+                    successBlock(data: JSON as! [NSObject : AnyObject])
+                }
+        }
+    }
+    /*
+    func requestServer(link: String, successBlock:(data:[NSObject : AnyObject] , stautusCode: Int)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject], encoding: .JSON)
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                var statusCode:Int
+                statusCode = (response.response?.statusCode)!
+                successBlock(data: JSON as! [NSObject : AnyObject] , stautusCode: statusCode)
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+                }
+                
+        }
+    }
+     */
     /*
     // MARK: - Navigation
 
