@@ -12,6 +12,7 @@ import MediaPlayer
 class vcResult: UIViewController {
 
     var moviePlayer : MPMoviePlayerController?
+    var genrePassed:Int = 0
     
     @IBOutlet weak var webView: UIWebView!
     

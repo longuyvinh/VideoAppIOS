@@ -175,8 +175,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "seguePlayDetail") {
             var svc = segue.destinationViewController as! vcResult;
-            svc.dataPassed = currentCategory
-            svc.secondDataPassed = fieldB.text
+            svc.genrePassed = currentCategory
         }
     }
     
