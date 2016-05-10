@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoApp/vcSignup.swift"
-            timestampString = "484471294.870383"
+            timestampString = "484558062.78886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "createAlertView(_:message:buttonTitle:)"
             landmarkType = "5">
          </BreakpointContent>

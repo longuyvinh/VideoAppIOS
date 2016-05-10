@@ -66,8 +66,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             [self.view layoutIfNeeded]
         }
     }*/
-    
-    //"http://filmify.yieldlevel.co/api/register/"
+
     func requestServer(link: String, successBlock:(data:[NSObject : AnyObject] , stautusCode: Int)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
         Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject])
             .responseJSON { response in switch response.result {

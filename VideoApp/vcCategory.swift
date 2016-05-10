@@ -45,36 +45,46 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         print("access token: \(accesstoken)")
         
-        let paramListGenres=[
-            "page": "1",
-            "page_size" : "1000",
-            "ordering" : "name",
-            "access_token" : accesstoken
-        ]
+        if( accesstoken != ""){
+            let paramListGenres=[
+                "page": "1",
+                "page_size" : "1000",
+                "ordering" : "name",
+                "access_token" : accesstoken
+            ]
         
-        let urlGenres = "http://filmify.yieldlevel.co/api/genres/"
+            let urlGenres = "http://filmify.yieldlevel.co/api/genres/"
 
-        self.requestServer(urlGenres,
-            successBlock:{(data) in
-                //print(data!["results"])
-                let jsonListing = data!["results"] as? NSArray
-                //print(jsonListing)
-                for item in jsonListing as! [AnyObject]{
-                    //let title:String = (item.valueForKey("description") as? String)!
-                    let genreId:Int = (item.valueForKey("id") as? Int)!
-                    let genreName:String = (item.valueForKey("description") as? String)!
-                    self.listGenre.append(Genre(idIn: genreId as Int, nameIn: genreName as String))
+            self.requestServer(urlGenres,
+                               successBlock:{(data) in
+                                //print(data!["results"])
+                                let jsonListing = data!["results"] as? NSArray
+                                //print(jsonListing)
+                                for item in jsonListing as! [AnyObject]{
+                                    //let title:String = (item.valueForKey("description") as? String)!
+                                    let genreId:Int = (item.valueForKey("id") as? Int)!
+                                    let genreName:String = (item.valueForKey("description") as? String)!
+                                    self.listGenre.append(Genre(idIn: genreId as Int, nameIn: genreName as String))
                     
-                    //self.listGenre.append(title)
-                    //print(title)
-                }
-                //print(self.listGenre)
-                self.myTableView.reloadData()
-            },
-            error:{(error) in
-            
-            },
-            parameters: paramListGenres)
+                                    //self.listGenre.append(title)
+                                    //print(title)
+                                }
+                                //print(self.listGenre)
+                                self.myTableView.reloadData()
+                            },
+                            error:{(error) in
+                                //error
+                            },
+                            parameters: paramListGenres)
+        }else{
+            print("token error")
+            /*
+            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("startView") as! vcStart
+            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = protectedPageNav
+            */
+        }
    }
 
     func requestServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {

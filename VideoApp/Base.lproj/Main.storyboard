@@ -77,7 +77,7 @@
         <!--Vc Start-->
         <scene sceneID="tjd-4m-5SR">
             <objects>
-                <viewController id="jDN-k0-Xf5" customClass="vcStart" customModule="Filmily" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="startView" id="jDN-k0-Xf5" customClass="vcStart" customModule="Filmily" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1fQ-tX-CH0"/>
                         <viewControllerLayoutGuide type="bottom" id="Yx7-FK-0E2"/>
@@ -645,7 +645,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aU2-m9-qw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2562" y="483"/>
+            <point key="canvasLocation" x="2664" y="484"/>
         </scene>
         <!--Vc Wached List-->
         <scene sceneID="WWv-Ib-YIB">
@@ -2400,9 +2400,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="o8I-oN-CmP"/>
+        <segue reference="kh1-X9-q0m"/>
+        <segue reference="vDc-qc-wto"/>
+        <segue reference="olX-c2-hIn"/>
         <segue reference="XcC-8b-ayC"/>
-        <segue reference="fva-w1-2wB"/>
-        <segue reference="BAz-O3-BNm"/>
     </inferredMetricsTieBreakers>
 </document>

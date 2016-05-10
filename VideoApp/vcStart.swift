@@ -15,7 +15,9 @@ import Alamofire
 class vcStart: UIViewController, FBSDKLoginButtonDelegate{
     
     @IBOutlet weak var loginFacebook: FBSDKLoginButton!
-
+    let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
+    let clientSecret = "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,8 +35,7 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
         var accesstoken:String
         var refeshtoken:String
         var expiretime:Int
-        let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
-        let clientSecret = "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E"
+        
         
         let defaults = NSUserDefaults.standardUserDefaults()
         if(defaults.objectForKey("accesstoken") != nil){
@@ -56,11 +57,13 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
         }
         
         if(accesstoken != "") && (expiretime >= timestamp){
+            
             //token still available and redirect to home category
             let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
             let protectedPageNav = UINavigationController(rootViewController: protectedPage)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window?.rootViewController = protectedPageNav
+            
         }else if((expiretime < timestamp) && (accesstoken != "")){
             //token expire timeout
             print("expired timeout")
@@ -99,19 +102,49 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
         
         loginFacebook.delegate = self
         loginFacebook.readPermissions = ["public_profile", "email", "user_friends"]
+
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if(FBSDKAccessToken.currentAccessToken() != nil){
-            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
-            
-            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-            
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            appDelegate.window?.rootViewController = protectedPageNav
+            let token = FBSDKAccessToken.currentAccessToken().tokenString
+            let paramAuth = [
+                "grant_type" :      "convert_token",
+                "backend" :         "facebook",
+                "client_id" :       clientID,
+                "client_secret" :   clientSecret,
+                "token" :           token
+            ]
+            let url = "http://filmify.yieldlevel.co/auth/convert-token"
+            self.getServer(url, successBlock: {data in
+                print(data)
+                let date = NSDate()
+                let timestamp = Int(date.timeIntervalSince1970)
+                
+                let accesstoken:String = (data!["access_token"] as? String)!
+                let refeshtoken:String = (data!["refresh_token"] as? String)!
+                let expiretime:Int = (data!["expires_in"] as? Int)!
+                print(accesstoken)
+                print(refeshtoken)
+                print(expiretime)
+                
+                let defaults = NSUserDefaults.standardUserDefaults()
+                let expireTimes = timestamp + expiretime
+                //day
+                defaults.setObject(accesstoken, forKey: "accesstoken")
+                defaults.setObject(refeshtoken, forKey: "refreshtoken")
+                defaults.setInteger(expireTimes, forKey: "expiretime")
+                defaults.synchronize()
+                
+                let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
+                let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.window?.rootViewController = protectedPageNav
+                }, error: {error in
+                    //error
+                }, parameters: paramAuth)
         }
     }
     
@@ -121,30 +154,74 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
     }
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        //facebookSegue
         if(error != nil){
             print(error.localizedDescription)
             return
         }
-        
         if let userToken = result.token{
             //get user access token
-            //let token:FBSDKAccessToken = result.token
-            print("Token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
-            print("User ID: \(FBSDKAccessToken.currentAccessToken().userID)")
+            //let tokenFB:FBSDKAccessToken = result.token
+            //print(tokenFB)
+            let token = FBSDKAccessToken.currentAccessToken().tokenString
+            print(token)
+            //print("Token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
+            //print("User ID: \(FBSDKAccessToken.currentAccessToken().userID)")
+            /*
+            let paramAuth = [
+                "grant_type" :      "convert_token",
+                "backend" :         "facebook",
+                "client_id" :       clientID,
+                "client_secret" :   clientSecret,
+                "token" :           token
+            ]
+            let url = "http://filmify.yieldlevel.co/auth/convert-token"
+            self.getServer(url, successBlock: {data in
+                    print(data)
+                    let date = NSDate()
+                    let timestamp = Int(date.timeIntervalSince1970)
+                
+                    let accesstoken:String = (data!["access_token"] as? String)!
+                    let refeshtoken:String = (data!["refresh_token"] as? String)!
+                    let expiretime:Int = (data!["expires_in"] as? Int)!
+                    print(accesstoken)
+                    print(refeshtoken)
+                    print(expiretime)
+                
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    let expireTimes = timestamp + expiretime
+                    //day
+                    defaults.setObject(accesstoken, forKey: "accesstoken")
+                    defaults.setObject(refeshtoken, forKey: "refreshtoken")
+                    defaults.setInteger(expireTimes, forKey: "expiretime")
+                    defaults.synchronize()
+                
+                }, error: {error in
+                }, parameters: paramAuth)
+            */
             
-            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
-            
-            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-            
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            appDelegate.window?.rootViewController = protectedPageNav
         }
         
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("User Logged Out")
+    }
+    
+    func getServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject])
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                let data: AnyObject? = JSON
+                successBlock(data: data)
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+                }
+                
+        }
     }
     /*
     // MARK: - Navigation
