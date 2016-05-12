@@ -60,10 +60,10 @@ class vcResult: UIViewController{
                 self.userid = data!["id"] as! Int
                 if(self.userid != 0){
                     defaults.setObject(self.userid, forKey: "userid")
-                    if( self.movieCurrent!.id != 0){
-                        self.loadDetailById(self.movieCurrent!)
-                    }else{
+                    if( self.genrePassed != 0){
                         self.loadDetailByGenre(self.genrePassed)
+                    }else{
+                        self.loadDetailById(self.movieCurrent!)
                     }
                 }
             }, error: { error in
