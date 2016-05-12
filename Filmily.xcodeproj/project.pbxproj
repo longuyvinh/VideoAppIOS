@@ -40,6 +40,9 @@
 		FA2236E41CB6510500737D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2236E21CB6510500737D60 /* LaunchScreen.storyboard */; };
 		FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4738B41CC4C318009E2FB0 /* vcResult.swift */; };
 		FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */; };
+		FA51AA6F1CE33DAD006512C7 /* CWStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA51AA6B1CE33DAD006512C7 /* CWStackController.m */; };
+		FA51AA701CE33DAD006512C7 /* CWStackPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA51AA6D1CE33DAD006512C7 /* CWStackPanGestureRecognizer.m */; };
+		FA51AA721CE43BAF006512C7 /* movieObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51AA711CE43BAF006512C7 /* movieObject.swift */; };
 		FAC348131CE042C700150228 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC348121CE042C700150228 /* Genre.swift */; };
 		FAFFE4721CC60820004C8FE6 /* watch_later.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFFE4701CC60820004C8FE6 /* watch_later.png */; };
 		FAFFE4731CC60820004C8FE6 /* watched.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFFE4711CC60820004C8FE6 /* watched.png */; };
@@ -103,6 +106,13 @@
 		FA4738B21CC4C2D9009E2FB0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FA4738B41CC4C318009E2FB0 /* vcResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcResult.swift; sourceTree = "<group>"; };
 		FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcWatchLaterList.swift; sourceTree = "<group>"; };
+		FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Filmily-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA51AA6A1CE33DAD006512C7 /* CWStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStackController.h; sourceTree = "<group>"; };
+		FA51AA6B1CE33DAD006512C7 /* CWStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStackController.m; sourceTree = "<group>"; };
+		FA51AA6C1CE33DAD006512C7 /* CWStackPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStackPanGestureRecognizer.h; sourceTree = "<group>"; };
+		FA51AA6D1CE33DAD006512C7 /* CWStackPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStackPanGestureRecognizer.m; sourceTree = "<group>"; };
+		FA51AA6E1CE33DAD006512C7 /* CWStackProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStackProtocol.h; sourceTree = "<group>"; };
+		FA51AA711CE43BAF006512C7 /* movieObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movieObject.swift; sourceTree = "<group>"; };
 		FA5F0D631CBE54D0007FE99F /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		FAC348121CE042C700150228 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		FAFFE4701CC60820004C8FE6 /* watch_later.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch_later.png; sourceTree = "<group>"; };
@@ -200,6 +210,7 @@
 		FA2236D51CB6510500737D60 /* VideoApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA51AA691CE33DAD006512C7 /* CWStackController */,
 				FAC348111CE0415300150228 /* objects */,
 				FA1951291CCF1F00007D734E /* fonts */,
 				FA1951281CCF1EC6007D734E /* resources */,
@@ -216,7 +227,6 @@
 				FAFFE49A1CC624F7004C8FE6 /* vcWachedList.swift */,
 				FAFFE49C1CC6324F004C8FE6 /* vcStart.swift */,
 				FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */,
-				FA02C5C21CC72B4800C79B40 /* videoObject.swift */,
 				FA02C5C41CC7349000C79B40 /* customCell.swift */,
 				FA02C5CA1CC793EA00C79B40 /* customView.xib */,
 				FA02C5CC1CC7946400C79B40 /* customView.swift */,
@@ -225,14 +235,29 @@
 				FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */,
 				FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */,
 				FA19512A1CCF1FB6007D734E /* vcSignup.swift */,
+				FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */,
 			);
 			path = VideoApp;
+			sourceTree = "<group>";
+		};
+		FA51AA691CE33DAD006512C7 /* CWStackController */ = {
+			isa = PBXGroup;
+			children = (
+				FA51AA6A1CE33DAD006512C7 /* CWStackController.h */,
+				FA51AA6B1CE33DAD006512C7 /* CWStackController.m */,
+				FA51AA6C1CE33DAD006512C7 /* CWStackPanGestureRecognizer.h */,
+				FA51AA6D1CE33DAD006512C7 /* CWStackPanGestureRecognizer.m */,
+				FA51AA6E1CE33DAD006512C7 /* CWStackProtocol.h */,
+			);
+			path = CWStackController;
 			sourceTree = "<group>";
 		};
 		FAC348111CE0415300150228 /* objects */ = {
 			isa = PBXGroup;
 			children = (
 				FAC348121CE042C700150228 /* Genre.swift */,
+				FA02C5C21CC72B4800C79B40 /* videoObject.swift */,
+				FA51AA711CE43BAF006512C7 /* movieObject.swift */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -387,15 +412,18 @@
 				FA02C5CF1CC8AEB300C79B40 /* TermViewController.swift in Sources */,
 				FA02C5D31CC8B90B00C79B40 /* ContactViewController.swift in Sources */,
 				FAFFE49D1CC6324F004C8FE6 /* vcStart.swift in Sources */,
+				FA51AA701CE33DAD006512C7 /* CWStackPanGestureRecognizer.m in Sources */,
 				FA02C6131CC8F2BD00C79B40 /* vcCategory.swift in Sources */,
 				FA02C5C31CC72B4800C79B40 /* videoObject.swift in Sources */,
 				FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */,
 				FAC348131CE042C700150228 /* Genre.swift in Sources */,
+				FA51AA6F1CE33DAD006512C7 /* CWStackController.m in Sources */,
 				FA02C5D11CC8B8FA00C79B40 /* DisclaimerViewController.swift in Sources */,
 				FAFFE49B1CC624F7004C8FE6 /* vcWachedList.swift in Sources */,
 				FA19512B1CCF1FB6007D734E /* vcSignup.swift in Sources */,
 				FA02C5CD1CC7946400C79B40 /* customView.swift in Sources */,
 				FA2236DF1CB6510500737D60 /* VideoApp.xcdatamodeld in Sources */,
+				FA51AA721CE43BAF006512C7 /* movieObject.swift in Sources */,
 				FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */,
 				FA2236D71CB6510500737D60 /* AppDelegate.swift in Sources */,
 				FA02C5C51CC7349000C79B40 /* customCell.swift in Sources */,
@@ -526,6 +554,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.moe.filmify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "aa248a7d-6e35-4c25-a9d6-bf8d6d8361a8";
+				SWIFT_OBJC_BRIDGING_HEADER = "VideoApp/Filmily-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -544,6 +573,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.moe.filmify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "aa248a7d-6e35-4c25-a9d6-bf8d6d8361a8";
+				SWIFT_OBJC_BRIDGING_HEADER = "VideoApp/Filmily-Bridging-Header.h";
 			};
 			name = Release;
 		};

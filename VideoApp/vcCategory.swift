@@ -98,17 +98,6 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    /*
-    //code demo
-    func makeTable(data: AnyObject?) -> () {
-        // make your table
-    }
-    
-    callSomeAPI() { data in
-    makeTable(data)
-    }*/
-    
-    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
     }
@@ -153,7 +142,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
         //print("current: \(currentCell)")
         currentCategory = self.listGenre[idkey].id!
-        //print(currentCategory)
+        print("show current genre \(currentCategory)")
     }
     
     func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
@@ -184,7 +173,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "seguePlayDetail") {
-            var svc = segue.destinationViewController as! vcResult;
+            let svc = segue.destinationViewController as! vcResult;
             svc.genrePassed = currentCategory
         }
     }

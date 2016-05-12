@@ -66,15 +66,29 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             [self.view layoutIfNeeded]
         }
     }*/
-
-    func requestServer(link: String, successBlock:(data:[NSObject : AnyObject] , stautusCode: Int)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+    func getRequest(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.GET, link , parameters: parameters as? [String : AnyObject])
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                successBlock(data: JSON as! [String : AnyObject])
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+                }
+                
+        }
+    }
+    
+    func requestServer(link: String, successBlock:(data:[String : AnyObject] , stautusCode: Int)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
         Alamofire.request(.POST, link , parameters: parameters as? [String : AnyObject])
             .responseJSON { response in switch response.result {
                 
             case .Success(let JSON):
                 var statusCode:Int
                 statusCode = (response.response?.statusCode)!
-                successBlock(data: JSON as! [NSObject : AnyObject] , stautusCode: statusCode)
+                successBlock(data: JSON as! [String : AnyObject] , stautusCode: statusCode)
                                 
             case .Failure(let error):
                 print("Request failed with error: \(error)")
@@ -127,6 +141,48 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             self.requestServer(url1, successBlock: { (data, stautusCode) in
                 if stautusCode != 201 {
                     print("error field")
+                    //username, email, last_name:max 30 ki tu, first_name:max 30 ki tu
+
+                    if(data["username"] != nil){
+                        let usernameErr = data["username"] as! NSArray
+                        //let totalErr = usernameErr.count
+                        var ErrorUsername:String = ""
+                        for err1 in usernameErr{
+                            ErrorUsername = ErrorUsername + (err1 as! String) + "\n"
+                        }
+                        self.createAlertView("Error Username", message: ErrorUsername, buttonTitle: "Retry")
+                    }
+                    
+                    if(data["email"] != nil){
+                        let emailErr = data["email"] as! NSArray
+                        var ErrorEmail:String = ""
+                        for err in emailErr{
+                            ErrorEmail = ErrorEmail + (err as! String) + "\n"
+                        }
+                        self.createAlertView("Error Email", message: ErrorEmail, buttonTitle: "Retry")
+                    }
+                    
+                    if(data["last_name"] != nil){
+                        let lastnameErr = data["last_name"] as! NSArray
+                        //let totalErr = usernameErr.count
+                        var ErrorLastname:String = ""
+                        for err in lastnameErr{
+                            ErrorLastname = ErrorLastname + (err as! String) + "\n"
+                        }
+                        self.createAlertView("Error Last Name", message: ErrorLastname, buttonTitle: "Retry")
+                    }
+                    
+                    if(data["first_name"] != nil){
+                        let firstnameErr = data["first_name"] as! NSArray
+                        //let totalErr = usernameErr.count
+                        var ErrorFirstname:String = ""
+                        for err in firstnameErr{
+                            ErrorFirstname = ErrorFirstname + (err as! String) + "\n"
+                        }
+                        self.createAlertView("Error First Name", message: ErrorFirstname, buttonTitle: "Retry")
+                    }
+                    
+                    //print(ErrorUsername)
                     //print(data)
                 } else {
                     //print("success")
@@ -171,90 +227,18 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                     //error
                 }, parameters: paramSignup)
 
-            
-//            Alamofire.request(.POST, "http://filmify.yieldlevel.co/api/register/", parameters: parameters, encoding: .JSON)
-//                .responseJSON { response in switch response.result {
-//                        case .Success(let JSON):
-//                                print("success")
-//                                var statusCode:Int
-//                                statusCode = (response.response?.statusCode)!
-//
-//                                if(statusCode != 201){
-//                                    print("auth error")
-//                                    let response = JSON as! NSDictionary
-//                                    //example if there is an id
-//                                    if ( response.objectForKey("username") != nil ){
-//                                        //let errUsername = (JSON.valueForKey("username") as? String)!
-//                                        //var uuidString: String? = regionToMonitor["uuid"] as AnyObject? as? String
-//                                        let errUsername:String? = JSON.valueForKey("username") as AnyObject? as? String
-//                                        //print(errUsername)
-//                                        self.createAlertView("Error", message: "\(errUsername)", buttonTitle: "Retry")
-//                                    }
-//                                    if(response.objectForKey("email") != nil){
-//                                        //let errEmail = response.objectForKey("email")
-//                                        let errEmail:String? = response.objectForKey("email") as AnyObject? as? String
-//                                        //print(errEmail)
-//                                        self.createAlertView("Error", message: errEmail!, buttonTitle: "Retry")
-//                                    }
-//                                    if(response.objectForKey("last_name") != nil){
-//                                        let errLname = response.objectForKey("last_name")
-//                                        //print(errLname)
-//                                        self.createAlertView("Error", message: errLname as! String, buttonTitle: "Retry")
-//                                    }
-//                                    if(response.objectForKey("first_name") != nil){
-//                                        let errFname = response.objectForKey("first_name")
-//                                        //print(errFname)
-//                                        self.createAlertView("Error", message: errFname as! String, buttonTitle: "Retry")
-//                                    }
-//                                }else{
-//                                    //print("auth success")
-//                                    self.createAlertView("Congratulation", message: "Sign up user successful", buttonTitle: "OK")
-//                                    
-//                                    let parameAuth = [
-//                                        "grant_type":       "password",
-//                                        "client_id":        "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod",
-//                                        "client_secret":    "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E",
-//                                        "username":         username,
-//                                        "password":         password
-//                                    ]
-//                                    print(parameAuth)
-//                                    
-//                                    Alamofire.request(.POST, "http://filmify.yieldlevel.co/auth/token/", parameters: parameAuth, encoding: .JSON).responseJSON { response2 in switch response2.result {
-//                                        
-//                                                case .Success(let JSON2):
-//                                                    print(parameters)
-//                                                    print("authentication success")
-//                                                    print("Success with JSON: \(JSON2)")
-//                                                    print(response2.data)
-//                                                    print(response2.response)
-//                                                    //self.performSegueWithIdentifier("segueIdentifier", sender: self)
-//                                                case .Failure(let error2):
-//                                                    print("error \(error2)")
-//
-//                                            }
-//                                    }
-//                                    
-//                                    
-//                                }
-//                    
-//                        case .Failure(let error):
-//                                print("Request failed with error: \(error)")
-//                    }
-//        
-//                
-//            }
         }
     }
     
     @IBAction func signup(sender: AnyObject) {
     
+        var errorFlah:Int = 0
+        
         let fname:String = txtFirstname.text!
         let lname:String = txtLastname.text!
         let email:String = txtEmail.text!
         let password:String = txtPassword.text!
         let username:String = txtUsername.text!
-        
-        var errorFlah:Int = 0
         
         if fname.isEmpty{
             self.createAlertView("Error", message: "First name can not blank", buttonTitle: "Retry")
@@ -276,10 +260,104 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             errorFlah = 1
         }
         
-        
-        
         if(errorFlah != 1){
-            self.performSegueWithIdentifier("segueIdentifier", sender: self)
+            let paramSignup = [
+                "first_name":   fname,
+                "last_name":    lname,
+                "username":     username,
+                "password":     password,
+                "email":        email
+            ]
+            let url1:String = "http://filmify.yieldlevel.co/api/register/"
+            
+            self.requestServer(url1, successBlock: { (data, stautusCode) in
+                if stautusCode != 201 {
+                    print("error field")
+                    //username, email, last_name:max 30 ki tu, first_name:max 30 ki tu
+                    
+                    if(data["username"] != nil){
+                        let usernameErr = data["username"] as! NSArray
+                        //let totalErr = usernameErr.count
+                        var ErrorUsername:String = ""
+                        for err1 in usernameErr{
+                            ErrorUsername = ErrorUsername + (err1 as! String) + "\n"
+                        }
+                        self.createAlertView("Error Username", message: ErrorUsername, buttonTitle: "Retry")
+                    }
+                    
+                    if(data["email"] != nil){
+                        let emailErr = data["email"] as! NSArray
+                        var ErrorEmail:String = ""
+                        for err in emailErr{
+                            ErrorEmail = ErrorEmail + (err as! String) + "\n"
+                        }
+                        self.createAlertView("Error Email", message: ErrorEmail, buttonTitle: "Retry")
+                    }
+                    
+                    if(data["last_name"] != nil){
+                        let lastnameErr = data["last_name"] as! NSArray
+                        //let totalErr = usernameErr.count
+                        var ErrorLastname:String = ""
+                        for err in lastnameErr{
+                            ErrorLastname = ErrorLastname + (err as! String) + "\n"
+                        }
+                        self.createAlertView("Error Last Name", message: ErrorLastname, buttonTitle: "Retry")
+                    }
+                    
+                    if(data["first_name"] != nil){
+                        let firstnameErr = data["first_name"] as! NSArray
+                        //let totalErr = usernameErr.count
+                        var ErrorFirstname:String = ""
+                        for err in firstnameErr{
+                            ErrorFirstname = ErrorFirstname + (err as! String) + "\n"
+                        }
+                        self.createAlertView("Error First Name", message: ErrorFirstname, buttonTitle: "Retry")
+                    }
+                    
+                    //print(ErrorUsername)
+                    //print(data)
+                } else {
+                    //print("success")
+                    //print(data)
+                    //[id: 46, username: longuyvinh, first_name: vinh, email: longuyvinh.ny@gmail.com, last_name: Nguyen]
+                    let usernameRS:String = (data["username"] as? String)!
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    
+                    let date = NSDate()
+                    let timestamp = Int(date.timeIntervalSince1970)
+                    
+                    let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
+                    let clientSecret = "0TL52Fg9hBgGYl8LY9xD8FvWj228yhnckhMH7mY8hunpXKimNIO5sDpJQPnMSG4gDeVxXdRbmIvgJ4mNzTwoKSQ6KxMNYE77CI6nkbjfdwHlykjY1fRfMnRPj3JTQS5E"
+                    
+                    let paramAuth = [
+                        "grant_type":       "password",
+                        "client_id":        clientID,
+                        "client_secret":    clientSecret,
+                        "username":         usernameRS,
+                        "password":         password
+                    ]
+                    let url = "http://filmify.yieldlevel.co/auth/token"
+                    self.requestServer(url, successBlock: { (data, stautusCode) in
+                        //print(data)
+                        let accesstoken = (data["access_token"] as? String)!
+                        let refeshtoken = (data["refresh_token"] as? String)!
+                        let expiretime = (data["expires_in"] as? Int)!
+                        let expireTime = timestamp + expiretime
+                        
+                        defaults.setObject(accesstoken, forKey: "accesstoken")
+                        defaults.setObject(refeshtoken, forKey: "refreshtoken")
+                        defaults.setInteger(expireTime, forKey: "expiretime")
+                        defaults.setObject(usernameRS, forKey: "username")
+                        self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                        }, error: { (error) in
+                            //error
+                        }, parameters: paramAuth)
+                    
+                }
+                
+                }, error: { (error) in
+                    //error
+                }, parameters: paramSignup)
         }
 
     }

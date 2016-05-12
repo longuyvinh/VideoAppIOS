@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import Alamofire
 
 class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var listWachLater = [videoObject]()
-
+    var listWachLater = [movieObject]()
+    var userid: Int = 0
+    var accesstoken:String = ""
+    
+    var movieWatchLater: movieObject?
+    
     @IBOutlet weak var tableWachLater: UITableView!
     
     @IBAction func popup(sender: AnyObject) {
@@ -86,13 +91,64 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         // Do any additional setup after loading the view.
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_SX300.jpg", tIn:"Batman v Superman: Dawn of Justice", yIn:"2016", dIn:"Zack Snyder", aIn:"Ben Affleck, Henry Cavill, Amy Adams"))
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTY0MDY0NjExN15BMl5BanBnXkFtZTgwOTU3OTYyODE@._V1_SX300.jpg", tIn:"X-Men: Apocalypse", yIn:"2016", dIn:"Bryan Singer, Byron Howard", aIn:"Sophie Turner, Jennifer Lawrence, Olivia Munn"))
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMjQyODg5Njc4N15BMl5BanBnXkFtZTgwMzExMjE3NzE@._V1_SX300.jpg", tIn:"Deadpool", yIn:"2016", dIn:"Tim Miller", aIn:"Ryan Reynolds, Karan Soni, Ed Skrein"))
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BOTMyMjEyNzIzMV5BMl5BanBnXkFtZTgwNzIyNjU0NzE@._V1_SX300.jpg", tIn:"Zootopia", yIn:"2016", dIn:"Byron Howard", aIn:"Ginnifer Goodwin, Jason Bateman, Idris Elba"))
         self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTUyMjA5OTgyOV5BMl5BanBnXkFtZTgwOTkyMjQ5NTE@._V1_SX300.jpg", tIn:"Terminus", yIn:"2015", dIn:"Marc Furmie", aIn:"Jai Koutrae, Kendra Appleton, Todd Lasance"))
+        */
+        let defaults = NSUserDefaults.standardUserDefaults()
+        accesstoken = defaults.objectForKey("accesstoken") as! String
+        userid = defaults.integerForKey("userid")
+        if( accesstoken != ""){
+            let paramWatched=[
+                "page_size" : "100",
+                "access_token" : accesstoken
+            ]
+            
+            let urlWatched = "http://filmify.yieldlevel.co/api/movies-watch-later-list/" + String(userid)
+            self.getServer(urlWatched, successBlock: { data in
+                let jsonListing = data!["results"] as? NSArray
+                //print(jsonListing)
+                if(jsonListing!.count > 0){
+                    for item in jsonListing as! [AnyObject]{
+                        //let title:String = (item.valueForKey("description") as? String)!
+                        let movie = item.valueForKey("movie")! as AnyObject
+                        
+                        let movieId: Int = movie.valueForKey("id") as! Int
+                        let poster:String? = movie.valueForKey("poster") as? String
+                        let title:String? = movie.valueForKey("title") as? String
+                        let year:Int? = movie.valueForKey("year") as? Int
+                        let director:String? = movie.valueForKey("director") as? String
+                        let actors:String? = movie.valueForKey("main_cast") as? String
+                        
+                        let trailer: String
+                        if(movie.valueForKey("trailer") is NSNull){
+                            trailer = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
+                        }else{
+                            trailer = movie.valueForKey("trailer") as! String
+                        }
+                        
+                        let plot: String = movie.valueForKey("plot") as! String
+                        
+                        self.listWachLater.append(movieObject(mid: movieId, pIn: poster!, tIn: title!, yIn: year!, dIn: director!, aIn: actors!, plotIn: plot, trailIn: trailer))
+                    }
+                    self.tableWachLater.reloadData()
+                }else{
+                    print("none of movie")
+                    self.createAlertView("Warning", message: "Non movies in list, please add to list", buttonTitle: "OK")
+                    self.navigationController!.popViewControllerAnimated(true)
+                }
+            }, error: {error in
+                //error
+            }, parameters: paramWatched)
+                
+        }else{
+            
+        }
+        
         
         self.tableWachLater.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -113,7 +169,7 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         let item = listWachLater[indexPath.row]
         cell.lblTitle.text = item.title
         
-        cell.lblYear.text = item.year
+        cell.lblYear.text = String(item.year)
         cell.lblDirector.text = item.director
         
         cell.lblActors.text = item.actors
@@ -127,6 +183,13 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow
+        let idkey:Int = indexPath!.row
+        movieWatchLater = self.listWachLater[idkey]
+        self.performSegueWithIdentifier("watchlaterDetailSegue", sender: tableView)
+        
+    }
     
     @IBAction func imgBack(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)
@@ -136,6 +199,7 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         self.navigationController!.popViewControllerAnimated(true)
     }
 
+    
     func requestImage(url: String, success: (UIImage?) -> Void) {
         requestURL(url, success: { (data) -> Void in
             if let d = data {
@@ -155,6 +219,41 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
                     success(data)
                 }
         })
+    }
+    
+    func getServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.GET, link , parameters: parameters as? [String : AnyObject])
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                let data: AnyObject? = JSON
+                successBlock(data: data)
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+                }
+                
+        }
+    }
+    
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let createAccountErrorAlert: UIAlertView = UIAlertView()
+        
+        createAccountErrorAlert.delegate = self
+        
+        createAccountErrorAlert.title = title
+        createAccountErrorAlert.message = message
+        createAccountErrorAlert.addButtonWithTitle(buttonTitle)
+        
+        createAccountErrorAlert.show()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "watchlaterDetailSegue") {
+            let svc = segue.destinationViewController as! vcResult;
+            svc.movieCurrent = movieWatchLater
+        }
     }
     /*
     // MARK: - Navigation

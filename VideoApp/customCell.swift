@@ -15,7 +15,7 @@ class customCell: UITableViewCell {
     @IBOutlet weak var lblYear: UILabel!
     @IBOutlet weak var lblDirector: UILabel!
     @IBOutlet weak var lblActors: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,5 +26,6 @@ class customCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
 
 }

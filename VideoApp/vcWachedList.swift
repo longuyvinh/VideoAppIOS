@@ -7,24 +7,80 @@
 //
 
 import UIKit
+import Alamofire
 
 class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var listWached = [videoObject]()
+    var listWached = [movieObject]()
     
     var imageCache = [String:UIImage]()
+    
+    var userid: Int = 0
+    var accesstoken:String = ""
+    var movieWatched: movieObject?
 
     @IBOutlet weak var tableWached: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        /*
         // Do any additional setup after loading the view.
         self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_SX300.jpg", tIn:"Inside Out", yIn:"2015", dIn:"Pete Docter", aIn:"Amy Poehler, Phyllis Smith, Richard Kind"))
         self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BODUwMDc5Mzc5M15BMl5BanBnXkFtZTcwNDgzOTY0MQ@@._V1_SX300.jpg", tIn:"Spider-Man 3", yIn:"2007", dIn:"Sam Raimi", aIn:"Tobey Maguire, Kirsten Dunst, James Franco"))
         self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTYxMjA5NDMzNV5BMl5BanBnXkFtZTcwOTk2Mjk3NA@@._V1_SX300.jpg", tIn:"Thor", yIn:"2011", dIn:"Kenneth Branagh", aIn:"Chris Hemsworth, Natalie Portman, Tom Hiddleston"))
         self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTYzOTc2NzU3N15BMl5BanBnXkFtZTcwNjY3MDE3NQ@@._V1_SX300.jpg", tIn:"Captain America: The First Avenger", yIn:"2011", dIn:"Joe Johnston", aIn:"Chris Evans, Hayley Atwell, Sebastian Stan"))
         self.listWached.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMjEyNzI1ODA0MF5BMl5BanBnXkFtZTYwODIxODY3._V1_SX300.jpg", tIn:"Ice Age", yIn:"2002", dIn:"Chris Wedge, Carlos Saldanha", aIn:"Ray Romano, John Leguizamo, Denis Leary"))
+        */
+        //get access token from api
+    
+        let defaults = NSUserDefaults.standardUserDefaults()
+        accesstoken = defaults.objectForKey("accesstoken") as! String
+        userid = defaults.integerForKey("userid")
+        if( accesstoken != ""){
+            let paramWatched=[
+                "page_size" : "100",
+                "access_token" : accesstoken
+            ]
+            
+            let urlWatched = "http://filmify.yieldlevel.co/api/movies-watch-list/" + String(userid)
+            self.getServer(urlWatched, successBlock: { data in
+                    let jsonListing = data!["results"] as? NSArray
+                    //print(jsonListing)
+                    if(jsonListing!.count > 0){
+                        for item in jsonListing as! [AnyObject]{
+                            //let title:String = (item.valueForKey("description") as? String)!
+                            let movie = item.valueForKey("movie")! as AnyObject
+                            
+                            let movieId: Int = movie.valueForKey("id") as! Int
+                            let poster:String? = movie.valueForKey("poster") as? String
+                            let title:String? = movie.valueForKey("title") as? String
+                            let year:Int? = movie.valueForKey("year") as? Int
+                            let director:String? = movie.valueForKey("director") as? String
+                            let actors:String? = movie.valueForKey("main_cast") as? String
+                            
+                            let trailer: String
+                            if(movie.valueForKey("trailer") is NSNull){
+                                trailer = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
+                            }else{
+                                trailer = movie.valueForKey("trailer") as! String
+                            }
+                            
+                            let plot: String = movie.valueForKey("plot") as! String
+                            
+                            self.listWached.append(movieObject(mid: movieId, pIn: poster!, tIn: title!, yIn: year!, dIn: director!, aIn: actors!, plotIn: plot, trailIn: trailer))
+                            
+                        }
+                        self.tableWached.reloadData()
+                    }else{
+                        self.createAlertView("Warning", message: "Non movies in list, please add to list", buttonTitle: "OK")
+                        self.navigationController!.popViewControllerAnimated(true)
+                    }
+                }, error: {error in
+                    //error
+                }, parameters: paramWatched)
+        }else{
+            
+        }
         
         self.tableWached.separatorStyle = UITableViewCellSeparatorStyle.None
     }
@@ -43,7 +99,7 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
         let item = listWached[indexPath.row]
         
         cell.lblTitle.text = item.title
-        cell.lblYear.text = item.year
+        cell.lblYear.text = String(item.year)
         cell.lblActors.text = item.actors
         cell.lblActors.numberOfLines = 0
         cell.lblActors.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -55,8 +111,15 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
         requestImage( item.poster! ) { (image) -> Void in
             cell.poster.image = image
         }
-
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow
+        let idkey:Int = indexPath!.row
+        movieWatched = self.listWached[idkey]
+        self.performSegueWithIdentifier("watchedDetailSegue", sender: tableView)
+        
     }
     
     @IBAction func imgBack(sender: AnyObject) {
@@ -140,6 +203,41 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
             if (v.tag == 100) {
                 v.removeFromSuperview()
             }
+        }
+    }
+    
+    func getServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
+        Alamofire.request(.GET, link , parameters: parameters as? [String : AnyObject])
+            .responseJSON { response in switch response.result {
+                
+            case .Success(let JSON):
+                let data: AnyObject? = JSON
+                successBlock(data: data)
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                errorBlock(error: error)
+                }
+                
+        }
+    }
+    
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let createAccountErrorAlert: UIAlertView = UIAlertView()
+        
+        createAccountErrorAlert.delegate = self
+        
+        createAccountErrorAlert.title = title
+        createAccountErrorAlert.message = message
+        createAccountErrorAlert.addButtonWithTitle(buttonTitle)
+        
+        createAccountErrorAlert.show()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "watchedDetailSegue") {
+            let svc = segue.destinationViewController as! vcResult;
+            svc.movieCurrent = movieWatched
         }
     }
     /*
