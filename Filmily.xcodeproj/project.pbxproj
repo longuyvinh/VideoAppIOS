@@ -44,6 +44,8 @@
 		FA51AA701CE33DAD006512C7 /* CWStackPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA51AA6D1CE33DAD006512C7 /* CWStackPanGestureRecognizer.m */; };
 		FA51AA721CE43BAF006512C7 /* movieObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51AA711CE43BAF006512C7 /* movieObject.swift */; };
 		FAC348131CE042C700150228 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC348121CE042C700150228 /* Genre.swift */; };
+		FADF887B1CE49AFD00CBF61B /* customLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADF887A1CE49AFD00CBF61B /* customLoading.xib */; };
+		FADF887D1CE49B3100CBF61B /* customLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF887C1CE49B3100CBF61B /* customLoading.swift */; };
 		FAFFE4721CC60820004C8FE6 /* watch_later.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFFE4701CC60820004C8FE6 /* watch_later.png */; };
 		FAFFE4731CC60820004C8FE6 /* watched.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFFE4711CC60820004C8FE6 /* watched.png */; };
 		FAFFE4771CC60B48004C8FE6 /* social-media-2.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFFE4741CC60B48004C8FE6 /* social-media-2.png */; };
@@ -115,6 +117,8 @@
 		FA51AA711CE43BAF006512C7 /* movieObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movieObject.swift; sourceTree = "<group>"; };
 		FA5F0D631CBE54D0007FE99F /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		FAC348121CE042C700150228 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		FADF887A1CE49AFD00CBF61B /* customLoading.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = customLoading.xib; sourceTree = "<group>"; };
+		FADF887C1CE49B3100CBF61B /* customLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customLoading.swift; sourceTree = "<group>"; };
 		FAFFE4701CC60820004C8FE6 /* watch_later.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch_later.png; sourceTree = "<group>"; };
 		FAFFE4711CC60820004C8FE6 /* watched.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watched.png; sourceTree = "<group>"; };
 		FAFFE4741CC60B48004C8FE6 /* social-media-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-media-2.png"; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 		FA2236D51CB6510500737D60 /* VideoApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA51AA731CE48A72006512C7 /* subviews */,
 				FA51AA691CE33DAD006512C7 /* CWStackController */,
 				FAC348111CE0415300150228 /* objects */,
 				FA1951291CCF1F00007D734E /* fonts */,
@@ -236,6 +241,8 @@
 				FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */,
 				FA19512A1CCF1FB6007D734E /* vcSignup.swift */,
 				FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */,
+				FADF887A1CE49AFD00CBF61B /* customLoading.xib */,
+				FADF887C1CE49B3100CBF61B /* customLoading.swift */,
 			);
 			path = VideoApp;
 			sourceTree = "<group>";
@@ -250,6 +257,13 @@
 				FA51AA6E1CE33DAD006512C7 /* CWStackProtocol.h */,
 			);
 			path = CWStackController;
+			sourceTree = "<group>";
+		};
+		FA51AA731CE48A72006512C7 /* subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = subviews;
 			sourceTree = "<group>";
 		};
 		FAC348111CE0415300150228 /* objects */ = {
@@ -332,6 +346,7 @@
 				FA08425B1CB76DD1006C68FE /* film_light3.png in Resources */,
 				FAFFE4721CC60820004C8FE6 /* watch_later.png in Resources */,
 				FA19C2F61CB657B700DDB49B /* Amatic-Bold.ttf in Resources */,
+				FADF887B1CE49AFD00CBF61B /* customLoading.xib in Resources */,
 				FAFFE4731CC60820004C8FE6 /* watched.png in Resources */,
 				FA031E6D1CC0C5BC00275D30 /* line_vertical.png in Resources */,
 				FA19C3051CB6797500DDB49B /* facebook.png in Resources */,
@@ -411,6 +426,7 @@
 				FA2236D91CB6510500737D60 /* ViewController.swift in Sources */,
 				FA02C5CF1CC8AEB300C79B40 /* TermViewController.swift in Sources */,
 				FA02C5D31CC8B90B00C79B40 /* ContactViewController.swift in Sources */,
+				FADF887D1CE49B3100CBF61B /* customLoading.swift in Sources */,
 				FAFFE49D1CC6324F004C8FE6 /* vcStart.swift in Sources */,
 				FA51AA701CE33DAD006512C7 /* CWStackPanGestureRecognizer.m in Sources */,
 				FA02C6131CC8F2BD00C79B40 /* vcCategory.swift in Sources */,

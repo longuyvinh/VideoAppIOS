@@ -18,6 +18,8 @@ class vcResult: UIViewController{
     var accesstoken:String = ""
     var movieCurrent : movieObject?
     
+    @IBOutlet weak var scrollContent: UIScrollView!
+    
     @IBOutlet weak var moviePoster: UIImageView!
     
     @IBOutlet weak var moviePilot: UILabel!
@@ -30,6 +32,31 @@ class vcResult: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //loading view waiting
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let subviewWidth = Int(screenSize.width)
+        let subviewHeight = Int(screenSize.height) - 160
+        
+        let subviewX:Int = Int( (Int(screenWidth) - Int(subviewWidth))/2 )
+        let subviewY:Int = Int( (Int(screenHeight) - Int(subviewHeight))/2 ) + 30
+        
+        let myLoadingView:customLoading = customLoading(frame: CGRect(x:subviewX, y: subviewY, width: subviewWidth, height: subviewHeight))
+        self.view.addSubview(myLoadingView)
+        myLoadingView.tag = 90
+        
+        //myLoadingView.layer.cornerRadius = 12
+        //myLoadingView.layer.backgroundColor = UIColor.whiteColor().CGColor
+        //myLoadingView.layer.borderColor = UIColor.blackColor().CGColor
+        //myLoadingView.layer.borderWidth = 1
+        //myLoadingView.layer.shadowRadius = 2
+        //myLoadingView.layer.cornerRadius = 12
+        //loading view waiting EOF
+ 
         
         let youtubeLink:String = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
 
@@ -65,6 +92,23 @@ class vcResult: UIViewController{
                     }else{
                         self.loadDetailById(self.movieCurrent!)
                     }
+                    
+                    //delay time to hide view loading
+                    let seconds = 2.0
+                    let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+                    let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    
+                    dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                        
+                        for v in self.view.subviews{
+                            if (v.tag == 90) {
+                                v.removeFromSuperview()
+                            }
+                        }
+                        
+                    })
+                    //delay time to hide view loading EOF
+                    
                 }
             }, error: { error in
                 //error
@@ -84,26 +128,7 @@ class vcResult: UIViewController{
                 self.moviePoster.image = UIImage(data: data)
             }
         }
-        /*
-         let parameters=[
-         "access_token" : accesstoken
-         ]
-        let url = "http://filmify.yieldlevel.co/api/movies/" + String(id)
         
-        self.getServer(url, successBlock: { data in
-            self.movieTitle.text = data!.valueForKey("title") as! String
-            self.movieYear.text = String(data!.valueForKey("year") as! Int)
-            self.moviePilot.text = data!.valueForKey("plot") as! String
-            self.movieActors.text = data!.valueForKey("main_cast") as! String
-            self.movieDirector.text = data!.valueForKey("director") as! String
-            
-            if let url = NSURL(string: data!.valueForKey("poster") as! String) {
-                if let data = NSData(contentsOfURL: url) {
-                    self.moviePoster.image = UIImage(data: data)
-                }
-            }
-            }, error: { error in
-            }, parameters: parameters)*/
     }
     
     func loadDetailByGenre(genreId: Int){

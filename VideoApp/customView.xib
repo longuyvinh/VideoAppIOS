@@ -15,7 +15,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="customView" customModule="VideoApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="customView" customModule="Filmily" customModuleProvider="target">
             <connections>
                 <outlet property="buttonContact" destination="EoL-JH-F0R" id="gtv-Pf-YEC"/>
                 <outlet property="buttonDisclaimer" destination="3hI-do-oXC" id="qyP-2g-Szj"/>

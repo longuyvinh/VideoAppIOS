@@ -1425,7 +1425,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QW4-X8-zHt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3987" y="292"/>
+            <point key="canvasLocation" x="3558" y="1283"/>
         </scene>
         <!--Term View Controller-->
         <scene sceneID="cAd-gd-86a">
@@ -2391,9 +2391,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Xs-nQ-0Kd"/>
-        <segue reference="QHj-w8-W0g"/>
-        <segue reference="KGG-c7-eCa"/>
-        <segue reference="vDc-qc-wto"/>
+        <segue reference="0Dl-GM-Xk7"/>
+        <segue reference="BAz-O3-BNm"/>
+        <segue reference="fva-w1-2wB"/>
+        <segue reference="o8I-oN-CmP"/>
     </inferredMetricsTieBreakers>
 </document>
