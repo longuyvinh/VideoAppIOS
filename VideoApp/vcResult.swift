@@ -7,18 +7,22 @@
 //
 
 import UIKit
-import MediaPlayer
 import Alamofire
-
-class vcResult: UIViewController{
+class vcResult: UIViewController, UIScrollViewDelegate{
 
     var genrePassed:Int = 0
     var userid: Int = 0
     var movieid: Int = 0
     var accesstoken:String = ""
     var movieCurrent : movieObject?
+    var listMovies = [movieObject]()
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageController: UIPageControl!
     
     @IBOutlet weak var scrollContent: UIScrollView!
+    
+    @IBOutlet weak var viewContent: UIView!
     
     @IBOutlet weak var moviePoster: UIImageView!
     
@@ -29,10 +33,9 @@ class vcResult: UIViewController{
     @IBOutlet weak var movieTitle: UILabel!
     
     @IBOutlet weak var webView: UIWebView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //loading view waiting
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
@@ -87,6 +90,7 @@ class vcResult: UIViewController{
                 self.userid = data!["id"] as! Int
                 if(self.userid != 0){
                     defaults.setObject(self.userid, forKey: "userid")
+                    
                     if( self.genrePassed != 0){
                         self.loadDetailByGenre(self.genrePassed)
                     }else{
@@ -94,7 +98,7 @@ class vcResult: UIViewController{
                     }
                     
                     //delay time to hide view loading
-                    let seconds = 2.0
+                    let seconds = 5.0
                     let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
                     let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                     
@@ -116,9 +120,10 @@ class vcResult: UIViewController{
 
     }
     
+    
     func loadDetailById(movie: movieObject){
         self.movieTitle.text = movie.title
-        self.movieYear.text = String(movie.year)
+        self.movieYear.text = String(movie.year! as Int)
         self.moviePilot.text = movie.plot
         self.movieActors.text = movie.actors
         self.movieDirector.text = movie.director
@@ -129,13 +134,32 @@ class vcResult: UIViewController{
             }
         }
         
+        let totalPage = CGFloat(self.listMovies.count)
+        print("total page: \(totalPage)")
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.width * totalPage, self.viewContent.frame.height + 50)
+        self.scrollView.delegate = self
+        self.pageController.currentPage = 0
+        /*
+        self.movieCurrent = self.listMovies[0]
+        self.movieTitle.text = self.movieCurrent!.title
+        self.movieYear.text = String(self.movieCurrent!.year! as Int)
+        self.moviePilot.text = self.movieCurrent!.plot
+        self.movieActors.text = self.movieCurrent!.actors
+        self.movieDirector.text = self.movieCurrent!.director
+        
+        if let url = NSURL(string: self.movieCurrent!.poster!) {
+            if let data = NSData(contentsOfURL: url) {
+                self.moviePoster.image = UIImage(data: data)
+            }
+        }*/
+        
     }
     
     func loadDetailByGenre(genreId: Int){
         let parameters=[
             "has_poster": "true",
             "has_plot" : "true",
-            "page_size" : "1",
+            "page_size" : "10",
             "genre_ids" : genreId,
             "access_token" : accesstoken
         ]
@@ -143,6 +167,56 @@ class vcResult: UIViewController{
         let url = "http://filmify.yieldlevel.co/api/movies-by-genres"
         
         self.getServer(url, successBlock: { data in
+            let jsonListing = data!["results"] as? NSArray
+            //print(jsonListing)
+            if(jsonListing!.count > 0){
+                for item in jsonListing as! [AnyObject]{
+                    //let title:String = (item.valueForKey("description") as? String)!
+                    //let movie = item.valueForKey("movie")! as AnyObject
+                    
+                    let movieId: Int = item.valueForKey("id") as! Int
+                    let poster:String? = item.valueForKey("poster") as? String
+                    let title:String? = item.valueForKey("title") as? String
+                    let year:Int? = item.valueForKey("year") as? Int
+                    let director:String? = item.valueForKey("director") as? String
+                    let actors:String? = item.valueForKey("main_cast") as? String
+                    
+                    let trailer: String
+                    if(item.valueForKey("trailer") is NSNull){
+                        trailer = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
+                    }else{
+                        trailer = item.valueForKey("trailer") as! String
+                    }
+                    
+                    let plot: String = item.valueForKey("plot") as! String
+                    
+                    self.listMovies.append(movieObject(mid: movieId, pIn: poster!, tIn: title!, yIn: year!, dIn: director!, aIn: actors!, plotIn: plot, trailIn: trailer))
+                    //print("added success: \(movieId)")
+                }
+                
+                let totalPage = CGFloat(self.listMovies.count)
+                print("total page: \(totalPage)")
+                self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.width * totalPage, self.viewContent.frame.height + 50)
+                self.scrollView.delegate = self
+                self.pageController.currentPage = 0
+                
+                self.movieCurrent = self.listMovies[0]
+                self.movieTitle.text = self.movieCurrent!.title
+                self.movieYear.text = String(self.movieCurrent!.year! as Int)
+                self.moviePilot.text = self.movieCurrent!.plot
+                self.movieActors.text = self.movieCurrent!.actors
+                self.movieDirector.text = self.movieCurrent!.director
+                
+                if let url = NSURL(string: self.movieCurrent!.poster!) {
+                    if let data = NSData(contentsOfURL: url) {
+                        self.moviePoster.image = UIImage(data: data)
+                    }
+                }
+                
+            }else{
+                print("none of movie")
+            }
+            /*
             let json = data!["results"] as! [AnyObject]
             let jsonData = json[0]
             self.movieid = jsonData.valueForKey("id") as! Int
@@ -157,7 +231,7 @@ class vcResult: UIViewController{
                 if let data = NSData(contentsOfURL: url) {
                     self.moviePoster.image = UIImage(data: data)
                 }
-            }
+            }*/
             }, error: { error in
             }, parameters: parameters)
         
@@ -296,7 +370,7 @@ class vcResult: UIViewController{
             }
         }
     }
-    
+    /*
     func createAlertView(title:String, message:String, buttonTitle: String){
         let createAccountErrorAlert: UIAlertView = UIAlertView()
         
@@ -307,5 +381,57 @@ class vcResult: UIViewController{
         createAccountErrorAlert.addButtonWithTitle(buttonTitle)
         
         createAccountErrorAlert.show()
+    }*/
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let attributedTitleString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont(name:"Amatic", size:30)!,
+            NSForegroundColorAttributeName : UIColor.blackColor()
+            ])
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.setValue(attributedTitleString, forKey: "attributedTitle")
+        
+        //UIAlertActionStyle have 3 option: Destructive, Default, Cancel
+        let libButton = UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.Default) { (alert) -> Void in
+            //vinh note: please add action here
+            //self.presentViewController(imageController, animated: true, completion: nil)
+        }
+        alert.addAction(libButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func loadDataView(){
+        
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView){
+        // Test the offset and calculate the current page after scrolling ends
+        let pageWidth:CGFloat = CGRectGetWidth(scrollView.frame)
+        let currentPage:CGFloat = floor((scrollView.contentOffset.x-pageWidth/2)/pageWidth)+1
+        // Change the indicator
+        self.pageController.currentPage = Int(currentPage);
+        // Change the text accordingly
+        
+        //let totalPage = Int(self.listMovies.count)
+        for (index, item) in self.listMovies.enumerate() {
+            if index == Int(currentPage) {
+                //print(item)
+                //print(currentPage)
+                
+                self.movieTitle.text = item.title
+                self.movieYear.text = String(item.year! as Int)
+                self.moviePilot.text = item.plot
+                self.movieActors.text = item.actors
+                self.movieDirector.text = item.director
+                
+                if let url = NSURL(string: item.poster!) {
+                    if let data = NSData(contentsOfURL: url) {
+                        self.moviePoster.image = UIImage(data: data)
+                    }
+                }
+                
+            }
+        }
+        
     }
 }

@@ -99,7 +99,7 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
         let item = listWached[indexPath.row]
         
         cell.lblTitle.text = item.title
-        cell.lblYear.text = String(item.year)
+        cell.lblYear.text = String(item.year! as Int)
         cell.lblActors.text = item.actors
         cell.lblActors.numberOfLines = 0
         cell.lblActors.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -221,7 +221,7 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
         }
     }
-    
+    /*
     func createAlertView(title:String, message:String, buttonTitle: String){
         let createAccountErrorAlert: UIAlertView = UIAlertView()
         
@@ -232,12 +232,31 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
         createAccountErrorAlert.addButtonWithTitle(buttonTitle)
         
         createAccountErrorAlert.show()
+    }*/
+    
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let attributedTitleString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont(name:"Amatic", size:30)!,
+            NSForegroundColorAttributeName : UIColor.blackColor()
+            ])
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.setValue(attributedTitleString, forKey: "attributedTitle")
+        
+        //UIAlertActionStyle have 3 option: Destructive, Default, Cancel
+        let libButton = UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.Default) { (alert) -> Void in
+            //vinh note: please add action here
+            //self.presentViewController(imageController, animated: true, completion: nil)
+        }
+        alert.addAction(libButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "watchedDetailSegue") {
             let svc = segue.destinationViewController as! vcResult;
             svc.movieCurrent = movieWatched
+            svc.listMovies = listWached
         }
     }
     /*

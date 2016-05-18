@@ -85,6 +85,8 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
             appDelegate.window?.rootViewController = protectedPageNav
             */
         }
+        
+        //self.createAlertController()
    }
 
     func requestServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
@@ -136,20 +138,12 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow
-        //print("row: \(indexPath!.row)")
         let idkey:Int = indexPath!.row
-        //print("genre id: \(self.listGenre[idkey].id) - \(self.listGenre[idkey].name)")
-        //let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
-        //print("current: \(currentCell)")
         currentCategory = self.listGenre[idkey].id!
-        print("show current genre \(currentCategory)")
+        //print("show current genre \(currentCategory)")
     }
     
     func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-        /*
-        let cell  = tableView.cellForRowAtIndexPath(indexPath)
-        cell!.contentView.backgroundColor = .redColor()
-         */
     }
     
     func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
@@ -167,28 +161,57 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
             self.createAlertView("Warning", message: "Please choose one category", buttonTitle: "Ok")
         }else{
             self.performSegueWithIdentifier("seguePlayDetail", sender: self)
+            //self.performSegueWithIdentifier("scrollViewSegue", sender: self)
         }
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "seguePlayDetail") {
-            let svc = segue.destinationViewController as! vcResult;
+            let svc = segue.destinationViewController as! vcResult
+            svc.genrePassed = currentCategory
+        }
+        
+        if (segue.identifier == "scrollViewSegue") {
+            let svc = segue.destinationViewController as! vcSwipe
             svc.genrePassed = currentCategory
         }
     }
     
+    
+    //comment out kieu alert
+    /*
     func createAlertView(title:String, message:String, buttonTitle: String){
         let createAccountErrorAlert: UIAlertView = UIAlertView()
-        
+        //let fontAwesomeFont = UIFont(name:"Amatic", size:30)
         createAccountErrorAlert.delegate = self
         
+        //createAccountErrorAlert.setValue(attributedTitleString, "attributedTitle")
         createAccountErrorAlert.title = title
         createAccountErrorAlert.message = message
         createAccountErrorAlert.addButtonWithTitle(buttonTitle)
-        
         createAccountErrorAlert.show()
+    }*/
+    
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let attributedTitleString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont(name:"Amatic", size:30)!,
+            NSForegroundColorAttributeName : UIColor.blackColor()
+            ])
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.setValue(attributedTitleString, forKey: "attributedTitle")
+        
+        //UIAlertActionStyle have 3 option: Destructive, Default, Cancel
+        let libButton = UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.Default) { (alert) -> Void in
+            //vinh note: please add action here
+            //self.presentViewController(imageController, animated: true, completion: nil)
+        }
+        alert.addAction(libButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    
     
     func getServer(link: String, successBlock:(data:[NSObject : AnyObject])-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
         Alamofire.request(.GET, link , parameters: parameters as? [String : AnyObject], encoding: .JSON)

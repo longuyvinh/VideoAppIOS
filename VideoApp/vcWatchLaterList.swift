@@ -91,14 +91,6 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        // Do any additional setup after loading the view.
-        self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_SX300.jpg", tIn:"Batman v Superman: Dawn of Justice", yIn:"2016", dIn:"Zack Snyder", aIn:"Ben Affleck, Henry Cavill, Amy Adams"))
-        self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTY0MDY0NjExN15BMl5BanBnXkFtZTgwOTU3OTYyODE@._V1_SX300.jpg", tIn:"X-Men: Apocalypse", yIn:"2016", dIn:"Bryan Singer, Byron Howard", aIn:"Sophie Turner, Jennifer Lawrence, Olivia Munn"))
-        self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMjQyODg5Njc4N15BMl5BanBnXkFtZTgwMzExMjE3NzE@._V1_SX300.jpg", tIn:"Deadpool", yIn:"2016", dIn:"Tim Miller", aIn:"Ryan Reynolds, Karan Soni, Ed Skrein"))
-        self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BOTMyMjEyNzIzMV5BMl5BanBnXkFtZTgwNzIyNjU0NzE@._V1_SX300.jpg", tIn:"Zootopia", yIn:"2016", dIn:"Byron Howard", aIn:"Ginnifer Goodwin, Jason Bateman, Idris Elba"))
-        self.listWachLater.append(videoObject(pIn:"http://ia.media-imdb.com/images/M/MV5BMTUyMjA5OTgyOV5BMl5BanBnXkFtZTgwOTkyMjQ5NTE@._V1_SX300.jpg", tIn:"Terminus", yIn:"2015", dIn:"Marc Furmie", aIn:"Jai Koutrae, Kendra Appleton, Todd Lasance"))
-        */
         let defaults = NSUserDefaults.standardUserDefaults()
         accesstoken = defaults.objectForKey("accesstoken") as! String
         userid = defaults.integerForKey("userid")
@@ -169,7 +161,7 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         let item = listWachLater[indexPath.row]
         cell.lblTitle.text = item.title
         
-        cell.lblYear.text = String(item.year)
+        cell.lblYear.text = String(item.year! as Int)
         cell.lblDirector.text = item.director
         
         cell.lblActors.text = item.actors
@@ -236,7 +228,7 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
                 
         }
     }
-    
+    /*
     func createAlertView(title:String, message:String, buttonTitle: String){
         let createAccountErrorAlert: UIAlertView = UIAlertView()
         
@@ -247,12 +239,31 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
         createAccountErrorAlert.addButtonWithTitle(buttonTitle)
         
         createAccountErrorAlert.show()
+    }*/
+    
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let attributedTitleString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont(name:"Amatic", size:30)!,
+            NSForegroundColorAttributeName : UIColor.blackColor()
+            ])
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.setValue(attributedTitleString, forKey: "attributedTitle")
+        
+        //UIAlertActionStyle have 3 option: Destructive, Default, Cancel
+        let libButton = UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.Default) { (alert) -> Void in
+            //vinh note: please add action here
+            //self.presentViewController(imageController, animated: true, completion: nil)
+        }
+        alert.addAction(libButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "watchlaterDetailSegue") {
             let svc = segue.destinationViewController as! vcResult;
             svc.movieCurrent = movieWatchLater
+            svc.listMovies = listWachLater
         }
     }
     /*

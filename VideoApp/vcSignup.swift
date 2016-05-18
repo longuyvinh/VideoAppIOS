@@ -373,6 +373,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }*/
     
+    /*
     func createAlertView(title:String, message:String, buttonTitle: String){
         let createAccountErrorAlert: UIAlertView = UIAlertView()
         
@@ -383,6 +384,23 @@ class vcSignup: UIViewController, UITextFieldDelegate {
         createAccountErrorAlert.addButtonWithTitle(buttonTitle)
         
         createAccountErrorAlert.show()
+    }*/
+    func createAlertView(title:String, message:String, buttonTitle: String){
+        let attributedTitleString = NSAttributedString(string: title, attributes: [
+            NSFontAttributeName : UIFont(name:"Amatic", size:30)!,
+            NSForegroundColorAttributeName : UIColor.blackColor()
+            ])
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.setValue(attributedTitleString, forKey: "attributedTitle")
+        
+        //UIAlertActionStyle have 3 option: Destructive, Default, Cancel
+        let libButton = UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.Default) { (alert) -> Void in
+            //vinh note: please add action here
+            //self.presentViewController(imageController, animated: true, completion: nil)
+        }
+        alert.addAction(libButton)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func isValidEmail(testStr:String) -> Bool {
