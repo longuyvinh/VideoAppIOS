@@ -39,6 +39,10 @@
 		FA2236E11CB6510500737D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2236E01CB6510500737D60 /* Assets.xcassets */; };
 		FA2236E41CB6510500737D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2236E21CB6510500737D60 /* LaunchScreen.storyboard */; };
 		FA277BFE1CEB11CF002FE259 /* customCellSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA277BFD1CEB11CF002FE259 /* customCellSwipe.swift */; };
+		FA277C251CEDC2B5002FE259 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA277C231CEDC2B5002FE259 /* CollectionViewCell.swift */; };
+		FA277C261CEDC2B5002FE259 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA277C241CEDC2B5002FE259 /* CollectionViewCell.xib */; };
+		FA277C281CEDDF67002FE259 /* customCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA277C271CEDDF67002FE259 /* customCollectionViewCell.swift */; };
+		FA277C2D1CEF23D2002FE259 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA277C2B1CEF23D2002FE259 /* MyCollectionViewCell.xib */; };
 		FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4738B41CC4C318009E2FB0 /* vcResult.swift */; };
 		FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */; };
 		FA51AA721CE43BAF006512C7 /* movieObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51AA711CE43BAF006512C7 /* movieObject.swift */; };
@@ -111,6 +115,10 @@
 		FA2236EB1CB6527400737D60 /* Amatic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amatic-Bold.ttf"; sourceTree = "<group>"; };
 		FA2236EC1CB6527A00737D60 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
 		FA277BFD1CEB11CF002FE259 /* customCellSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customCellSwipe.swift; sourceTree = "<group>"; };
+		FA277C231CEDC2B5002FE259 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		FA277C241CEDC2B5002FE259 /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		FA277C271CEDDF67002FE259 /* customCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA277C2B1CEF23D2002FE259 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		FA4738B21CC4C2D9009E2FB0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FA4738B41CC4C318009E2FB0 /* vcResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcResult.swift; sourceTree = "<group>"; };
 		FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcWatchLaterList.swift; sourceTree = "<group>"; };
@@ -221,39 +229,51 @@
 		FA2236D51CB6510500737D60 /* VideoApp */ = {
 			isa = PBXGroup;
 			children = (
-				FAAE26371CE9C54A00678194 /* images */,
-				FA51AA731CE48A72006512C7 /* subviews */,
-				FAC348111CE0415300150228 /* objects */,
-				FA1951291CCF1F00007D734E /* fonts */,
-				FA1951281CCF1EC6007D734E /* resources */,
+				FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */,
+				FA2236E51CB6510500737D60 /* Info.plist */,
 				FA2236D61CB6510500737D60 /* AppDelegate.swift */,
+				FA277C231CEDC2B5002FE259 /* CollectionViewCell.swift */,
+				FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */,
+				FA02C5C41CC7349000C79B40 /* customCell.swift */,
+				FA277BFD1CEB11CF002FE259 /* customCellSwipe.swift */,
+				FA277C271CEDDF67002FE259 /* customCollectionViewCell.swift */,
+				FADF887C1CE49B3100CBF61B /* customLoading.swift */,
+				FA02C5CC1CC7946400C79B40 /* customView.swift */,
+				FA02C5D01CC8B8FA00C79B40 /* DisclaimerViewController.swift */,
+				FA02C5CE1CC8AEB300C79B40 /* TermViewController.swift */,
+				FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */,
+				FA4738B41CC4C318009E2FB0 /* vcResult.swift */,
+				FA19512A1CCF1FB6007D734E /* vcSignup.swift */,
+				FAFFE49C1CC6324F004C8FE6 /* vcStart.swift */,
+				FAAE26351CE9BB0900678194 /* vcSwipe.swift */,
+				FAFFE49A1CC624F7004C8FE6 /* vcWachedList.swift */,
+				FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */,
+				FA2236D81CB6510500737D60 /* ViewController.swift */,
 				FA2236EB1CB6527400737D60 /* Amatic-Bold.ttf */,
 				FA2236EC1CB6527A00737D60 /* AmaticSC-Regular.ttf */,
 				FA2236E01CB6510500737D60 /* Assets.xcassets */,
-				FA2236E51CB6510500737D60 /* Info.plist */,
+				FA277C241CEDC2B5002FE259 /* CollectionViewCell.xib */,
+				FADF887A1CE49AFD00CBF61B /* customLoading.xib */,
+				FA02C5CA1CC793EA00C79B40 /* customView.xib */,
+				FA277C291CEF23B0002FE259 /* cellCollection */,
+				FA1951291CCF1F00007D734E /* fonts */,
+				FAAE26371CE9C54A00678194 /* images */,
 				FA2236E21CB6510500737D60 /* LaunchScreen.storyboard */,
 				FA2236DA1CB6510500737D60 /* Main.storyboard */,
+				FAC348111CE0415300150228 /* objects */,
+				FA1951281CCF1EC6007D734E /* resources */,
+				FA51AA731CE48A72006512C7 /* subviews */,
 				FA2236DD1CB6510500737D60 /* VideoApp.xcdatamodeld */,
-				FA2236D81CB6510500737D60 /* ViewController.swift */,
-				FA4738B41CC4C318009E2FB0 /* vcResult.swift */,
-				FAFFE49A1CC624F7004C8FE6 /* vcWachedList.swift */,
-				FAFFE49C1CC6324F004C8FE6 /* vcStart.swift */,
-				FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */,
-				FA02C5C41CC7349000C79B40 /* customCell.swift */,
-				FA02C5CA1CC793EA00C79B40 /* customView.xib */,
-				FA02C5CC1CC7946400C79B40 /* customView.swift */,
-				FA02C5CE1CC8AEB300C79B40 /* TermViewController.swift */,
-				FA02C5D01CC8B8FA00C79B40 /* DisclaimerViewController.swift */,
-				FA02C5D21CC8B90B00C79B40 /* ContactViewController.swift */,
-				FA02C6121CC8F2BD00C79B40 /* vcCategory.swift */,
-				FA19512A1CCF1FB6007D734E /* vcSignup.swift */,
-				FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */,
-				FADF887A1CE49AFD00CBF61B /* customLoading.xib */,
-				FADF887C1CE49B3100CBF61B /* customLoading.swift */,
-				FAAE26351CE9BB0900678194 /* vcSwipe.swift */,
-				FA277BFD1CEB11CF002FE259 /* customCellSwipe.swift */,
 			);
 			path = VideoApp;
+			sourceTree = "<group>";
+		};
+		FA277C291CEF23B0002FE259 /* cellCollection */ = {
+			isa = PBXGroup;
+			children = (
+				FA277C2B1CEF23D2002FE259 /* MyCollectionViewCell.xib */,
+			);
+			name = cellCollection;
 			sourceTree = "<group>";
 		};
 		FA51AA731CE48A72006512C7 /* subviews */ = {
@@ -359,9 +379,11 @@
 				FADF887B1CE49AFD00CBF61B /* customLoading.xib in Resources */,
 				FAAE263F1CE9C6CD00678194 /* photo3.jpeg in Resources */,
 				FAFFE4731CC60820004C8FE6 /* watched.png in Resources */,
+				FA277C2D1CEF23D2002FE259 /* MyCollectionViewCell.xib in Resources */,
 				FA031E6D1CC0C5BC00275D30 /* line_vertical.png in Resources */,
 				FA19C3051CB6797500DDB49B /* facebook.png in Resources */,
 				FA19C2F71CB657B700DDB49B /* AmaticSC-Regular.ttf in Resources */,
+				FA277C261CEDC2B5002FE259 /* CollectionViewCell.xib in Resources */,
 				FA2236E41CB6510500737D60 /* LaunchScreen.storyboard in Resources */,
 				FA2236E11CB6510500737D60 /* Assets.xcassets in Resources */,
 				FA08425F1CB7BAB3006C68FE /* line1.png in Resources */,
@@ -452,8 +474,10 @@
 				FA277BFE1CEB11CF002FE259 /* customCellSwipe.swift in Sources */,
 				FA02C5CD1CC7946400C79B40 /* customView.swift in Sources */,
 				FA2236DF1CB6510500737D60 /* VideoApp.xcdatamodeld in Sources */,
+				FA277C281CEDDF67002FE259 /* customCollectionViewCell.swift in Sources */,
 				FA51AA721CE43BAF006512C7 /* movieObject.swift in Sources */,
 				FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */,
+				FA277C251CEDC2B5002FE259 /* CollectionViewCell.swift in Sources */,
 				FA2236D71CB6510500737D60 /* AppDelegate.swift in Sources */,
 				FA02C5C51CC7349000C79B40 /* customCell.swift in Sources */,
 				FAAE26361CE9BB0900678194 /* vcSwipe.swift in Sources */,

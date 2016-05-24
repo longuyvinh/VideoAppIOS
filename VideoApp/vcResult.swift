@@ -20,9 +20,6 @@ class vcResult: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageController: UIPageControl!
     
-    @IBOutlet weak var scrollContent: UIScrollView!
-    
-    @IBOutlet weak var viewContent: UIView!
     
     @IBOutlet weak var moviePoster: UIImageView!
     
@@ -59,7 +56,41 @@ class vcResult: UIViewController, UIScrollViewDelegate{
         //myLoadingView.layer.shadowRadius = 2
         //myLoadingView.layer.cornerRadius = 12
         //loading view waiting EOF
- 
+        
+        //let scrollViewWidth:CGFloat = self.scrollView.frame.width
+        //let scrollViewHeight:CGFloat = self.scrollView.frame.height
+        
+        let imgOne = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+        imgOne.image = UIImage(named: "bgLight")
+        let imgTwo = UIImageView(frame: CGRectMake(screenWidth, 0, screenWidth, screenHeight))
+        imgTwo.image = UIImage(named: "bgDark")
+        let imgThree = UIImageView(frame: CGRectMake(screenWidth*2, 0,screenWidth, screenHeight))
+        imgThree.image = UIImage(named: "bgLight")
+        let imgFour = UIImageView(frame: CGRectMake(screenWidth*3, 0,screenWidth, screenHeight))
+        imgFour.image = UIImage(named: "bgDark")
+        let imgFive = UIImageView(frame: CGRectMake(screenWidth*4, 0,screenWidth, screenHeight))
+        imgFive.image = UIImage(named: "bgLight")
+        let imgSix = UIImageView(frame: CGRectMake(screenWidth*5, 0,screenWidth, screenHeight))
+        imgSix.image = UIImage(named: "bgDark")
+        let imgSeven = UIImageView(frame: CGRectMake(screenWidth*6, 0, screenWidth, screenHeight))
+        imgSeven.image = UIImage(named: "bgLight")
+        let imgEight = UIImageView(frame: CGRectMake(screenWidth*7, 0, screenWidth, screenHeight))
+        imgEight.image = UIImage(named: "bgDark")
+        let imgNine = UIImageView(frame: CGRectMake(screenWidth*8, 0, screenWidth, screenHeight))
+        imgNine.image = UIImage(named: "bgLight")
+        let imgTen = UIImageView(frame: CGRectMake(screenWidth*9, 0, screenWidth, screenHeight))
+        imgTen.image = UIImage(named: "bgDark")
+        
+        self.scrollView.addSubview(imgOne)
+        self.scrollView.addSubview(imgTwo)
+        self.scrollView.addSubview(imgThree)
+        self.scrollView.addSubview(imgFour)
+        self.scrollView.addSubview(imgFive)
+        self.scrollView.addSubview(imgSix)
+        self.scrollView.addSubview(imgSeven)
+        self.scrollView.addSubview(imgEight)
+        self.scrollView.addSubview(imgNine)
+        self.scrollView.addSubview(imgTen)
         
         let youtubeLink:String = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
 
@@ -113,6 +144,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                     })
                     //delay time to hide view loading EOF
                     
+                    
                 }
             }, error: { error in
                 //error
@@ -134,24 +166,28 @@ class vcResult: UIViewController, UIScrollViewDelegate{
             }
         }
         
-        let totalPage = CGFloat(self.listMovies.count)
-        print("total page: \(totalPage)")
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.width * totalPage, self.viewContent.frame.height + 50)
-        self.scrollView.delegate = self
-        self.pageController.currentPage = 0
-        /*
-        self.movieCurrent = self.listMovies[0]
-        self.movieTitle.text = self.movieCurrent!.title
-        self.movieYear.text = String(self.movieCurrent!.year! as Int)
-        self.moviePilot.text = self.movieCurrent!.plot
-        self.movieActors.text = self.movieCurrent!.actors
-        self.movieDirector.text = self.movieCurrent!.director
+        //let scrollViewWidth:CGFloat = self.scrollView.frame.width
+        //let scrollViewHeight:CGFloat = self.scrollView.frame.height
         
-        if let url = NSURL(string: self.movieCurrent!.poster!) {
-            if let data = NSData(contentsOfURL: url) {
-                self.moviePoster.image = UIImage(data: data)
+        let totalPage = CGFloat(self.listMovies.count)
+        /*
+        let imgOne = UIImageView(frame: CGRectMake(0, 0,scrollViewWidth, scrollViewHeight))
+        imgOne.image = UIImage(named: "bgLight")
+        let imgTwo = UIImageView(frame: CGRectMake(scrollViewWidth, 0,scrollViewWidth, scrollViewHeight))
+        imgTwo.image = UIImage(named: "bgDark")
+        
+        for index in 1...Int(totalPage) {
+            if(index % 2 == 0){
+                self.scrollView.addSubview(imgOne)
+            }else{
+                self.scrollView.addSubview(imgTwo)
             }
         }*/
+        //print("total page: \(totalPage)")
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height)
+        self.scrollView.delegate = self
+        self.pageController.currentPage = 0
+        
         
     }
     
@@ -193,10 +229,24 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                     self.listMovies.append(movieObject(mid: movieId, pIn: poster!, tIn: title!, yIn: year!, dIn: director!, aIn: actors!, plotIn: plot, trailIn: trailer))
                     //print("added success: \(movieId)")
                 }
+                let scrollViewWidth:CGFloat = self.scrollView.frame.width
+                let scrollViewHeight:CGFloat = self.scrollView.frame.height
                 
                 let totalPage = CGFloat(self.listMovies.count)
                 print("total page: \(totalPage)")
-                self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.width * totalPage, self.viewContent.frame.height + 50)
+                
+                
+                /*
+                for index in 1...Int(totalPage) {
+                    if(index % 2 == 0){
+                        print(index % 2)
+                        self.scrollView.addSubview(imgOne)
+                    }else{
+                        print(index % 2)
+                        self.scrollView.addSubview(imgTwo)
+                    }
+                }*/
+                self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height + 50)
                 self.scrollView.delegate = self
                 self.pageController.currentPage = 0
                 

@@ -9,22 +9,30 @@
 import UIKit
 import Alamofire
 
-class vcSwipe: UIViewController, UIScrollViewDelegate {
-    @IBOutlet weak var pageController: UIPageControl!
-    @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var moviePoster: UIImageView!
+class vcSwipe: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
+    @IBOutlet weak var collection: UICollectionView!
+    let kCellIdentifier = "MyCell"
     
-    @IBOutlet weak var scrollHorizol: UIScrollView!
-    
+    let kHorizontalInsets: CGFloat = 10.0
+    let kVerticalInsets: CGFloat = 10.0
+
     var genrePassed:Int = 0
     var listMovies = [movieObject]()
     var accesstoken:String = ""
+    var frame = CGRectMake(0, 0, 0, 0)
+    var offscreenCells = Dictionary<String, UICollectionViewCell>()
+    
+    //var listing:[String] =  ["item1", "item2", "item3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(" show genre: \(genrePassed)")
+        collection.dataSource = self
+        collection.delegate = self
+        let myCellNib = UINib(nibName: "CollectionViewCell", bundle: nil)
+        collection.registerNib(myCellNib, forCellWithReuseIdentifier: kCellIdentifier)
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         accesstoken = defaults.objectForKey("accesstoken") as! String
         
@@ -64,17 +72,15 @@ class vcSwipe: UIViewController, UIScrollViewDelegate {
                     
                     self.listMovies.append(movieObject(mid: movieId, pIn: poster!, tIn: title!, yIn: year!, dIn: director!, aIn: actors!, plotIn: plot, trailIn: trailer))
                 }
-                
-                let totalPage = CGFloat(self.listMovies.count)
-                self.scrollHorizol.contentSize = CGSizeMake(self.scrollHorizol.frame.width * totalPage, self.scrollHorizol.frame.height)
-                self.scrollHorizol.delegate = self
-                self.pageController.currentPage = 0
+                print(self.listMovies.count)
+                self.collection.reloadData()
                 
             }else{
                 print("none of movie")
             }
             }, error: { error in
             }, parameters: parameters)
+        
     }
     
     func requestImage(url: String, success: (UIImage?) -> Void) {
@@ -114,6 +120,116 @@ class vcSwipe: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    // MARK: - UICollectionViewDataSource
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.listMovies.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+        //cell.configCell(<#T##title: String##String#>, year: <#T##String#>)
+        cell.configCell(self.listMovies[indexPath.row].title!, year: String(self.listMovies[indexPath.row].year! as Int))
+        /*
+        cell.cellTitle.text = self.listMovies[indexPath.row].title
+        requestImage( self.listMovies[indexPath.row].poster! ) { (image) -> Void in
+            cell.cellPoster.image = image
+        }*/
+        
+        // Make sure layout subviews
+        cell.layoutIfNeeded()
+        return cell
+    }
+
+
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("cell \(indexPath.row) selected")
+    }
+    /*
+    // MARK: - UICollectionViewFlowLayout Delegate
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        // Set up desired width
+        //let targetWidth: CGFloat = (self.collectionView.bounds.width - 3 * kHorizontalInsets) / 2
+        let targetWidth: CGFloat = (self.collection.bounds.width - 3 * kHorizontalInsets)
+        
+        // Use fake cell to calculate height
+        let reuseIdentifier = kCellIdentifier
+        var cell: CollectionViewCell? = self.offscreenCells[reuseIdentifier] as? CollectionViewCell
+        if cell == nil {
+            cell = NSBundle.mainBundle().loadNibNamed("MyCollectionViewCell", owner: self, options: nil)[0] as? CollectionViewCell
+            self.offscreenCells[reuseIdentifier] = cell
+        }
+        
+        // Config cell and let system determine size
+        cell!.configCell(self.listMovies[indexPath.row].title!, year: String(self.listMovies[indexPath.row].year! as Int))
+        
+        // Cell's size is determined in nib file, need to set it's width (in this case), and inside, use this cell's width to set label's preferredMaxLayoutWidth, thus, height can be determined, this size will be returned for real cell initialization
+        cell!.bounds = CGRectMake(0, 0, targetWidth, cell!.bounds.height)
+        cell!.contentView.bounds = cell!.bounds
+        
+        // Layout subviews, this will let labels on this cell to set preferredMaxLayoutWidth
+        cell!.setNeedsLayout()
+        cell!.layoutIfNeeded()
+        
+        var size = cell!.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        // Still need to force the width, since width can be smalled due to break mode of labels
+        size.width = targetWidth
+        return size
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(kVerticalInsets, kHorizontalInsets, kVerticalInsets, kHorizontalInsets)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return kHorizontalInsets
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return kVerticalInsets
+    }*/
+    
+    /*
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        let pageWidth:Float = 310 + 25;
+        
+        let currentOffSet:Float = Float(scrollView.contentOffset.x)
+        
+        print(currentOffSet)
+        let targetOffSet:Float = Float(targetContentOffset.memory.x)
+        
+        print(targetOffSet)
+        var newTargetOffset:Float = 0
+        
+        if(targetOffSet > currentOffSet){
+            newTargetOffset = ceilf(currentOffSet / pageWidth) * pageWidth
+        }else{
+            newTargetOffset = floorf(currentOffSet / pageWidth) * pageWidth
+        }
+        
+        if(newTargetOffset < 0){
+            newTargetOffset = 0;
+        }else if (newTargetOffset > Float(scrollView.contentSize.width)){
+            newTargetOffset = Float(scrollView.contentSize.width)
+        }
+        
+        targetContentOffset.memory.x = CGFloat(currentOffSet)
+        scrollView.setContentOffset(CGPointMake(CGFloat(newTargetOffset), 0), animated: true)
+        
+    }
+    
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+     */
+
+    /*
     func scrollViewDidEndDecelerating(scrollHorizol: UIScrollView){
         // Test the offset and calculate the current page after scrolling ends
         let pageWidth:CGFloat = CGRectGetWidth(scrollHorizol.frame)
@@ -133,6 +249,10 @@ class vcSwipe: UIViewController, UIScrollViewDelegate {
             }
         }
         
-    }
+    }*/
+
+    
+
 
 }
+
