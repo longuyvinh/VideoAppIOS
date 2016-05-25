@@ -286,7 +286,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
     @IBAction func shareAction(sender: AnyObject) {
         let firstActivityItem = "Hey, check out this mediocre site that sometimes posts about Swift!"
         
-        let secondActivityItem : NSURL = NSURL(fileURLWithPath: "http://www.dvdowns.com/")
+        let secondActivityItem : NSURL = NSURL(fileURLWithPath: "http://img.f29.vnecdn.net/2016/05/25/obama-roi-VN-9656-1464157305.jpg")
         
         let activityViewController : UIActivityViewController = UIActivityViewController(
             activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
