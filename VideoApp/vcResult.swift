@@ -165,25 +165,9 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 self.moviePoster.image = UIImage(data: data)
             }
         }
-        
-        //let scrollViewWidth:CGFloat = self.scrollView.frame.width
-        //let scrollViewHeight:CGFloat = self.scrollView.frame.height
-        
+
         let totalPage = CGFloat(self.listMovies.count)
-        /*
-        let imgOne = UIImageView(frame: CGRectMake(0, 0,scrollViewWidth, scrollViewHeight))
-        imgOne.image = UIImage(named: "bgLight")
-        let imgTwo = UIImageView(frame: CGRectMake(scrollViewWidth, 0,scrollViewWidth, scrollViewHeight))
-        imgTwo.image = UIImage(named: "bgDark")
-        
-        for index in 1...Int(totalPage) {
-            if(index % 2 == 0){
-                self.scrollView.addSubview(imgOne)
-            }else{
-                self.scrollView.addSubview(imgTwo)
-            }
-        }*/
-        //print("total page: \(totalPage)")
+
         self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height)
         self.scrollView.delegate = self
         self.pageController.currentPage = 0
@@ -229,23 +213,9 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                     self.listMovies.append(movieObject(mid: movieId, pIn: poster!, tIn: title!, yIn: year!, dIn: director!, aIn: actors!, plotIn: plot, trailIn: trailer))
                     //print("added success: \(movieId)")
                 }
-                let scrollViewWidth:CGFloat = self.scrollView.frame.width
-                let scrollViewHeight:CGFloat = self.scrollView.frame.height
                 
                 let totalPage = CGFloat(self.listMovies.count)
                 print("total page: \(totalPage)")
-                
-                
-                /*
-                for index in 1...Int(totalPage) {
-                    if(index % 2 == 0){
-                        print(index % 2)
-                        self.scrollView.addSubview(imgOne)
-                    }else{
-                        print(index % 2)
-                        self.scrollView.addSubview(imgTwo)
-                    }
-                }*/
                 self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height + 50)
                 self.scrollView.delegate = self
                 self.pageController.currentPage = 0
@@ -266,22 +236,6 @@ class vcResult: UIViewController, UIScrollViewDelegate{
             }else{
                 print("none of movie")
             }
-            /*
-            let json = data!["results"] as! [AnyObject]
-            let jsonData = json[0]
-            self.movieid = jsonData.valueForKey("id") as! Int
-            
-            self.movieTitle.text = jsonData.valueForKey("title") as! String
-            self.movieYear.text = String(jsonData.valueForKey("year") as! Int)
-            self.moviePilot.text = jsonData.valueForKey("plot") as! String
-            self.movieActors.text = jsonData.valueForKey("main_cast") as! String
-            self.movieDirector.text = jsonData.valueForKey("director") as! String
-            
-            if let url = NSURL(string: jsonData.valueForKey("poster") as! String) {
-                if let data = NSData(contentsOfURL: url) {
-                    self.moviePoster.image = UIImage(data: data)
-                }
-            }*/
             }, error: { error in
             }, parameters: parameters)
         
@@ -291,7 +245,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
     @IBAction func addWatched(sender: AnyObject) {
             let paramSaveList = [
                 "user" : userid,
-                "movie": movieid,
+                "movie": Int(movieCurrent!.id!),
                 "access_token" : accesstoken
             ]
             let urlSave = "http://api.filmify.net/api/watch-list/"
@@ -310,9 +264,10 @@ class vcResult: UIViewController, UIScrollViewDelegate{
     @IBAction func addWatchLater(sender: AnyObject) {
             let paramSaveList = [
                 "user" : userid,
-                "movie": movieid,
+                "movie": Int(movieCurrent!.id!),
                 "access_token" : accesstoken
             ]
+        
             let urlSave = "http://api.filmify.net/api/watch-later-list/"
             
             self.postServer(urlSave, successBlock: { (data, statusCode) in
@@ -466,8 +421,8 @@ class vcResult: UIViewController, UIScrollViewDelegate{
         for (index, item) in self.listMovies.enumerate() {
             if index == Int(currentPage) {
                 //print(item)
-                //print(currentPage)
-                
+                //print("page current: \(currentPage)")
+                movieCurrent = self.listMovies[Int(currentPage)]
                 self.movieTitle.text = item.title
                 self.movieYear.text = String(item.year! as Int)
                 self.moviePilot.text = item.plot
