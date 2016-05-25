@@ -281,6 +281,30 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 }, parameters: paramSaveList)
         
     }
+    
+
+    @IBAction func shareAction(sender: AnyObject) {
+        let firstActivityItem = "Hey, check out this mediocre site that sometimes posts about Swift!"
+        
+        let secondActivityItem : NSURL = NSURL(fileURLWithPath: "http://www.dvdowns.com/")
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
+        
+        activityViewController.excludedActivityTypes = [
+            UIActivityTypePostToWeibo,
+            UIActivityTypePrint,
+            UIActivityTypeAssignToContact,
+            UIActivityTypeSaveToCameraRoll,
+            UIActivityTypeAddToReadingList,
+            UIActivityTypePostToFlickr,
+            UIActivityTypePostToVimeo,
+            UIActivityTypePostToTencentWeibo
+        ]
+        
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -423,6 +447,11 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 //print(item)
                 //print("page current: \(currentPage)")
                 movieCurrent = self.listMovies[Int(currentPage)]
+                
+                let defaults = NSUserDefaults(suiteName: "group.com.moe.filmify")
+                defaults?.setObject("It worked!", forKey: "alarmTime")
+                defaults?.synchronize()
+                
                 self.movieTitle.text = item.title
                 self.movieYear.text = String(item.year! as Int)
                 self.moviePilot.text = item.plot

@@ -50,6 +50,7 @@
             <string>Amatic-Bold</string>
             <string>Amatic-Bold</string>
             <string>Amatic-Bold</string>
+            <string>Amatic-Bold</string>
         </mutableArray>
         <mutableArray key="AmaticSC-Regular.ttf">
             <string>AmaticSC-Regular</string>
@@ -2025,16 +2026,30 @@
                                             <action selector="addWatchLater:" destination="0An-d2-kRp" eventType="touchUpInside" id="aBW-LW-Uef"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2I-Aw-wyO">
-                                        <rect key="frame" x="277" y="0.0" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="By5-zU-kzZ">
+                                        <rect key="frame" x="264" y="0.0" width="73" height="30"/>
+                                        <color key="backgroundColor" red="0.14901960784313725" green="0.8901960784313725" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="73" id="X0P-kE-hxF"/>
+                                            <constraint firstAttribute="height" constant="30" id="fIQ-HD-4yS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="20"/>
+                                        <state key="normal" title="share now">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareAction:" destination="0An-d2-kRp" eventType="touchUpInside" id="RBV-FB-dVz"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="2Sg-dm-QpW" firstAttribute="centerY" secondItem="BZ2-b5-MVr" secondAttribute="centerY" id="1eA-G5-aRs"/>
                                     <constraint firstAttribute="height" constant="30" id="1qn-JG-JYm"/>
+                                    <constraint firstItem="By5-zU-kzZ" firstAttribute="centerX" secondItem="BZ2-b5-MVr" secondAttribute="centerX" id="Ewi-dz-rc2"/>
+                                    <constraint firstItem="By5-zU-kzZ" firstAttribute="centerY" secondItem="BZ2-b5-MVr" secondAttribute="centerY" id="PX5-pr-h0w"/>
                                     <constraint firstItem="pCf-r4-dJb" firstAttribute="centerY" secondItem="BZ2-b5-MVr" secondAttribute="centerY" id="fFg-UX-VuY"/>
+                                    <constraint firstItem="By5-zU-kzZ" firstAttribute="centerY" secondItem="BZ2-b5-MVr" secondAttribute="centerY" id="gXk-Q1-a5A"/>
                                     <constraint firstAttribute="trailing" secondItem="2Sg-dm-QpW" secondAttribute="trailing" id="iWf-5D-BgA"/>
                                     <constraint firstItem="pCf-r4-dJb" firstAttribute="leading" secondItem="BZ2-b5-MVr" secondAttribute="leading" id="nEu-0e-SIh"/>
                                 </constraints>
@@ -2338,9 +2353,9 @@
         <image name="watched.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fva-w1-2wB"/>
-        <segue reference="DCA-1n-dd8"/>
-        <segue reference="o8I-oN-CmP"/>
         <segue reference="BAz-O3-BNm"/>
+        <segue reference="1Xs-nQ-0Kd"/>
+        <segue reference="fva-w1-2wB"/>
+        <segue reference="o8I-oN-CmP"/>
     </inferredMetricsTieBreakers>
 </document>
