@@ -116,7 +116,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
         self.movieActors.text = ""
         self.movieDirector.text = ""
         
-        let urlUser = "http://filmify.yieldlevel.co/api/user/me"
+        let urlUser = "http://api.filmify.net/api/user/me"
         self.getServer(urlUser, successBlock: { data in
                 self.userid = data!["id"] as! Int
                 if(self.userid != 0){
@@ -200,7 +200,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
             "access_token" : accesstoken
         ]
         
-        let url = "http://filmify.yieldlevel.co/api/movies-by-genres"
+        let url = "http://api.filmify.net/api/movies-by-genres"
         
         self.getServer(url, successBlock: { data in
             let jsonListing = data!["results"] as? NSArray
@@ -294,7 +294,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 "movie": movieid,
                 "access_token" : accesstoken
             ]
-            let urlSave = "http://filmify.yieldlevel.co/api/watch-list/"
+            let urlSave = "http://api.filmify.net/api/watch-list/"
             
             self.postServer(urlSave, successBlock: { (data, statusCode) in
                     if(statusCode != 201){
@@ -313,7 +313,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 "movie": movieid,
                 "access_token" : accesstoken
             ]
-            let urlSave = "http://filmify.yieldlevel.co/api/watch-later-list/"
+            let urlSave = "http://api.filmify.net/api/watch-later-list/"
             
             self.postServer(urlSave, successBlock: { (data, statusCode) in
                     if(statusCode != 201){

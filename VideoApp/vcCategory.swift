@@ -53,7 +53,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 "access_token" : accesstoken
             ]
         
-            let urlGenres = "http://filmify.yieldlevel.co/api/genres/"
+            let urlGenres = "http://api.filmify.net/api/genres/"
 
             self.requestServer(urlGenres,
                                successBlock:{(data) in

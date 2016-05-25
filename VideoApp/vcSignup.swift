@@ -136,7 +136,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                 "password":     password,
                 "email":        email
             ]
-            let url1:String = "http://filmify.yieldlevel.co/api/register/"
+            let url1:String = "http://api.filmify.net/api/register/"
             
             self.requestServer(url1, successBlock: { (data, stautusCode) in
                 if stautusCode != 201 {
@@ -204,7 +204,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                         "username":         usernameRS,
                         "password":         password
                     ]
-                    let url = "http://filmify.yieldlevel.co/auth/token"
+                    let url = "http://api.filmify.net/auth/token"
                     self.requestServer(url, successBlock: { (data, stautusCode) in
                             //print(data)
                             let accesstoken = (data["access_token"] as? String)!
@@ -268,7 +268,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                 "password":     password,
                 "email":        email
             ]
-            let url1:String = "http://filmify.yieldlevel.co/api/register/"
+            let url1:String = "http://api.filmify.net/api/register/"
             
             self.requestServer(url1, successBlock: { (data, stautusCode) in
                 if stautusCode != 201 {
@@ -336,7 +336,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                         "username":         usernameRS,
                         "password":         password
                     ]
-                    let url = "http://filmify.yieldlevel.co/auth/token"
+                    let url = "http://api.filmify.net/auth/token"
                     self.requestServer(url, successBlock: { (data, stautusCode) in
                         //print(data)
                         let accesstoken = (data["access_token"] as? String)!

@@ -100,7 +100,7 @@ class vcWatchLaterList: UIViewController, UITableViewDataSource, UITableViewDele
                 "access_token" : accesstoken
             ]
             
-            let urlWatched = "http://filmify.yieldlevel.co/api/movies-watch-later-list/" + String(userid)
+            let urlWatched = "http://api.filmify.net/api/movies-watch-later-list/" + String(userid)
             self.getServer(urlWatched, successBlock: { data in
                 let jsonListing = data!["results"] as? NSArray
                 //print(jsonListing)

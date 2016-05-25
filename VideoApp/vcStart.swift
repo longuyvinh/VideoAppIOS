@@ -74,7 +74,7 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
                 "client_secret":    clientSecret,
                 "refresh_token":    refeshtoken
             ]
-            let url = "http://filmify.yieldlevel.co/auth/token"
+            let url = "http://api.filmify.net/auth/token"
             
             Alamofire.request(.POST, url, parameters: paramAuth)
                 .responseJSON { response in
@@ -117,7 +117,7 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
                 "client_secret" :   clientSecret,
                 "token" :           token
             ]
-            let url = "http://filmify.yieldlevel.co/auth/convert-token"
+            let url = "http://api.filmify.net/auth/convert-token"
             self.getServer(url, successBlock: {data in
                 print(data)
                 let date = NSDate()
@@ -175,7 +175,7 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
                 "client_secret" :   clientSecret,
                 "token" :           token
             ]
-            let url = "http://filmify.yieldlevel.co/auth/convert-token"
+            let url = "http://api.filmify.net/auth/convert-token"
             self.getServer(url, successBlock: {data in
                     print(data)
                     let date = NSDate()

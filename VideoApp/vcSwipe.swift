@@ -44,7 +44,7 @@ class vcSwipe: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             "access_token" : accesstoken
         ]
         
-        let url = "http://filmify.yieldlevel.co/api/movies-by-genres"
+        let url = "http://api.filmify.net/api/movies-by-genres"
         
         self.getServer(url, successBlock: { data in
             let jsonListing = data!["results"] as? NSArray
