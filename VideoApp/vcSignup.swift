@@ -186,11 +186,13 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                     //print(data)
                 } else {
                     //print("success")
-                    //print(data)
+                    print(data)
                     //[id: 46, username: longuyvinh, first_name: vinh, email: longuyvinh.ny@gmail.com, last_name: Nguyen]
                     let usernameRS:String = (data["username"] as? String)!
+                    let userid:Int = data["id"] as! Int
                     let defaults = NSUserDefaults.standardUserDefaults()
-                    
+                    defaults.setInteger(userid, forKey: "userid")
+
                     let date = NSDate()
                     let timestamp = Int(date.timeIntervalSince1970)
                     
@@ -321,7 +323,9 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                     //print(data)
                     //[id: 46, username: longuyvinh, first_name: vinh, email: longuyvinh.ny@gmail.com, last_name: Nguyen]
                     let usernameRS:String = (data["username"] as? String)!
+                    let userid:Int = data["id"] as! Int
                     let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setInteger(userid, forKey: "userid")
                     
                     let date = NSDate()
                     let timestamp = Int(date.timeIntervalSince1970)

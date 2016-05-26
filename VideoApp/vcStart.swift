@@ -21,14 +21,6 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        /*
-        if(FBSDKAccessToken.currentAccessToken() == nil){
-            print("User is not logged in")
-        }else{
-            print("User is not logged")
-        }*/
-        
         //get time now
         let date = NSDate()
         let timestamp = Int(date.timeIntervalSince1970)
@@ -160,45 +152,8 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
             return
         }
         if let userToken = result.token{
-            //get user access token
-            //let tokenFB:FBSDKAccessToken = result.token
-            //print(tokenFB)
             let token = FBSDKAccessToken.currentAccessToken().tokenString
-            print(token)
-            //print("Token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
-            //print("User ID: \(FBSDKAccessToken.currentAccessToken().userID)")
-            /*
-            let paramAuth = [
-                "grant_type" :      "convert_token",
-                "backend" :         "facebook",
-                "client_id" :       clientID,
-                "client_secret" :   clientSecret,
-                "token" :           token
-            ]
-            let url = "http://api.filmify.net/auth/convert-token"
-            self.getServer(url, successBlock: {data in
-                    print(data)
-                    let date = NSDate()
-                    let timestamp = Int(date.timeIntervalSince1970)
-                
-                    let accesstoken:String = (data!["access_token"] as? String)!
-                    let refeshtoken:String = (data!["refresh_token"] as? String)!
-                    let expiretime:Int = (data!["expires_in"] as? Int)!
-                    print(accesstoken)
-                    print(refeshtoken)
-                    print(expiretime)
-                
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    let expireTimes = timestamp + expiretime
-                    //day
-                    defaults.setObject(accesstoken, forKey: "accesstoken")
-                    defaults.setObject(refeshtoken, forKey: "refreshtoken")
-                    defaults.setInteger(expireTimes, forKey: "expiretime")
-                    defaults.synchronize()
-                
-                }, error: {error in
-                }, parameters: paramAuth)
-            */
+            //print(token)
             
         }
         

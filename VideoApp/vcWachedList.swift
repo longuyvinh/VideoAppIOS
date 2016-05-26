@@ -43,6 +43,8 @@ class vcWachedList: UIViewController, UITableViewDelegate, UITableViewDataSource
             ]
             
             let urlWatched = "http://api.filmify.net/api/movies-watch-list/" + String(userid)
+            print(urlWatched)
+            
             self.getServer(urlWatched, successBlock: { data in
                     let jsonListing = data!["results"] as? NSArray
                     //print(jsonListing)
