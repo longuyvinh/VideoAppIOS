@@ -17,7 +17,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate ,
     @IBOutlet weak var myTableView: UITableView!
     
     var currentCategory:Int = -1
-    
+    var idkey:Int = 0;
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -116,7 +116,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate ,
         let protectedPage: UIViewController = storyboard.instantiateViewControllerWithIdentifier("ViewDetailVideo")
         RootView.shareInstance.loadResult1(1)
         let next = protectedPage as! vcResult
-        let idkey:Int = 0 // When pan from category to result get index defaults . ex (0 = ACTION)
+         // When pan from category to result get index defaults . ex (0 = ACTION)
         currentCategory = self.listGenre[idkey].id!
         next.genrePassed = currentCategory
 
@@ -157,7 +157,8 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate ,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow
-        let idkey:Int = indexPath!.row
+        self.idkey = Int(indexPath!.row)
+        
         currentCategory = self.listGenre[idkey].id!
         //print("show current genre \(currentCategory)")
         

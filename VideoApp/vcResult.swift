@@ -270,6 +270,7 @@ class vcResult: UIViewController, UIScrollViewDelegate {
 
 
     @IBAction func addWatched(sender: AnyObject) {
+            //print(movieCurrent?.title)
             let paramSaveList = [
                 "user" : userid,
                 "movie": Int(movieCurrent!.id!),
@@ -289,6 +290,7 @@ class vcResult: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func addWatchLater(sender: AnyObject) {
+            //print(movieCurrent?.title)
             let paramSaveList = [
                 "user" : userid,
                 "movie": Int(movieCurrent!.id!),

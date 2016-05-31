@@ -127,7 +127,7 @@ class vcSignup: UIViewController, UITextFieldDelegate , CWStackProtocol{
             self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
             errorFlah = 1
         }
-        // alo ... hu
+        
         if(errorFlah != 1){
             let paramSignup = [
                 "first_name":   fname,
@@ -218,14 +218,22 @@ class vcSignup: UIViewController, UITextFieldDelegate , CWStackProtocol{
                             defaults.setObject(refeshtoken, forKey: "refreshtoken")
                             defaults.setInteger(expireTime, forKey: "expiretime")
                             defaults.setObject(usernameRS, forKey: "username")
-                        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
-                        let stackController: CWStackController = CWStackController(rootViewController: protectedPage)
+
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        
+                        
+                        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
+                        
+                        //var storyboard: UIStoryboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+                        let mainViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("homeCategory")
+                        let stackController: CWStackController = CWStackController(rootViewController: mainViewController)
                         
                         let nav = UINavigationController(rootViewController: stackController)
                         nav.navigationBarHidden = true;
-
-                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.window? = UIWindow(frame: UIScreen.mainScreen().bounds)
                         appDelegate.window?.rootViewController = nav
+                        appDelegate.window?.makeKeyAndVisible()
+
 
                         }, error: { (error) in
                             //error
@@ -360,7 +368,21 @@ class vcSignup: UIViewController, UITextFieldDelegate , CWStackProtocol{
                         defaults.setObject(refeshtoken, forKey: "refreshtoken")
                         defaults.setInteger(expireTime, forKey: "expiretime")
                         defaults.setObject(usernameRS, forKey: "username")
-                        self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                        //self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        
+                        
+                        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
+                        
+                        //var storyboard: UIStoryboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+                        let mainViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("homeCategory")
+                        let stackController: CWStackController = CWStackController(rootViewController: mainViewController)
+                        
+                        let nav = UINavigationController(rootViewController: stackController)
+                        nav.navigationBarHidden = true;
+                        appDelegate.window? = UIWindow(frame: UIScreen.mainScreen().bounds)
+                        appDelegate.window?.rootViewController = nav
+                        appDelegate.window?.makeKeyAndVisible()
                         }, error: { (error) in
                             //error
                         }, parameters: paramAuth)
