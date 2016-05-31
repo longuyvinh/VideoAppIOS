@@ -22,6 +22,12 @@
 		FA08425B1CB76DD1006C68FE /* film_light3.png in Resources */ = {isa = PBXBuildFile; fileRef = FA08425A1CB76DD1006C68FE /* film_light3.png */; };
 		FA08425D1CB7B3E8006C68FE /* bg_conner.png in Resources */ = {isa = PBXBuildFile; fileRef = FA08425C1CB7B3E8006C68FE /* bg_conner.png */; };
 		FA08425F1CB7BAB3006C68FE /* line1.png in Resources */ = {isa = PBXBuildFile; fileRef = FA08425E1CB7BAB3006C68FE /* line1.png */; };
+		FA0B8CF11CFC4CCB000625F4 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B8CEF1CFC4CCB000625F4 /* RootViewController.swift */; };
+		FA0B8CF21CFC4CCB000625F4 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0B8CF01CFC4CCB000625F4 /* RootViewController.xib */; };
+		FA0B8D011CFC8460000625F4 /* CWStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0B8CFD1CFC8460000625F4 /* CWStackController.m */; };
+		FA0B8D021CFC8460000625F4 /* CWStackPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0B8CFF1CFC8460000625F4 /* CWStackPanGestureRecognizer.m */; };
+		FA0B8D051CFC850E000625F4 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0B8D041CFC850E000625F4 /* ScrollViewController.m */; };
+		FA0B8D071CFC95AB000625F4 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B8D061CFC95AB000625F4 /* RootView.swift */; };
 		FA19512B1CCF1FB6007D734E /* vcSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19512A1CCF1FB6007D734E /* vcSignup.swift */; };
 		FA19C2F61CB657B700DDB49B /* Amatic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2236EB1CB6527400737D60 /* Amatic-Bold.ttf */; };
 		FA19C2F71CB657B700DDB49B /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2236EC1CB6527A00737D60 /* AmaticSC-Regular.ttf */; };
@@ -98,6 +104,16 @@
 		FA08425A1CB76DD1006C68FE /* film_light3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = film_light3.png; sourceTree = "<group>"; };
 		FA08425C1CB7B3E8006C68FE /* bg_conner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_conner.png; sourceTree = "<group>"; };
 		FA08425E1CB7BAB3006C68FE /* line1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line1.png; sourceTree = "<group>"; };
+		FA0B8CEF1CFC4CCB000625F4 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		FA0B8CF01CFC4CCB000625F4 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		FA0B8CFC1CFC8460000625F4 /* CWStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStackController.h; sourceTree = "<group>"; };
+		FA0B8CFD1CFC8460000625F4 /* CWStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStackController.m; sourceTree = "<group>"; };
+		FA0B8CFE1CFC8460000625F4 /* CWStackPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStackPanGestureRecognizer.h; sourceTree = "<group>"; };
+		FA0B8CFF1CFC8460000625F4 /* CWStackPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStackPanGestureRecognizer.m; sourceTree = "<group>"; };
+		FA0B8D001CFC8460000625F4 /* CWStackProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStackProtocol.h; sourceTree = "<group>"; };
+		FA0B8D031CFC850E000625F4 /* ScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewController.h; sourceTree = "<group>"; };
+		FA0B8D041CFC850E000625F4 /* ScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
+		FA0B8D061CFC95AB000625F4 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		FA19512A1CCF1FB6007D734E /* vcSignup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcSignup.swift; sourceTree = "<group>"; };
 		FA19C2F81CB65C4100DDB49B /* player_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_black.png; sourceTree = "<group>"; };
 		FA19C2F91CB65C4100DDB49B /* player_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_white.png; sourceTree = "<group>"; };
@@ -123,7 +139,7 @@
 		FA277C271CEDDF67002FE259 /* customCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA277C2B1CEF23D2002FE259 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		FA4738B21CC4C2D9009E2FB0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		FA4738B41CC4C318009E2FB0 /* vcResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcResult.swift; sourceTree = "<group>"; };
+		FA4738B41CC4C318009E2FB0 /* vcResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcResult.swift; sourceTree = "<group>"; tabWidth = 5; };
 		FA4BF9141CC6844100E8B4C4 /* vcWatchLaterList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcWatchLaterList.swift; sourceTree = "<group>"; };
 		FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Filmily-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA51AA711CE43BAF006512C7 /* movieObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movieObject.swift; sourceTree = "<group>"; };
@@ -176,6 +192,20 @@
 				A16AC6036855249D36227353 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA0B8CFB1CFC8460000625F4 /* CWStackController */ = {
+			isa = PBXGroup;
+			children = (
+				FA0B8D031CFC850E000625F4 /* ScrollViewController.h */,
+				FA0B8D041CFC850E000625F4 /* ScrollViewController.m */,
+				FA0B8CFC1CFC8460000625F4 /* CWStackController.h */,
+				FA0B8CFD1CFC8460000625F4 /* CWStackController.m */,
+				FA0B8CFE1CFC8460000625F4 /* CWStackPanGestureRecognizer.h */,
+				FA0B8CFF1CFC8460000625F4 /* CWStackPanGestureRecognizer.m */,
+				FA0B8D001CFC8460000625F4 /* CWStackProtocol.h */,
+			);
+			path = CWStackController;
 			sourceTree = "<group>";
 		};
 		FA1951281CCF1EC6007D734E /* resources */ = {
@@ -235,6 +265,7 @@
 		FA2236D51CB6510500737D60 /* VideoApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA0B8CFB1CFC8460000625F4 /* CWStackController */,
 				FA51AA661CE3396B006512C7 /* Filmily-Bridging-Header.h */,
 				FA2236E51CB6510500737D60 /* Info.plist */,
 				FA2236D61CB6510500737D60 /* AppDelegate.swift */,
@@ -271,6 +302,9 @@
 				FA51AA731CE48A72006512C7 /* subviews */,
 				FA2236DD1CB6510500737D60 /* VideoApp.xcdatamodeld */,
 				FAC103A91CF6E06600696EED /* launchViewController.swift */,
+				FA0B8CEF1CFC4CCB000625F4 /* RootViewController.swift */,
+				FA0B8CF01CFC4CCB000625F4 /* RootViewController.xib */,
+				FA0B8D061CFC95AB000625F4 /* RootView.swift */,
 			);
 			path = VideoApp;
 			sourceTree = "<group>";
@@ -413,6 +447,7 @@
 				FA19C2FB1CB65C4100DDB49B /* player_white.png in Resources */,
 				FAAE263D1CE9C6CD00678194 /* photo1.jpeg in Resources */,
 				FA08425D1CB7B3E8006C68FE /* bg_conner.png in Resources */,
+				FA0B8CF21CFC4CCB000625F4 /* RootViewController.xib in Resources */,
 				FA031E711CC0C93E00275D30 /* film_black.png in Resources */,
 				FAAE263E1CE9C6CD00678194 /* photo2.jpeg in Resources */,
 			);
@@ -473,13 +508,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0B8D011CFC8460000625F4 /* CWStackController.m in Sources */,
 				FA2236D91CB6510500737D60 /* ViewController.swift in Sources */,
 				FAC103AA1CF6E06600696EED /* launchViewController.swift in Sources */,
 				FA02C5CF1CC8AEB300C79B40 /* TermViewController.swift in Sources */,
+				FA0B8D071CFC95AB000625F4 /* RootView.swift in Sources */,
 				FA02C5D31CC8B90B00C79B40 /* ContactViewController.swift in Sources */,
 				FADF887D1CE49B3100CBF61B /* customLoading.swift in Sources */,
 				FAFFE49D1CC6324F004C8FE6 /* vcStart.swift in Sources */,
 				FA02C6131CC8F2BD00C79B40 /* vcCategory.swift in Sources */,
+				FA0B8D021CFC8460000625F4 /* CWStackPanGestureRecognizer.m in Sources */,
 				FA02C5C31CC72B4800C79B40 /* videoObject.swift in Sources */,
 				FA4738B51CC4C318009E2FB0 /* vcResult.swift in Sources */,
 				FAC348131CE042C700150228 /* Genre.swift in Sources */,
@@ -487,10 +525,12 @@
 				FAFFE49B1CC624F7004C8FE6 /* vcWachedList.swift in Sources */,
 				FA19512B1CCF1FB6007D734E /* vcSignup.swift in Sources */,
 				FA277BFE1CEB11CF002FE259 /* customCellSwipe.swift in Sources */,
+				FA0B8CF11CFC4CCB000625F4 /* RootViewController.swift in Sources */,
 				FA02C5CD1CC7946400C79B40 /* customView.swift in Sources */,
 				FA2236DF1CB6510500737D60 /* VideoApp.xcdatamodeld in Sources */,
 				FA277C281CEDDF67002FE259 /* customCollectionViewCell.swift in Sources */,
 				FA51AA721CE43BAF006512C7 /* movieObject.swift in Sources */,
+				FA0B8D051CFC850E000625F4 /* ScrollViewController.m in Sources */,
 				FA4BF9151CC6844100E8B4C4 /* vcWatchLaterList.swift in Sources */,
 				FA277C251CEDC2B5002FE259 /* CollectionViewCell.swift in Sources */,
 				FA2236D71CB6510500737D60 /* AppDelegate.swift in Sources */,

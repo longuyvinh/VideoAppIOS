@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class vcSignup: UIViewController, UITextFieldDelegate {
+class vcSignup: UIViewController, UITextFieldDelegate , CWStackProtocol{
     
     @IBOutlet weak var txtFirstname: UITextField!
     @IBOutlet weak var txtLastname: UITextField!
@@ -127,7 +127,7 @@ class vcSignup: UIViewController, UITextFieldDelegate {
             self.createAlertView("Error", message: "Password can not blank", buttonTitle: "Retry")
             errorFlah = 1
         }
-        
+        // alo ... hu
         if(errorFlah != 1){
             let paramSignup = [
                 "first_name":   fname,
@@ -218,7 +218,15 @@ class vcSignup: UIViewController, UITextFieldDelegate {
                             defaults.setObject(refeshtoken, forKey: "refreshtoken")
                             defaults.setInteger(expireTime, forKey: "expiretime")
                             defaults.setObject(usernameRS, forKey: "username")
-                            self.performSegueWithIdentifier("segueIdentifier", sender: self)
+                        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
+                        let stackController: CWStackController = CWStackController(rootViewController: protectedPage)
+                        
+                        let nav = UINavigationController(rootViewController: stackController)
+                        nav.navigationBarHidden = true;
+
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = nav
+
                         }, error: { (error) in
                             //error
                         }, parameters: paramAuth)

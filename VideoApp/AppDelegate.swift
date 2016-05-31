@@ -19,7 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+//        var rootView = RootViewController()
+//        rootView.in // doi e ti
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
         
+        //var storyboard: UIStoryboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+        let mainViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("startView")
+        let stackController: CWStackController = CWStackController(rootViewController: mainViewController)
+
+        let nav = UINavigationController(rootViewController: stackController)
+        nav.navigationBarHidden = true;
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = nav
+        self.window!.makeKeyAndVisible()
+        
+        //self.window?.rootViewController = rootVC
+        //self.navigationController?.setViewControllers([viewController], animated: false)
+        //self.window?.makeKeyAndVisible()
         return true
     }
     

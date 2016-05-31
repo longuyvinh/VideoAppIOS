@@ -9,13 +9,10 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-
-    @IBOutlet weak var cellPoster: UIImageView!
-    @IBOutlet weak var cellTitle: UILabel!
-    @IBOutlet weak var cellYear: UILabel!
     
-    let kLabelVerticalInsets: CGFloat = 8.0
-    let kLabelHorizontalInsets: CGFloat = 8.0
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var moviePoster: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,14 +25,7 @@ class CollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         // Set what preferredMaxLayoutWidth you want
         //contentLabel.preferredMaxLayoutWidth = self.bounds.width - 2 * kLabelHorizontalInsets
+        //flowLayout.itemSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     }
-    
-    func configCell(title: String, year: String) {
-        
-        cellTitle.text = title
-        cellYear.text = year
-        
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
-    }
+
 }

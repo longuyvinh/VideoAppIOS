@@ -12,7 +12,7 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import Alamofire
 
-class vcStart: UIViewController, FBSDKLoginButtonDelegate{
+class vcStart: UIViewController, FBSDKLoginButtonDelegate, CWStackProtocol{
     
     @IBOutlet weak var loginFacebook: FBSDKLoginButton!
     let clientID = "cWRbW1jW3j0aqkLPZOd1aSPsjQoh0RI4q6UgDhod"
@@ -52,9 +52,12 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
             
             //token still available and redirect to home category
             let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
-            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+            let stackController: CWStackController = CWStackController(rootViewController: protectedPage)
+            
+            let nav = UINavigationController(rootViewController: stackController)
+            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window?.rootViewController = protectedPageNav
+            appDelegate.window?.rootViewController = nav
             
         }else if((expiretime < timestamp) && (accesstoken != "")){
             //token expire timeout
@@ -131,9 +134,14 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
                 defaults.synchronize()
                 
                 let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("homeCategory") as! vcCategory
-                let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+                let stackController: CWStackController = CWStackController(rootViewController: protectedPage)
+                
+                let nav = UINavigationController(rootViewController: stackController)
+                nav.navigationBarHidden = true;
+
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.window?.rootViewController = protectedPageNav
+                appDelegate.window?.rootViewController = nav
+
                 }, error: {error in
                     //error
                 }, parameters: paramAuth)
@@ -144,7 +152,12 @@ class vcStart: UIViewController, FBSDKLoginButtonDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func previousViewController()  {
+        
+    }
+    func nextViewController() -> UIViewController! {
+        return self;
+    }
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         //facebookSegue
         if(error != nil){

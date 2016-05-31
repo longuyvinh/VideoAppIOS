@@ -8,7 +8,10 @@
 
 import UIKit
 import Alamofire
-class vcResult: UIViewController, UIScrollViewDelegate{
+
+class vcResult: UIViewController, UIScrollViewDelegate {
+
+    var resultIndex:Int = 0
 
     var genrePassed:Int = 0
     var userid: Int = 0
@@ -17,6 +20,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
     var movieCurrent : movieObject?
     var listMovies = [movieObject]()
     
+    @IBOutlet weak var viewResults: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageController: UIPageControl!
     
@@ -59,7 +63,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
         
         //let scrollViewWidth:CGFloat = self.scrollView.frame.width
         //let scrollViewHeight:CGFloat = self.scrollView.frame.height
-        
+        /*
         let imgOne = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
         imgOne.image = UIImage(named: "bgLight")
         let imgTwo = UIImageView(frame: CGRectMake(screenWidth, 0, screenWidth, screenHeight))
@@ -91,7 +95,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
         self.scrollView.addSubview(imgEight)
         self.scrollView.addSubview(imgNine)
         self.scrollView.addSubview(imgTen)
-        
+        */
         let youtubeLink:String = "https://www.youtube.com/embed/DOUvmXXFvEI?&playsinline=1"
 
         let width = self.webView.frame.width
@@ -125,6 +129,7 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                     if( self.genrePassed != 0){
                         self.loadDetailByGenre(self.genrePassed)
                     }else{
+                        
                         self.loadDetailById(self.movieCurrent!)
                     }
                     
@@ -152,7 +157,24 @@ class vcResult: UIViewController, UIScrollViewDelegate{
 
     }
     
-    
+    // MARK : - FSStack//
+    func previousViewController(){
+        RootView.shareInstance.loadResult2(1)
+
+    }
+    func nextViewController() -> UIViewController! {
+        if RootView.shareInstance.loadResult <= 10 {
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
+            //var storyboard: UIStoryboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+            let protectedPage: vcResult = storyboard.instantiateViewControllerWithIdentifier("ViewDetailVideo") as! vcResult
+            protectedPage.genrePassed = 1;
+            RootView.shareInstance.loadResult1(1)
+            return protectedPage;
+ 
+        }
+        return nil;//nguc lai ko chay ha e
+    }
+
     func loadDetailById(movie: movieObject){
         self.movieTitle.text = movie.title
         self.movieYear.text = String(movie.year! as Int)
@@ -168,18 +190,23 @@ class vcResult: UIViewController, UIScrollViewDelegate{
 
         let totalPage = CGFloat(self.listMovies.count)
 
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height)
-        self.scrollView.delegate = self
-        self.pageController.currentPage = 0
+//        self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height)
+//        self.scrollView.delegate = self
+//        self.pageController.currentPage = 0
         
         
     }
     
     func loadDetailByGenre(genreId: Int){
+        let valueLoad:Int = RootView.shareInstance.loadResult
+        //let pageSize = 10 // doi e 1 ti //cai nay a gan cai bien cua e do
+        ///chac ko lay dc ha
+        // a dung roi do
+        // doi e ti
         let parameters=[
             "has_poster": "true",
             "has_plot" : "true",
-            "page_size" : "10",
+            "page_size" : valueLoad,
             "genre_ids" : genreId,
             "access_token" : accesstoken
         ]
@@ -216,11 +243,11 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 
                 let totalPage = CGFloat(self.listMovies.count)
                 print("total page: \(totalPage)")
-                self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height + 50)
-                self.scrollView.delegate = self
-                self.pageController.currentPage = 0
+//                self.scrollView.contentSize = CGSizeMake(self.view.frame.width * totalPage, self.view.frame.height + 50)
+//                self.scrollView.delegate = self
+//                self.pageController.currentPage = 0
                 
-                self.movieCurrent = self.listMovies[0]
+                self.movieCurrent = self.listMovies[valueLoad - 1 ]
                 self.movieTitle.text = self.movieCurrent!.title
                 self.movieYear.text = String(self.movieCurrent!.year! as Int)
                 self.moviePilot.text = self.movieCurrent!.plot
@@ -442,15 +469,30 @@ class vcResult: UIViewController, UIScrollViewDelegate{
         // Change the text accordingly
         
         //let totalPage = Int(self.listMovies.count)
+        
         for (index, item) in self.listMovies.enumerate() {
             if index == Int(currentPage) {
                 //print(item)
-                //print("page current: \(currentPage)")
-                movieCurrent = self.listMovies[Int(currentPage)]
+                print("page current: \(currentPage)")
+
+//                self.viewResults  = UIView();
+//                self.viewResults.frame = CGRect(x: 0,y: 0,width: 100,height: 200);
+//                self.viewResults.backgroundColor = UIColor.redColor()
+//                self.scrollView.addSubview(view);
                 
-                let defaults = NSUserDefaults(suiteName: "group.com.moe.filmify")
-                defaults?.setObject("It worked!", forKey: "alarmTime")
-                defaults?.synchronize()
+//                var currentFrame :CGRect
+//                currentFrame = self.viewResults.frame
+//                
+//                
+//                self.viewResults.frame.origin.x  = 500;
+//                self.viewResults.frame.origin.y = 0;
+//                self.scrollView.addSubview(self.viewResults)
+//
+//                self.viewResults.backgroundColor = UIColor.redColor()
+//                self.scrollView.contentSize = CGSizeMake(self.view.frame.width , self.view.frame.height)
+//                self.scrollView.contentSize = CGSizeMake(self.view.frame.width * 1, self.view.frame.height)
+
+                movieCurrent = self.listMovies[Int(currentPage)]
                 
                 self.movieTitle.text = item.title
                 self.movieYear.text = String(item.year! as Int)
@@ -466,6 +508,5 @@ class vcResult: UIViewController, UIScrollViewDelegate{
                 
             }
         }
-        
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate , CWStackProtocol{
 
     @IBOutlet weak var viewFrameTable: UIView!
     //let listGenre = ["Action", "Adventure", "Fantasy", "Animation", "Comedy" , "Comedy11"]
@@ -88,7 +88,6 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         //self.createAlertController()
    }
-
     func requestServer(link: String, successBlock:(data:AnyObject?)-> Void , error errorBlock:(error:NSError) -> Void  , parameters:AnyObject )  {
         Alamofire.request(.GET, link, parameters: parameters as? [String : AnyObject]).responseJSON{
             response in
@@ -102,6 +101,26 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        RootView.shareInstance.loadResultDefults(0) // resset to defaults
+
+    }
+    // MARK : - FSStack
+    func previousViewController()  {
+        
+    }
+    
+    func nextViewController() -> UIViewController! {
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
+        
+        //var storyboard: UIStoryboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+        let protectedPage: UIViewController = storyboard.instantiateViewControllerWithIdentifier("ViewDetailVideo")
+        RootView.shareInstance.loadResult1(1)
+        let next = protectedPage as! vcResult
+        let idkey:Int = 0 // When pan from category to result get index defaults . ex (0 = ACTION)
+        currentCategory = self.listGenre[idkey].id!
+        next.genrePassed = currentCategory
+
+        return protectedPage;
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,6 +160,7 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let idkey:Int = indexPath!.row
         currentCategory = self.listGenre[idkey].id!
         //print("show current genre \(currentCategory)")
+        
     }
     
     func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
@@ -160,13 +180,19 @@ class vcCategory: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if(currentCategory == -1){
             self.createAlertView("Warning", message: "Please choose one category", buttonTitle: "Ok")
         }else{
-            self.performSegueWithIdentifier("seguePlayDetail", sender: self)
+//            self.performSegueWithIdentifier("seguePlayDetail", sender: self)
+            let next = self.nextViewController() as! vcResult
+            
+            self.stackController.pushViewController(next, animated: true);
+            next.genrePassed = currentCategory
+
             //self.performSegueWithIdentifier("scrollViewSegue", sender: self)
         }
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
         if (segue.identifier == "seguePlayDetail") {
             let svc = segue.destinationViewController as! vcResult
             svc.genrePassed = currentCategory
